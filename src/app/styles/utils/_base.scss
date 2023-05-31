@@ -1,0 +1,9 @@
+@use './setting' as setting;
+@use './tools' as tools;
+
+/*
+  Capa base justo despues de las configuraciones
+    1. Estilos a elementos html sin clases
+    2. por lo regular son selectores de etiqueta
+    3. h1-h6, estilos básicos de los links, listas, etc..
+*/

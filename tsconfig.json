@@ -1,0 +1,50 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+	"compileOnSave": false,
+	"compilerOptions": {
+		"baseUrl": "./",
+		"outDir": "./dist/out-tsc",
+		"forceConsistentCasingInFileNames": true,
+		"strict": true,
+		"noImplicitOverride": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"sourceMap": true,
+		"declaration": false,
+		"downlevelIteration": true,
+		"experimentalDecorators": true,
+		"moduleResolution": "node",
+		"importHelpers": true,
+		"target": "es2017",
+		"module": "es2020",
+		"lib": ["es2020", "dom"],
+		"paths": {
+			// Shared and Global paths
+			"@shared/components": ["src/app/components/index.ts"],
+			"@shared/services": ["src/app/services/index.ts"],
+			"@shared/modules": ["src/app/shared/modules/index.ts"],
+			"@shared/models": ["src/app/models/index.ts"],
+			"@shared/guards": ["src/app/guards/index.ts"],
+			"@shared/pipes": ["src/app/shared/pipes/index.ts"],
+			"@shared/directives": ["src/app/shared/directives/index.ts"],
+			"@shared/resolvers": ["src/app/shared/resolvers/index.ts"],
+			"@shared/interceptors": ["src/app/shared/interceptors/index.ts"],
+			"@shared/validators": ["src/app/shared/validators/index.ts"],
+			"@environment": ["src/environments/environment.ts"],
+			"@store/*": ["src/app/store/*"],
+			// Auth Module Components Paths
+			"@auth/components": ["src/app/modules/auth/components/index.ts"],
+			"@auth/views": ["src/app/modules/auth/views/index.ts"],
+			// Home Module Components Paths
+			"@board/components": ["src/app/modules/board/components/index.ts"],
+			"@board/views": ["src/app/modules/board/views/index.ts"]
+		}
+	},
+	"angularCompilerOptions": {
+		"enableI18nLegacyMessageIdFormat": false,
+		"strictInjectionParameters": true,
+		"strictInputAccessModifiers": true,
+		"strictTemplates": true
+	}
+}

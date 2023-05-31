@@ -1,0 +1,24 @@
+@use './setting' as setting;
+@use './tools' as tools;
+@use 'sass:math';
+
+/*
+  En esta capa estarán:
+    1. patrones de diseños, elementos reutilizables
+    2. no cosméticos, ni colores, ni tipografías
+    3. exclusivamente se usaran selectores de clase
+*/
+
+.Spinner {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: tools.zindexs(one);
+	background-color: rgba(tools.colors(primaryDark), 0.5);
+	opacity: 0.5;
+}

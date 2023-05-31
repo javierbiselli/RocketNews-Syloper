@@ -1,0 +1,22 @@
+@use './setting' as setting;
+@use './tools' as tools;
+
+/*
+  En esta capa estarán:
+    1. Estilos que normalizan comportamiento en distintos entornos
+    2. Reset de estilos ejm. normalize css etc..
+*/
+
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	height: 100%;
+}
+body {
+	margin: 0;
+}

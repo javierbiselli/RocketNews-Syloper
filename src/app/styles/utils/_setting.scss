@@ -1,0 +1,98 @@
+@use 'sass:math';
+
+/*
+  En esta capa estarán:
+    1. configuraciones disponibles globalmente
+    2. cambios de configuraciones
+    3. colores representativos de la marca o empresa
+*/
+
+// Sizes breakpoints
+$breakPoints: (
+	// zero
+	zr: 0,
+	// mobile
+	mb: 320px,
+	// landscape
+	ls: 576px,
+	// tablet
+	tb: 768px,
+	// desktop
+	dt: 992px,
+	// extra desktop
+	xd: 1200px
+);
+// Fontsize and configurations
+$fontsize: 16px;
+$ratio: 1.25; // ratio
+$fontsizeNormal: $fontsize; // normal size, 16px
+$fontsizeHeadingThree: $fontsizeNormal * $ratio; // heading 3, 20px
+$fontsizeHeadingTwo: $fontsizeHeadingThree * $ratio; // heading 2, 25px
+$fontsizeHeadingOne: $fontsizeHeadingTwo * $ratio; // heading 1, 31.25px
+$fontsizeSmallOne: math.div($fontsizeNormal, $ratio); // small 1, 12.8px
+$fontsizeSmallTwo: math.div($fontsizeSmallOne, $ratio); // small 2, 8.192px
+$fontsizes: (
+	normal: 16px,
+	headingThree: 20px,
+	headingTwo: 25px,
+	headingOne: 32px,
+	smallOne: 12px,
+	smallTwo: 8px,
+);
+// Fonts family
+$roboto: 'Roboto', sans-serif;
+$quicksand: 'Quicksand', sans-serif;
+// Line height
+$lineHeight: 1.2;
+// Max width
+$maxWidth: 1280px;
+// Rounded sizes for edge and more
+$radius: (
+	z: 0,
+	xxs: 6px,
+	xs: 8px,
+	s: 12px,
+	m: 16px,
+	l: 24px,
+	xl: 32px,
+);
+// Sizes of spaced
+$spacing: (
+	z: 0,
+	xxs: 8px,
+	xs: 12px,
+	s: 16px,
+	m: 24px,
+	l: 32px,
+	xl: 48px,
+);
+// List of z-index
+$zindexs: (
+	one: 1000,
+	two: 2000,
+	three: 3000,
+	four: 4000,
+	five: 5000,
+);
+// Colors palette Change for project
+$colors: (
+	primary: #531bba,
+	primaryLight: #cba0ff,
+	primaryDark: #150132,
+	accent: #ffa800,
+	accentLight: #ffc500,
+	accentDark: #bc791c,
+	warn: #ff3a2d,
+	warnLight: #fe294c,
+	warnDark: #a41a31,
+	success: #1de9b6,
+	successLight: #64ffda,
+	successDark: #00bfa5,
+	light: #f5f5f5,
+	dark: #393939,
+	gray: #b5b5b5,
+	grayLight: #dbdbdb,
+	grayDark: #535353,
+	white: #ffffff,
+	black: #000000,
+);
