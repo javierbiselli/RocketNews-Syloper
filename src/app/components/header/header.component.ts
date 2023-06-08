@@ -8,13 +8,25 @@ import { Component, OnInit } from "@angular/core";
 export class HeaderComponent implements OnInit {
   constructor() {}
 
-  ngOnInit(): void {}
+  currentDate: string = "";
 
-  options: Intl.DateTimeFormatOptions = {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  };
-  currentDate: string = new Date().toLocaleDateString("en-US", this.options);
+  ngOnInit() {
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    };
+
+    const updateDateTime = () => {
+      this.currentDate = new Date().toLocaleDateString("en-US", options);
+    };
+
+    updateDateTime();
+
+    setInterval(updateDateTime, 1000);
+  }
 }
