@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import Typed from "typed.js";
 
 @Component({
   selector: "app-header",
@@ -49,5 +50,20 @@ export class HeaderComponent implements OnInit {
     this.searchButtonClicked
       ? (this.searchButtonClass = this.closeIcon)
       : (this.searchButtonClass = "fa-magnifying-glass");
+  }
+
+  ngAfterViewInit() {
+    const options = {
+      strings: [
+        "Probando un texto corto",
+        "Probando un texto largo muy largo para ver si esto funciona y no se pasa el texto de su contenedor",
+      ],
+      typeSpeed: 50,
+      backSpeed: 20,
+      backDelay: 2500,
+      loop: true,
+    };
+
+    const typed = new Typed(".trendig-new-text", options);
   }
 }
