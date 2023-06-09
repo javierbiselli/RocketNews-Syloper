@@ -29,4 +29,14 @@ export class HeaderComponent implements OnInit {
 
     setInterval(updateDateTime, 1000);
   }
+
+  searchButtonClicked = false;
+  searchButtonClass = "fa-magnifying-glass";
+
+  changeSearchVisibility() {
+    this.searchButtonClicked = !this.searchButtonClicked;
+    this.searchButtonClicked
+      ? (this.searchButtonClass = "fa-xmark")
+      : (this.searchButtonClass = "fa-magnifying-glass");
+  }
 }

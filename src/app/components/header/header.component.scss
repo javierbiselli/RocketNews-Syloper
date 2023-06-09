@@ -118,11 +118,17 @@
           }
         }
         button {
-          padding: 10px 20px;
+          padding: 10px 25px;
           background-color: transparent;
           color: white;
           font-size: $fontsizeNormal;
           transition: 0.3s;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          i {
+            position: absolute;
+          }
         }
         button:hover {
           background-color: colors(warnDark);
@@ -137,7 +143,38 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    button {
+    .search-input-container {
+      display: flex;
+      position: absolute;
+      z-index: 50;
+      top: 0;
+      right: 0;
+      padding: 20px 30px;
+      margin: 0 8%;
+      background-color: colors(primaryDark);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .visible {
+      opacity: 1;
+    }
+    a {
+      font-size: $fontsizeNormal;
+      background-color: colors(warnDark);
+      padding: 5px 10px;
+      color: white;
+    }
+    input {
+      border: none;
+      background-color: colors(secondaryDark);
+      color: colors(grayDark);
+      font-size: $fontsizeNormal;
+      padding: 0 10px;
+    }
+    input:focus {
+      outline: none;
+    }
+    .menu-button {
       position: absolute;
       background-color: colors(warnDark);
       color: white;
@@ -186,7 +223,7 @@
     }
     .main-header {
       order: 3;
-      button {
+      .menu-button {
         display: none;
       }
       .main-header-background-container {
