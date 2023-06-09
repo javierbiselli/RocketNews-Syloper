@@ -23,7 +23,12 @@
         <button>Login/Register</button>
       </div>
     </div>
-    <div class="header-bottom">
+    <div
+      class="header-bottom"
+      [ngClass]="{
+        visible: menuButtonClicked
+      }"
+    >
       <div class="header-bottom-section">
         <nav>
           <ul>
@@ -49,7 +54,9 @@
         <input type="text" />
         <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
       </div>
-      <button class="menu-button"><i class="fa-solid fa-bars"></i></button>
+      <button class="menu-button" (click)="changeMenuVisibility()">
+        <i class="fa-solid" [ngClass]="menuButtonClass"></i>
+      </button>
       <div class="main-header-background-container">
         <img
           class="main-header-background"

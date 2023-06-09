@@ -9,6 +9,7 @@ export class HeaderComponent implements OnInit {
   constructor() {}
 
   currentDate: string = "";
+  closeIcon: string = "fa-xmark";
 
   ngOnInit() {
     const options: Intl.DateTimeFormatOptions = {
@@ -30,13 +31,23 @@ export class HeaderComponent implements OnInit {
     setInterval(updateDateTime, 1000);
   }
 
-  searchButtonClicked = false;
-  searchButtonClass = "fa-magnifying-glass";
+  menuButtonClicked: boolean = false;
+  menuButtonClass: string = "fa-bars";
 
-  changeSearchVisibility() {
+  changeMenuVisibility(): void {
+    this.menuButtonClicked = !this.menuButtonClicked;
+    this.menuButtonClicked
+      ? (this.menuButtonClass = this.closeIcon)
+      : (this.menuButtonClass = "fa-bars");
+  }
+
+  searchButtonClicked: boolean = false;
+  searchButtonClass: string = "fa-magnifying-glass";
+
+  changeSearchVisibility(): void {
     this.searchButtonClicked = !this.searchButtonClicked;
     this.searchButtonClicked
-      ? (this.searchButtonClass = "fa-xmark")
+      ? (this.searchButtonClass = this.closeIcon)
       : (this.searchButtonClass = "fa-magnifying-glass");
   }
 }

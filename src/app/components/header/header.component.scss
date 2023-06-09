@@ -93,18 +93,23 @@
   .header-bottom {
     background-color: colors(primaryDark);
     border-bottom: 2px solid colors(warnDark);
-    display: none;
+    position: fixed;
+    width: 100%;
+    top: 120px;
+    padding: 0 5%;
+    opacity: 0;
+    transition: opacity 0.2s ease;
     .header-bottom-section {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 10%;
       nav {
         display: flex;
         width: 100%;
         justify-content: space-between;
         ul {
           display: flex;
+          flex-direction: column;
           gap: 5px;
           a {
             color: colors(white);
@@ -126,6 +131,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
+          display: none;
           i {
             position: absolute;
           }
@@ -135,6 +141,11 @@
         }
       }
     }
+  }
+
+  .visible {
+    visibility: visible;
+    opacity: 1;
   }
 
   .main-header {
@@ -180,10 +191,13 @@
       color: white;
       top: 0;
       left: 0;
-      padding: 3px 8px;
+      padding: 8px 8px;
       margin: 8px;
       font-size: $fontsizeHeadingThree;
       z-index: 100;
+      i {
+        width: 24px;
+      }
     }
     .main-header-background-container {
       width: 100%;
@@ -219,7 +233,21 @@
     }
     .header-bottom {
       order: 2;
-      display: block;
+      position: relative;
+      visibility: visible;
+      top: 0;
+      opacity: 1;
+      padding: 0 10%;
+      .header-bottom-section {
+        nav {
+          ul {
+            flex-direction: row;
+          }
+          button {
+            display: flex;
+          }
+        }
+      }
     }
     .main-header {
       order: 3;
