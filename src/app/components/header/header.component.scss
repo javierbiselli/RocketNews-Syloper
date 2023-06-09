@@ -107,7 +107,8 @@
     top: 120px;
     padding: 0 5%;
     opacity: 0;
-    transition: opacity 0.2s ease;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
     .header-bottom-section {
       display: flex;
       justify-content: space-between;
