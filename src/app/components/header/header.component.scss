@@ -3,43 +3,62 @@
 
 .header {
   font-family: Roboto;
-  height: 35px;
   font-size: $fontsizeSmallOne;
+
+  .header-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
 
   .header-top-section {
     border-left: 1px solid colors(grayLight);
     border-right: 1px solid colors(grayLight);
-    padding: 0 10px;
     flex-grow: 1;
-    display: flex;
+    padding: 0 10px;
     justify-content: center;
     align-items: center;
+    display: none;
+  }
+
+  .header-top-section:nth-child(1) {
+    display: flex;
+    border-bottom: 3px solid colors(dark);
+    padding: 5px 20px;
+    padding-bottom: 9px;
   }
 
   .header-top {
-    display: none;
-    padding: 5px 10%;
-
+    order: 2;
+    display: flex;
     .trending-container {
       text-align: start;
-      flex-grow: 3;
-      max-width: 500px;
-      a {
-        width: 100%;
-        margin-left: 20px;
-        color: black;
-        font-weight: bold;
-        transition: 0.3s;
-      }
-      a:hover {
-        color: colors(warnDark);
-      }
+      flex-grow: 2;
       span {
         background-color: colors(warnDark);
         color: colors(white);
         font-size: $fontsizeSmallTwo;
         padding: 3px 8px;
         font-weight: bolder;
+      }
+      .trending-new-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        a {
+          margin-left: 20px;
+          color: black;
+          font-weight: bold;
+          transition: 0.3s;
+        }
+        a:hover,
+        button:hover {
+          color: colors(warnDark);
+        }
+        .trending-new-navigation {
+          display: flex;
+          flex-basis: 30px;
+          justify-content: space-between;
+        }
       }
     }
 
@@ -113,6 +132,7 @@
   }
 
   .main-header {
+    order: 1;
     position: relative;
     display: flex;
     justify-content: center;
@@ -150,12 +170,22 @@
 @include from(dt) {
   .header {
     .header-top {
+      order: 1;
+      padding: 5px 10%;
+    }
+    .header-top-section {
       display: flex;
     }
+    .header-top-section:nth-child(1) {
+      padding: 0 10px;
+      border-bottom: none;
+    }
     .header-bottom {
+      order: 2;
       display: block;
     }
     .main-header {
+      order: 3;
       button {
         display: none;
       }
