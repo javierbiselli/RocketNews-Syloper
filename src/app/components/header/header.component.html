@@ -5,12 +5,21 @@
         <span class="trending-red">TRENDING</span>
         <div class="trending-new-container">
           <div class="trendig-new-text-container">
-            <a href="#"><span class="trendig-new-text"></span></a>
+            <a href="#"
+              ><span
+                [attr.title]="strings[currentStringIndex]"
+                class="trending-new-text"
+              ></span
+            ></a>
           </div>
         </div>
         <div class="trending-new-navigation">
-          <button><i class="fa-solid fa-angle-left"></i></button>
-          <button><i class="fa-solid fa-angle-right"></i></button>
+          <button (click)="decrementStringIndex()">
+            <i class="fa-solid fa-angle-left"></i>
+          </button>
+          <button (click)="incrementStringIndex()">
+            <i class="fa-solid fa-angle-right"></i>
+          </button>
         </div>
       </div>
       <div class="header-top-section date-container">

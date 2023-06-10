@@ -68,6 +68,9 @@
         button:hover {
           color: colors(warnDark);
         }
+        button:active {
+          color: colors(black);
+        }
       }
     }
 
