@@ -5,10 +5,11 @@ import { BrowserModule } from '@angular/platform-browser'
 import { environment } from '@environment'
 // This Module Imports
 import { AppRoutingModule } from './app-routing.module'
-import { AppComponent } from './app.component'
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './components/header/header.component'
 
 @NgModule({
-	declarations: [AppComponent],
+	declarations: [AppComponent, HeaderComponent],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
