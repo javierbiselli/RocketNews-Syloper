@@ -11,7 +11,7 @@ export class NewsContainerComponent implements OnInit {
   constructor(private apiCallService: ApiCallService) {}
 
   apiData: any;
-  articles: any;
+  articles: Article[] = [];
 
   ngOnInit() {
     // api call
@@ -45,5 +45,13 @@ export class NewsContainerComponent implements OnInit {
     const year: number = dateObj.getFullYear();
 
     return `${month} ${day}, ${year}`;
+  }
+
+  isDesktop(): boolean {
+    return window.innerWidth > 1200;
+  }
+
+  isFirstElement(array: Article[], element: Article): boolean {
+    return array.indexOf(element) === 0;
   }
 }

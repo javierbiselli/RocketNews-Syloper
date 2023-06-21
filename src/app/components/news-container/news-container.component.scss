@@ -18,13 +18,14 @@ h2 {
   );
 }
 
-section {
+.articles-section {
   width: 100%;
-  margin: 10px 0;
+  max-width: 1000px;
+  margin: 15px auto 15px auto;
   .articles-container {
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 20px 10px;
     .image-date-container {
       position: relative;
       p {
@@ -51,6 +52,9 @@ section {
       font-weight: bold;
       color: colors(black);
     }
+    .title:hover {
+      text-decoration: underline;
+    }
 
     .mini-separation-bar {
       width: 100%;
@@ -69,6 +73,9 @@ section {
     .articles-container {
       padding: 10px;
       .image-date-container {
+        img {
+          height: 150px;
+        }
         p {
           padding: 1px 7px;
         }
@@ -83,8 +90,10 @@ section {
   }
   .articles-container:nth-child(-n + 2) {
     grid-column: span 2;
-    img {
-      height: 300px;
+    .image-date-container {
+      img:not(.image-date-container) {
+        height: 300px;
+      }
     }
     .mini-separation-bar {
       display: block;
@@ -93,16 +102,43 @@ section {
 }
 
 @include from(xd) {
-  section {
-    width: 75%;
-    margin: auto;
-  }
-
   .articles-section {
+    grid-template-columns: repeat(3, 1fr);
     .articles-container {
       .title {
         font-size: fontsizes(normal);
       }
+    }
+  }
+
+  .first-element:not(.articles-section) {
+    grid-column: span 2;
+    grid-row: span 2;
+    margin: 10px;
+    background-color: colors(secondaryDark);
+    color: white;
+    .title:not(.articles-container) {
+      color: white;
+      font-size: fontsizes(headingTwo);
+      margin: 5px 10px;
+    }
+    .image-date-container {
+      p {
+        display: none;
+      }
+    }
+    .summary {
+      padding: 10px;
+    }
+    .mini-separation-bar {
+      display: none;
+    }
+  }
+  .articles-container:nth-child(2) {
+    grid-column: span 1;
+    grid-row: span 1;
+    .mini-separation-bar {
+      display: none;
     }
   }
 }
