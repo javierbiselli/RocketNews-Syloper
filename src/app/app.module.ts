@@ -6,10 +6,11 @@ import { environment } from '@environment'
 // This Module Imports
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component'
+import { HeaderComponent } from './components/header/header.component';
+import { NewsContainerComponent } from './components/news-container/news-container.component'
 
 @NgModule({
-	declarations: [AppComponent, HeaderComponent],
+	declarations: [AppComponent, HeaderComponent, NewsContainerComponent],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
