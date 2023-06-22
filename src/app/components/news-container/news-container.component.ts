@@ -15,11 +15,12 @@ export class NewsContainerComponent implements OnInit {
 
   ngOnInit() {
     // api call
-    this.apiCallService.getData("articles").subscribe((data) => {
-      this.apiData = data;
-      this.articles = data.results;
-      console.log(data.results);
-    });
+    this.apiCallService
+      .getData("articles/?limit=9&offset=0")
+      .subscribe((data) => {
+        this.apiData = data;
+        this.articles = data.results;
+      });
   }
 
   getDate(rawDate: string) {
@@ -43,8 +44,18 @@ export class NewsContainerComponent implements OnInit {
     const month: string = monthNames[dateObj.getMonth()];
     const day: number = dateObj.getDate();
     const year: number = dateObj.getFullYear();
+    let hour: number = dateObj.getHours();
+    const minute: string = dateObj.getMinutes().toString().padStart(2, "0");
+    let period: string = "am";
 
-    return `${month} ${day}, ${year}`;
+    if (hour >= 12) {
+      period = "pm";
+      if (hour > 12) {
+        hour -= 12;
+      }
+    }
+
+    return `${month} ${day}, ${year} | ${hour}:${minute} ${period}`;
   }
 
   isDesktop(): boolean {

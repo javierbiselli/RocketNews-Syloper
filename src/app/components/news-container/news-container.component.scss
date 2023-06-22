@@ -43,7 +43,6 @@ h2 {
       img {
         width: 100%;
         object-fit: cover;
-        transition: 0.5s;
       }
     }
 
@@ -99,6 +98,10 @@ h2 {
       display: block;
     }
   }
+
+  .articles-container:last-child {
+    grid-column: span 2;
+  }
 }
 
 @include from(xd) {
@@ -122,13 +125,15 @@ h2 {
       font-size: fontsizes(headingTwo);
       margin: 5px 10px;
     }
-    .image-date-container {
-      p {
-        display: none;
-      }
-    }
     .summary {
       padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      .updated-date {
+        align-self: end;
+      }
     }
     .mini-separation-bar {
       display: none;
@@ -140,5 +145,9 @@ h2 {
     .mini-separation-bar {
       display: none;
     }
+  }
+
+  .articles-container:last-child {
+    grid-column: span 1;
   }
 }
