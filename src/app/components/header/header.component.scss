@@ -23,8 +23,7 @@
   .header-top-section:nth-child(1) {
     display: flex;
     border-bottom: 3px solid colors(dark);
-    padding: 3px 7px;
-    padding-bottom: 9px;
+    padding: 7px;
   }
 
   .header-top {
@@ -112,6 +111,7 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 75;
     .header-bottom-section {
       display: flex;
       justify-content: space-between;
@@ -168,13 +168,18 @@
     justify-content: center;
     align-items: center;
     .search-input-container {
-      display: flex;
       position: absolute;
       z-index: 50;
       top: 0;
-      right: 0;
+      width: 100%;
+      max-width: 1700px;
+      margin: auto;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .search-input {
+      display: flex;
       padding: 20px 30px;
-      margin: 0 8%;
       background-color: colors(primaryDark);
       opacity: 0;
       transition: opacity 0.3s ease;
@@ -199,7 +204,7 @@
       outline: none;
     }
     .menu-button {
-      position: absolute;
+      position: fixed;
       background-color: colors(warnDark);
       color: white;
       top: 0;
@@ -214,12 +219,12 @@
     }
     .main-header-background-container {
       width: 100%;
+      height: 120px;
       .main-header-background {
         width: 100%;
         height: 120px;
         object-fit: cover;
         object-position: top;
-        filter: brightness(0.7);
       }
     }
 
@@ -235,7 +240,14 @@
   .header {
     .header-top {
       order: 1;
-      padding: 5px 10%;
+      padding: 5px 0;
+      width: 100%;
+      min-width: 1000px;
+      max-width: 1700px;
+      margin: auto;
+    }
+    .trending-container {
+      min-width: 550px;
     }
     .header-top-section {
       display: flex;
@@ -246,12 +258,13 @@
     }
     .header-bottom {
       order: 2;
-      position: relative;
       visibility: visible;
+      position: sticky;
       top: 0;
       opacity: 1;
-      padding: 0 10%;
       .header-bottom-section {
+        margin: auto;
+        max-width: 1700px;
         nav {
           ul {
             flex-direction: row;
@@ -268,6 +281,7 @@
         display: none;
       }
       .main-header-background-container {
+        height: 200px;
         .main-header-background {
           height: 200px;
         }

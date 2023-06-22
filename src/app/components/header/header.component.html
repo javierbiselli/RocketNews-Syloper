@@ -26,9 +26,15 @@
         <p>{{ currentDate }}</p>
       </div>
       <div class="header-top-section social-networks-container">
-        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <a href="https://www.facebook.com/" target="_blank"
+          ><i class="fa-brands fa-facebook-f"></i
+        ></a>
+        <a href="https://www.instagram.com/" target="_blank"
+          ><i class="fa-brands fa-instagram"></i
+        ></a>
+        <a href="https://twitter.com/" target="_blank"
+          ><i class="fa-brands fa-twitter"></i
+        ></a>
       </div>
       <div class="header-top-section loginregister-button-container">
         <button>Login/Register</button>
@@ -56,14 +62,16 @@
       </div>
     </div>
     <div class="main-header">
-      <div
-        class="search-input-container"
-        [ngClass]="{
-          visible: searchButtonClicked
-        }"
-      >
-        <input type="text" />
-        <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+      <div class="search-input-container">
+        <div
+          class="search-input"
+          [ngClass]="{
+            visible: searchButtonClicked
+          }"
+        >
+          <input type="text" />
+          <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+        </div>
       </div>
       <button class="menu-button" (click)="changeMenuVisibility()">
         <i class="fa-solid" [ngClass]="menuButtonClass"></i>

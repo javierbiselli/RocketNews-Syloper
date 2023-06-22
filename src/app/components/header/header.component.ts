@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, HostListener, OnInit } from "@angular/core";
 import Typed from "typed.js";
 
 @Component({
@@ -48,6 +48,14 @@ export class HeaderComponent implements OnInit {
   searchButtonClicked: boolean = false;
   searchButtonClass: string = "fa-magnifying-glass";
 
+  @HostListener("window:resize")
+  onWindowResize() {
+    if (window.innerWidth < 992) {
+      this.searchButtonClicked = false;
+      this.searchButtonClass = "fa-magnifying-glass";
+    }
+  }
+
   changeSearchVisibility(): void {
     this.searchButtonClicked = !this.searchButtonClicked;
     this.searchButtonClicked
@@ -56,6 +64,17 @@ export class HeaderComponent implements OnInit {
   }
 
   //--------------- TYPED.JS ---------------
+
+  // getTrending() {
+  //   let trending = [];
+  //   for (let i = 0; i < 3; i++) {
+  //     trending.push(this.newsData[i].title);
+  //   }
+  //   console.log(trending);
+  //   return trending;
+  // }
+
+  // trending = this.getTrending();
 
   strings: string[] = [
     "Probando un texto corto",
