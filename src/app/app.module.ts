@@ -7,13 +7,14 @@ import { environment } from '@environment'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
+import { NewsContainerComponent } from './components/news-container/news-container.component';
 import { ContactFormComponent } from './components/contact-form/contact-form.component'
 import { RouterModule } from '@angular/router'
 import { FormsModule } from '@angular/forms'
 
 
 @NgModule({
-	declarations: [AppComponent, HeaderComponent, ContactFormComponent],
+	declarations: [AppComponent, HeaderComponent, NewsContainerComponent, ContactFormComponent],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
