@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms'
 		HttpClientModule,
 		FormsModule,
 		RouterModule.forRoot([
+			{ path: '', component: NewsContainerComponent },
 			{ path: 'contact', component: ContactFormComponent },
 		]),
 	],
