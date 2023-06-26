@@ -26,9 +26,15 @@
         <p>{{ currentDate }}</p>
       </div>
       <div class="header-top-section social-networks-container">
-        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <a href="https://www.facebook.com/" target="_blank"
+          ><i class="fa-brands fa-facebook-f"></i
+        ></a>
+        <a href="https://www.instagram.com/" target="_blank"
+          ><i class="fa-brands fa-instagram"></i
+        ></a>
+        <a href="https://twitter.com/" target="_blank"
+          ><i class="fa-brands fa-twitter"></i
+        ></a>
       </div>
       <div class="header-top-section loginregister-button-container">
         <button>Login/Register</button>
@@ -43,11 +49,36 @@
       <div class="header-bottom-section">
         <nav>
           <ul>
-            <a routerLink=""><li>HOME</li></a>
-            <a href="#"><li>BLOGS</li></a>
-            <a href="#"><li>REPORTS</li></a>
-            <a href="#"><li>ABOUT US</li></a>
-            <a routerLink="/contact"><li>CONTACT US</li></a>
+            <a
+              routerLink=""
+              (click)="setSelectedTab('HOME')"
+              [ngClass]="{ active: selectedTab === 'HOME' }"
+              ><li>HOME</li></a
+            >
+            <a
+              href="#"
+              (click)="setSelectedTab('BLOGS')"
+              [ngClass]="{ active: selectedTab === 'BLOGS' }"
+              ><li>BLOGS</li></a
+            >
+            <a
+              href="#"
+              (click)="setSelectedTab('REPORTS')"
+              [ngClass]="{ active: selectedTab === 'REPORTS' }"
+              ><li>REPORTS</li></a
+            >
+            <a
+              href="#"
+              (click)="setSelectedTab('ABOUT US')"
+              [ngClass]="{ active: selectedTab === 'ABOUT US' }"
+              ><li>ABOUT US</li></a
+            >
+            <a
+              routerLink="/contact">
+              (click)="setSelectedTab('CONTACT US')"
+              [ngClass]="{ active: selectedTab === 'CONTACT US' }"
+              ><li>CONTACT US</li></a
+            >
           </ul>
           <button (click)="changeSearchVisibility()">
             <i class="fa-solid" [ngClass]="searchButtonClass"></i>
@@ -56,14 +87,16 @@
       </div>
     </div>
     <div class="main-header">
-      <div
-        class="search-input-container"
-        [ngClass]="{
-          visible: searchButtonClicked
-        }"
-      >
-        <input type="text" />
-        <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+      <div class="search-input-container">
+        <div
+          class="search-input"
+          [ngClass]="{
+            visible: searchButtonClicked
+          }"
+        >
+          <input type="text" />
+          <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+        </div>
       </div>
       <button class="menu-button" (click)="changeMenuVisibility()">
         <i class="fa-solid" [ngClass]="menuButtonClass"></i>
