@@ -12,6 +12,15 @@ export class HeaderComponent implements OnInit {
   currentDate: string = "";
   closeIcon: string = "fa-xmark";
 
+  // nav bar logic
+
+  selectedTab: string = "HOME";
+
+  setSelectedTab(tab: string) {
+    this.selectedTab = tab;
+    console.log(this.selectedTab);
+  }
+
   ngOnInit() {
     // clock logic
     const options: Intl.DateTimeFormatOptions = {

@@ -134,6 +134,9 @@
           a:hover {
             background-color: colors(warnDark);
           }
+          .active {
+            background-color: colors(warnDark);
+          }
         }
         button {
           padding: 10px 25px;
@@ -259,7 +262,7 @@
     .header-bottom {
       order: 2;
       visibility: visible;
-      position: sticky;
+      position: relative;
       top: 0;
       opacity: 1;
       .header-bottom-section {
