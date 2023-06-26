@@ -15,7 +15,7 @@ export class ContactFormComponent implements OnInit {
 
   onSubmit(form: NgForm): void {
     console.log(form.value);  // all values
-    window.alert('Messege sent!');
+    window.alert('Message sent!');
     form.resetForm();
   }
 

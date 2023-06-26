@@ -1,0 +1,98 @@
+@import "../../styles/utils/setting";
+@import "../../styles/utils/tools";
+
+h2 {
+  text-align: center;
+  margin: 15px 0;
+  font-weight: bold;
+}
+
+.separation-bar {
+  width: 90%;
+  height: 2px;
+  margin: auto;
+  background: linear-gradient(
+    to right,
+    colors(black) 10%,
+    colors(warnDark) 50%
+);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.form-group {
+  margin-top: spacing(xxs);
+  margin-bottom: spacing(xs);
+}
+
+.no-focus{
+  outline: none;
+}
+
+.form-group-field {
+  width: 100%;
+  padding: 12px 10px;
+  margin-top: spacing(xxs);
+  display: inline-block;
+  border: 1px solid #ccc;
+  // border-radius: 4px;
+  background-color: colors(light);
+  box-sizing: border-box;
+}
+
+.message-field{
+  height: 10em;
+  resize: none;
+  font: inherit;
+}
+
+.alert {
+  width: fit-content;
+  font-size: fontsizes(smallOne);
+  background-color: colors(warn);
+  color: white;
+  padding: 4px 10px;
+  border: none;
+}
+
+.required {
+  color: colors(warnDark);
+}
+
+.button {
+  font-size: 1.2em;
+  width: 100%;
+  background-color: colors(warnDark);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+}
+.button:hover {
+  filter: brightness(0.8);
+  transition-duration: 0.3s;
+}
+:disabled {
+  background-color: colors(gray);
+}
+
+@include from(dt) {
+  .container {
+    width: 50%;
+    margin-left: 5%;
+  }
+
+  .form-group-field {
+    width: 70%;
+    display: block;
+  }
+
+  .message-field {
+    width: 100%;
+  }
+}

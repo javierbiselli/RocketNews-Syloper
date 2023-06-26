@@ -1,52 +1,58 @@
+<section class="section">
 
-<h2>Contact Us</h2>
-
-<div class="container">
-    <form (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
-
-        <div class="form-group">
-            <label for="name">Full name <span>*</span></label>
-            <input type="text" class="form-control" id="name" required
-                    placeholder="First and last name"
-                    ngModel name="name" #name="ngModel">
-            <div [hidden]="name.valid || name.pristine"
-                class="alert alert-danger">
-            Full name required
+    <h2>Contact Us</h2>
+    <div class="separation-bar"></div>
+    
+    <div class="container">
+        <form class="form" (ngSubmit)="onSubmit(contactForm)" #contactForm="ngForm">
+    
+            <div class="form-group">
+                <label class="form-group-label" for="name">
+                        Full name <span class="required">*</span></label>
+                <input type="text" class="form-group-field no-focus" id="name" required
+                        placeholder="First and last name"
+                        ngModel name="name" #name="ngModel">
+                <div [hidden]="name.valid || name.pristine"
+                    class="alert">
+                Full name required
+                </div>
             </div>
-        </div>
-        
-        <div class="form-group">
-            <label for="email">Email address <span>*</span></label>
-            <input type="email" class="form-control" id="email" required
-                    placeholder="email@address.com"
-                    ngModel name="email" #email="ngModel">
-            <div [hidden]="email.valid || email.pristine"
-                class="alert alert-danger">
-            Email address is required
+            
+            <div class="form-group">
+                <label class="form-group-label" for="email">
+                        Email address <span class="required">*</span></label>
+                <input type="email" class="form-group-field no-focus" id="email" required
+                        placeholder="email@address.com"
+                        ngModel name="email" #email="ngModel">
+                <div [hidden]="email.valid || email.pristine" class="alert">
+                        Email address required
+                </div>
             </div>
-        </div>
-        
-        <div class="form-group">
-            <label for="country">Country</label>
-            <input type="text" class="form-control" id="country"
-                    placeholder="Your country here"
-                    ngModel name="country" >
-        </div>
-
-        <div class="form-group">
-            <label for="subject">Subject <span>*</span></label>
-            <textarea id="subject" name="subject" required
-                    placeholder="Write your messege here.."
-                    ngModel name="subject" #subject="ngModel"></textarea>
-            <div [hidden]="subject.valid || subject.pristine"
-                class="alert alert-danger">
-            This message is required
+            
+            <div class="form-group">
+                <label class="form-group-label" for="country">Country</label>
+                <input type="text" class="form-group-field no-focus" id="country"
+                        placeholder="Your country here"
+                        ngModel name="country" >
             </div>
-        </div>
-
-        <p><span>* </span>required fields.</p>
-        <button type="submit" class="btn btn-success" #submit
-                [disabled]="!contactForm.form.valid">
-                Submit</button>
-    </form>
-</div>
+    
+            <div class="form-group">
+                <label class="form-group-label" for="subject">
+                        Subject <span class="required">*</span></label>
+                <textarea class="form-group-field message-field no-focus" id="subject" name="subject" required
+                        placeholder="Write your message here.."
+                        ngModel name="subject" #subject="ngModel"></textarea>
+                <div [hidden]="subject.valid || subject.pristine" class="alert">
+                        This message is required
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <p><span class="required">*</span> Required fields.</p>
+                <button type="submit" class="button" #submit
+                        [disabled]="!contactForm.form.valid">
+                        Submit</button>
+            </div>
+        </form>
+    </div>
+</section>
