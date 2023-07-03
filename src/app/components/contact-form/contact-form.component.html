@@ -31,9 +31,13 @@
             
             <div class="form-group">
                 <label class="form-group-label" for="country">Country</label>
-                <input type="text" class="form-group-field no-focus" id="country"
-                        placeholder="Your country here"
-                        ngModel name="country" >
+                <select id="country" class="form-group-field no-focus">
+                        <option value=""></option>
+                        <option *ngFor="let country of countries" 
+                                [value]="country">
+                                {{country}}
+                        </option>
+                </select>
             </div>
     
             <div class="form-group">

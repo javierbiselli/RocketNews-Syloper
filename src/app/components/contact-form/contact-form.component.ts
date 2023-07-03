@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { countryList } from 'src/app/models/country';
 
 @Component({
   selector: 'app-contact-form',
@@ -9,6 +10,8 @@ import { NgForm } from '@angular/forms';
 export class ContactFormComponent implements OnInit {
 
   constructor() { }
+
+  countries = countryList;
 
   ngOnInit(): void {
   }
