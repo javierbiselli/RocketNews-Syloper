@@ -12,7 +12,7 @@
                 <input type="text" class="form-group-field no-focus" id="name" required
                         placeholder="First and last name"
                         ngModel name="name" #name="ngModel">
-                <div [hidden]="name.valid || name.pristine"
+                <div [hidden]="!(name.invalid && (name.dirty || name.touched))"
                     class="alert">
                 Full name required
                 </div>
@@ -23,9 +23,9 @@
                         Email address <span class="required">*</span></label>
                 <input type="email" class="form-group-field no-focus" id="email" required
                         placeholder="email@address.com"
-                        ngModel name="email" #email="ngModel">
-                <div [hidden]="email.valid || email.pristine" class="alert">
-                        Email address required
+                        ngModel name="email" #email="ngModel" email>
+                <div [hidden]="!(email.invalid && (email.dirty || email.touched))" class="alert">
+                        Email not valid
                 </div>
             </div>
             
