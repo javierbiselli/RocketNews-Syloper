@@ -44,6 +44,39 @@ h2 {
   box-sizing: border-box;
 }
 
+.form-group select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select.arrow {
+  background-image:
+    linear-gradient(45deg, transparent 50%, colors(grey) 50%),
+    linear-gradient(135deg, colors(grey) 50%, transparent 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position:
+    calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px),
+    calc(100% - 2.5em) 0.5em;
+  background-size:
+    5px 5px,
+    5px 5px,
+    1px 1.5em;
+  background-repeat: no-repeat;
+}
+
+select.arrow:focus {
+  background-image:
+    linear-gradient(45deg, colors(grey) 50%, transparent 50%),
+    linear-gradient(135deg, transparent 50%, colors(grey) 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position:
+    calc(100% - 15px) 1em,
+    calc(100% - 20px) 1em,
+    calc(100% - 2.5em) 0.5em;
+}
+
 .message-field{
   height: 10em;
   resize: none;
@@ -78,7 +111,7 @@ h2 {
   transition-duration: 0.3s;
 }
 :disabled {
-  background-color: colors(gray);
+  filter: brightness(45%);
 }
 
 @include from(dt) {
