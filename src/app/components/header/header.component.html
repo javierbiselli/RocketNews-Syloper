@@ -56,6 +56,12 @@
               ><li>HOME</li></a
             >
             <a
+              routerLink="/forum"
+              (click)="setSelectedTab('FORUM')"
+              [ngClass]="{ active: selectedTab === 'FORUM' }"
+              ><li>FORUM</li></a
+            >
+            <a
               href="#"
               (click)="setSelectedTab('BLOGS')"
               [ngClass]="{ active: selectedTab === 'BLOGS' }"
@@ -98,8 +104,16 @@
           <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
         </div>
       </div>
-      <button class="menu-button" id="menu-button" (click)="changeMenuVisibility()">
-        <i class="fa-solid" id="menu-button-icon" [ngClass]="menuButtonClass"></i>
+      <button
+        class="menu-button"
+        id="menu-button"
+        (click)="changeMenuVisibility()"
+      >
+        <i
+          class="fa-solid"
+          id="menu-button-icon"
+          [ngClass]="menuButtonClass"
+        ></i>
       </button>
       <div class="main-header-background-container">
         <img

@@ -1,32 +1,39 @@
 <h2>Latest news</h2>
 <div class="separation-bar"></div>
-<section class="articles-section">
-  <div
-    *ngFor="let article of articles; first as first"
-    class="articles-container"
-    [ngClass]="{ 'first-element': first }"
-  >
-    <div class="image-date-container">
-      <p>
-        <i class="fa-regular fa-calendar"></i>
-        &nbsp;
-        {{ getDate(article.published_at) }}
-      </p>
-      <a href="{{ article.url }}" target="_blank">
-        <img src="{{ article.image_url }}" alt="{{ article.title }}"
-      /></a>
-    </div>
-    <a class="title" href="{{ article.url }}" target="_blank">{{
-      article.title
-    }}</a>
+<div class="main-container">
+  <section class="articles-section">
     <div
-      class="summary"
-      *ngIf="isDesktop() && isFirstElement(articles, article)"
+      *ngFor="let article of articles; first as first"
+      class="articles-container"
+      [ngClass]="{ 'first-element': first }"
     >
-      <p>{{ article.summary }}</p>
-      &nbsp;
-      <p class="updated-date">Updated at: {{ getDate(article.updated_at) }}</p>
+      <div class="image-date-container">
+        <p>
+          <i class="fa-regular fa-calendar"></i>
+          &nbsp;
+          {{ getDate(article.published_at) }}
+        </p>
+        <a href="{{ article.url }}" target="_blank">
+          <img src="{{ article.image_url }}" alt="{{ article.title }}"
+        /></a>
+      </div>
+      <a class="title" href="{{ article.url }}" target="_blank">{{
+        article.title
+      }}</a>
+      <div
+        class="summary"
+        *ngIf="isDesktop() && isFirstElement(articles, article)"
+      >
+        <p>{{ article.summary }}</p>
+        &nbsp;
+        <p class="updated-date">
+          Updated at: {{ getDate(article.updated_at) }}
+        </p>
+      </div>
+      <div class="mini-separation-bar"></div>
     </div>
-    <div class="mini-separation-bar"></div>
+  </section>
+  <div class="publicity">
+    <app-paid-service></app-paid-service>
   </div>
-</section>
+</div>
