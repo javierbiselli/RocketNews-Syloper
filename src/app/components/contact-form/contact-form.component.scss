@@ -1,0 +1,131 @@
+@import "../../styles/utils/setting";
+@import "../../styles/utils/tools";
+
+h2 {
+  text-align: center;
+  margin: 15px 0;
+  font-weight: bold;
+}
+
+.separation-bar {
+  width: 90%;
+  height: 2px;
+  margin: auto;
+  background: linear-gradient(
+    to right,
+    colors(black) 10%,
+    colors(warnDark) 50%
+);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.form-group {
+  margin-top: spacing(xxs);
+  margin-bottom: spacing(xs);
+}
+
+.no-focus{
+  outline: none;
+}
+
+.form-group-field {
+  width: 100%;
+  padding: 12px 10px;
+  margin-top: spacing(xxs);
+  display: inline-block;
+  border: 1px solid #ccc;
+  // border-radius: 4px;
+  background-color: colors(light);
+  box-sizing: border-box;
+}
+
+.form-group select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select.arrow {
+  background-image:
+    linear-gradient(45deg, transparent 50%, colors(grey) 50%),
+    linear-gradient(135deg, colors(grey) 50%, transparent 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position:
+    calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px),
+    calc(100% - 2.5em) 0.5em;
+  background-size:
+    5px 5px,
+    5px 5px,
+    1px 1.5em;
+  background-repeat: no-repeat;
+}
+
+select.arrow:focus {
+  background-image:
+    linear-gradient(45deg, colors(grey) 50%, transparent 50%),
+    linear-gradient(135deg, transparent 50%, colors(grey) 50%),
+    linear-gradient(to right, #ccc, #ccc);
+  background-position:
+    calc(100% - 15px) 1em,
+    calc(100% - 20px) 1em,
+    calc(100% - 2.5em) 0.5em;
+}
+
+.message-field{
+  height: 10em;
+  resize: none;
+  font: inherit;
+}
+
+.alert {
+  width: fit-content;
+  font-size: fontsizes(smallOne);
+  background-color: colors(warn);
+  color: white;
+  padding: 4px 10px;
+  border: none;
+}
+
+.required {
+  color: colors(warnDark);
+}
+
+.button {
+  font-size: 1.2em;
+  width: 100%;
+  background-color: colors(warnDark);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+}
+.button:hover {
+  filter: brightness(0.8);
+  transition-duration: 0.3s;
+}
+:disabled {
+  filter: brightness(45%);
+}
+
+@include from(dt) {
+  .container {
+    width: 50%;
+    margin-left: 5%;
+  }
+
+  .form-group-field {
+    width: 70%;
+    display: block;
+  }
+
+  .message-field {
+    width: 100%;
+  }
+}

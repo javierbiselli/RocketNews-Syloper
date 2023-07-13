@@ -47,34 +47,34 @@
       }"
     >
       <div class="header-bottom-section">
-        <nav>
+        <nav id="nav">
           <ul>
             <a
-              href=""
+              routerLink=""
               (click)="setSelectedTab('HOME')"
               [ngClass]="{ active: selectedTab === 'HOME' }"
               ><li>HOME</li></a
             >
             <a
-              href=""
+              href="#"
               (click)="setSelectedTab('BLOGS')"
               [ngClass]="{ active: selectedTab === 'BLOGS' }"
               ><li>BLOGS</li></a
             >
             <a
-              href=""
+              href="#"
               (click)="setSelectedTab('REPORTS')"
               [ngClass]="{ active: selectedTab === 'REPORTS' }"
               ><li>REPORTS</li></a
             >
             <a
-              href=""
+              href="#"
               (click)="setSelectedTab('ABOUT US')"
               [ngClass]="{ active: selectedTab === 'ABOUT US' }"
               ><li>ABOUT US</li></a
             >
             <a
-              href=""
+              routerLink="/contact"
               (click)="setSelectedTab('CONTACT US')"
               [ngClass]="{ active: selectedTab === 'CONTACT US' }"
               ><li>CONTACT US</li></a
@@ -98,8 +98,8 @@
           <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
         </div>
       </div>
-      <button class="menu-button" (click)="changeMenuVisibility()">
-        <i class="fa-solid" [ngClass]="menuButtonClass"></i>
+      <button class="menu-button" id="menu-button" (click)="changeMenuVisibility()">
+        <i class="fa-solid" id="menu-button-icon" [ngClass]="menuButtonClass"></i>
       </button>
       <div class="main-header-background-container">
         <img

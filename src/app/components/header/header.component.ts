@@ -45,12 +45,28 @@ export class HeaderComponent implements OnInit {
   // menu logic
   menuButtonClicked: boolean = false;
   menuButtonClass: string = "fa-bars";
+  abortController = new AbortController();
 
   changeMenuVisibility(): void {
-    this.menuButtonClicked = !this.menuButtonClicked;
-    this.menuButtonClicked
-      ? (this.menuButtonClass = this.closeIcon)
-      : (this.menuButtonClass = "fa-bars");
+    this.menuButtonClicked = !this.menuButtonClicked;  
+
+    if (this.menuButtonClicked) {
+      this.menuButtonClass = this.closeIcon;
+      
+      let thisFile = this; // to avoid "this" refering to 'document'
+      document.addEventListener('click', function(e){
+        // if user clicks outside menu:
+        if (e.target != document.getElementById('nav') && 
+        e.target != document.getElementById('menu-button') &&
+        e.target != document.getElementById('menu-button-icon')){
+          thisFile.menuButtonClass = "fa-bars";
+          thisFile.menuButtonClicked = false;
+          thisFile.abortController.abort(); // removes event listener
+        }
+      });
+    } else {
+      this.menuButtonClass = "fa-bars";
+    }
   }
 
   // search bar logic
