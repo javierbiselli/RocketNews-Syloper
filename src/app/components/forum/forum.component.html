@@ -1,1 +1,39 @@
-<p>forum works!</p>
+<div class="section-container">
+  <div class="top-container">
+    <div class="select-container">
+      <label for="order">Order by:</label>
+      <select name="order" (change)="changeOrder($event)">
+        <option value="0" [selected]="order === 0">Priority</option>
+        <option value="1" [selected]="order === 1">Trending</option>
+        <option value="2" [selected]="order === 2">Newest</option>
+        <option value="3" [selected]="order === 3">Oldest</option>
+      </select>
+    </div>
+  </div>
+  <section>
+    <div class="posts-container">
+      <div class="headers-container">
+        <i class="fa-solid fa-shuttle-space"></i>
+        <i class="fa-solid fa-comment"></i>
+        <i class="fa-solid fa-clock"></i>
+      </div>
+      <div
+        *ngFor="let post of posts"
+        class="post"
+        [ngClass]="{ priority: post.priority }"
+      >
+        <div class="title-container">
+          <i class="fa-solid fa-unlock"></i>
+          <a href="#">{{ post.title }}</a>
+        </div>
+        <p class="comments">{{ post.comments.length }}</p>
+        <div class="data-container">
+          <p>
+            by <b>{{ post.author.name }}</b>
+          </p>
+          <p>on {{ post.date }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

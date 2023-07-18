@@ -21,6 +21,7 @@ import { ForumComponent } from "./components/forum/forum.component";
     NewsContainerComponent,
     ContactFormComponent,
     PaidServiceComponent,
+    ForumComponent,
   ],
   imports: [
     BrowserModule,
