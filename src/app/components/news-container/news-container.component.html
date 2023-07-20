@@ -5,6 +5,7 @@
     *ngFor="let article of articles; first as first"
     class="articles-container"
     [ngClass]="{ 'first-element': first }"
+    [style.display]="loading ? 'hidden' : 'block'"
   >
     <div class="image-date-container">
       <p>
@@ -13,7 +14,7 @@
         {{ getDate(article.published_at) }}
       </p>
       <a href="{{ article.url }}" target="_blank">
-        <img src="{{ article.image_url }}" alt="{{ article.title }}"
+        <img [src]="article.image_url" alt="{{ article.title }}"
       /></a>
     </div>
     <a class="title" href="{{ article.url }}" target="_blank">{{
@@ -21,12 +22,43 @@
     }}</a>
     <div
       class="summary"
-      *ngIf="isDesktop() && isFirstElement(articles, article)"
+      *ngIf="isDesktop() && isFullElement(articles, article)"
     >
       <p>{{ article.summary }}</p>
-      &nbsp;
       <p class="updated-date">Updated at: {{ getDate(article.updated_at) }}</p>
     </div>
     <div class="mini-separation-bar"></div>
   </div>
 </section>
+<div class="ghost-articles" *ngIf="loading">
+  <div class="ghost-article">
+    <div class="ghost-content animation-fade"></div>
+    <div class="ghost-content animation-fade"></div>
+    <div class="ghost-content animation-fade"></div>
+  </div>
+  <div class="ghost-article">
+    <div class="ghost-content animation-fade"></div>
+    <div class="ghost-content animation-fade"></div>
+    <div class="ghost-content animation-fade"></div>
+  </div>
+  <div class="ghost-article">
+    <div class="ghost-content animation-fade"></div>
+    <div class="ghost-content animation-fade"></div>
+    <div class="ghost-content animation-fade"></div>
+  </div>
+  <div class="ghost-article">
+    <div class="ghost-content animation-fade"></div>
+    <div class="ghost-content animation-fade"></div>
+    <div class="ghost-content animation-fade"></div>
+  </div>
+  <div class="ghost-article">
+    <div class="ghost-content animation-fade"></div>
+    <div class="ghost-content animation-fade"></div>
+    <div class="ghost-content animation-fade"></div>
+  </div>
+  <div class="ghost-article">
+    <div class="ghost-content animation-fade"></div>
+    <div class="ghost-content animation-fade"></div>
+    <div class="ghost-content animation-fade"></div>
+  </div>
+</div>

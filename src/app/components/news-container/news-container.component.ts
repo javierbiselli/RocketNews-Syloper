@@ -14,10 +14,10 @@ export class NewsContainerComponent implements OnInit {
 
   apiData: any;
   articles: Article[] = [];
-  limit: number = 9;
+  limit: number = 6;
   offset: number = 0;
 
-  maxNews: number = 90; // Maximum number of articles loaded on scroll
+  maxNews: number = 36; // Maximum number of articles loaded on scroll
 
   apiCall() {
     this.loading = true;
@@ -37,7 +37,7 @@ export class NewsContainerComponent implements OnInit {
   }
 
   loadMoreElements() {
-    if (this.offset < this.maxNews) {
+    if (this.offset + 6 < this.maxNews) {
       this.loading = true;
       this.offset += this.limit;
       this.apiCallService
@@ -57,9 +57,8 @@ export class NewsContainerComponent implements OnInit {
   }
 
   @HostListener("window:scroll", ["$event"])
+  @HostListener("window:touchmove", ["$event"])
   onScroll() {
-    const windowHeight = window.innerHeight;
-
     const body = document.body;
     const html = document.documentElement;
     const docHeight = Math.max(
@@ -69,13 +68,12 @@ export class NewsContainerComponent implements OnInit {
       html.scrollHeight,
       html.offsetHeight
     );
-    const windowBottom = windowHeight + window.pageYOffset;
+    const windowBottom = window.innerHeight + window.pageYOffset;
 
     if (windowBottom >= docHeight) {
       this.loadMoreElements();
     }
   }
-
   ngOnInit() {
     this.apiCall();
   }
@@ -119,7 +117,8 @@ export class NewsContainerComponent implements OnInit {
     return window.innerWidth > 1200;
   }
 
-  isFirstElement(array: Article[], element: Article): boolean {
-    return array.indexOf(element) === 0;
+  isFullElement(array: Article[], element: Article): boolean {
+    const index = array.indexOf(element);
+    return index === 0 || index % 6 === 0;
   }
 }
