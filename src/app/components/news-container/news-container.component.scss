@@ -146,10 +146,6 @@ h2 {
     }
   }
 
-  .articles-container:last-child {
-    grid-column: span 2;
-  }
-
   .ghost-articles {
     grid-template-columns: repeat(2, 1fr);
     width: 75%;
@@ -183,7 +179,6 @@ h2 {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 100%;
       gap: 30px;
       .updated-date {
         align-self: end;
