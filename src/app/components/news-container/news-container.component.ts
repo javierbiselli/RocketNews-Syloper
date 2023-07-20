@@ -10,14 +10,15 @@ import { ApiCallService } from "@shared/services";
 export class NewsContainerComponent implements OnInit {
   constructor(private apiCallService: ApiCallService) {}
 
-  loading: boolean = false;
+  loading: boolean = true;
+  imageLoading: { [key: number]: boolean } = {};
 
   apiData: any;
   articles: Article[] = [];
   limit: number = 6;
   offset: number = 0;
 
-  maxNews: number = 36; // Maximum number of articles loaded on scroll
+  maxNews: number = 48; // Maximum number of articles loaded on scroll
 
   apiCall() {
     this.loading = true;
@@ -28,6 +29,9 @@ export class NewsContainerComponent implements OnInit {
           this.apiData = data;
           this.articles = data.results;
           this.loading = false;
+          this.articles.forEach((article) => {
+            this.imageLoading[article.id] = true;
+          });
         },
         (error) => {
           console.error("Error fetching data, try again later", error);
@@ -45,8 +49,13 @@ export class NewsContainerComponent implements OnInit {
         .subscribe(
           (data) => {
             this.apiData = data;
-            this.articles.push(...data.results);
+            const newArticles = data.results;
+            this.articles.push(...newArticles);
             this.loading = false;
+
+            newArticles.forEach((article: any) => {
+              this.imageLoading[article.id] = true;
+            });
           },
           (error) => {
             console.error("Error fetching data, try again later", error);
@@ -54,6 +63,10 @@ export class NewsContainerComponent implements OnInit {
           }
         );
     }
+  }
+
+  onImageLoad(articleId: number) {
+    this.imageLoading[articleId] = false;
   }
 
   @HostListener("window:scroll", ["$event"])

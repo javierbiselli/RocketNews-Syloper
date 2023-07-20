@@ -13,9 +13,17 @@
         &nbsp;
         {{ getDate(article.published_at) }}
       </p>
+      <div class="Spinner" *ngIf="imageLoading[article.id]">
+        <span class="loader"></span>
+      </div>
       <a href="{{ article.url }}" target="_blank">
-        <img [src]="article.image_url" alt="{{ article.title }}"
-      /></a>
+        <img
+          [style.display]="imageLoading[article.id] ? 'hidden' : 'block'"
+          [src]="article.image_url"
+          alt="{{ article.title }}"
+          (load)="onImageLoad(article.id)"
+        />
+      </a>
     </div>
     <a class="title" href="{{ article.url }}" target="_blank">{{
       article.title
