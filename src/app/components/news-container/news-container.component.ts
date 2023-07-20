@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, HostListener, OnInit } from "@angular/core";
 import { Article } from "@shared/models";
 import { ApiCallService } from "@shared/services";
 
@@ -10,17 +10,74 @@ import { ApiCallService } from "@shared/services";
 export class NewsContainerComponent implements OnInit {
   constructor(private apiCallService: ApiCallService) {}
 
+  loading: boolean = false;
+
   apiData: any;
   articles: Article[] = [];
+  limit: number = 9;
+  offset: number = 0;
+
+  maxNews: number = 90; // Maximum number of articles loaded on scroll
+
+  apiCall() {
+    this.loading = true;
+    this.apiCallService
+      .getData(`articles/?limit=${this.limit}&offset=${this.offset}`)
+      .subscribe(
+        (data) => {
+          this.apiData = data;
+          this.articles = data.results;
+          this.loading = false;
+        },
+        (error) => {
+          console.error("Error fetching data, try again later", error);
+          this.loading = false;
+        }
+      );
+  }
+
+  loadMoreElements() {
+    if (this.offset < this.maxNews) {
+      this.loading = true;
+      this.offset += this.limit;
+      this.apiCallService
+        .getData(`articles/?limit=${this.limit}&offset=${this.offset}`)
+        .subscribe(
+          (data) => {
+            this.apiData = data;
+            this.articles.push(...data.results);
+            this.loading = false;
+          },
+          (error) => {
+            console.error("Error fetching data, try again later", error);
+            this.loading = false;
+          }
+        );
+    }
+  }
+
+  @HostListener("window:scroll", ["$event"])
+  onScroll() {
+    const windowHeight = window.innerHeight;
+
+    const body = document.body;
+    const html = document.documentElement;
+    const docHeight = Math.max(
+      body.scrollHeight,
+      body.offsetHeight,
+      html.clientHeight,
+      html.scrollHeight,
+      html.offsetHeight
+    );
+    const windowBottom = windowHeight + window.pageYOffset;
+
+    if (windowBottom >= docHeight) {
+      this.loadMoreElements();
+    }
+  }
 
   ngOnInit() {
-    // api call
-    this.apiCallService
-      .getData("articles/?limit=9&offset=0")
-      .subscribe((data) => {
-        this.apiData = data;
-        this.articles = data.results;
-      });
+    this.apiCall();
   }
 
   getDate(rawDate: string) {
