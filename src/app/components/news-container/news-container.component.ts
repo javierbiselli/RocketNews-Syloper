@@ -69,6 +69,8 @@ export class NewsContainerComponent implements OnInit {
     this.imageLoading[articleId] = false;
   }
 
+  scrollOffset: number = 0.95;
+
   @HostListener("window:scroll", ["$event"])
   @HostListener("window:touchmove", ["$event"])
   onScroll() {
@@ -79,14 +81,18 @@ export class NewsContainerComponent implements OnInit {
       body.offsetHeight,
       html.clientHeight,
       html.scrollHeight,
-      html.offsetHeight
+      html.offsetHeight,
+      window.innerHeight
     );
     const windowBottom = window.innerHeight + window.pageYOffset;
 
-    if (windowBottom >= docHeight) {
+    const loadMoreTriggerPoint = docHeight * this.scrollOffset;
+
+    if (windowBottom >= loadMoreTriggerPoint) {
       this.loadMoreElements();
     }
   }
+
   ngOnInit() {
     this.apiCall();
   }
