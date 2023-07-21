@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, HostListener, OnInit } from "@angular/core";
 import { Article } from "@shared/models";
 import { ApiCallService } from "@shared/services";
 
@@ -10,17 +10,91 @@ import { ApiCallService } from "@shared/services";
 export class NewsContainerComponent implements OnInit {
   constructor(private apiCallService: ApiCallService) {}
 
+  loading: boolean = true;
+  imageLoading: { [key: number]: boolean } = {};
+
   apiData: any;
   articles: Article[] = [];
+  limit: number = 6;
+  offset: number = 0;
+
+  maxNews: number = 48; // Maximum number of articles loaded on scroll
+
+  apiCall() {
+    this.loading = true;
+    this.apiCallService
+      .getData(`articles/?limit=${this.limit}&offset=${this.offset}`)
+      .subscribe(
+        (data) => {
+          this.apiData = data;
+          this.articles = data.results;
+          this.loading = false;
+          this.articles.forEach((article) => {
+            this.imageLoading[article.id] = true;
+          });
+        },
+        (error) => {
+          console.error("Error fetching data, try again later", error);
+          this.loading = false;
+        }
+      );
+  }
+
+  loadMoreElements() {
+    if (this.offset + 6 < this.maxNews) {
+      this.loading = true;
+      this.offset += this.limit;
+      this.apiCallService
+        .getData(`articles/?limit=${this.limit}&offset=${this.offset}`)
+        .subscribe(
+          (data) => {
+            this.apiData = data;
+            const newArticles = data.results;
+            this.articles.push(...newArticles);
+            this.loading = false;
+
+            newArticles.forEach((article: any) => {
+              this.imageLoading[article.id] = true;
+            });
+          },
+          (error) => {
+            console.error("Error fetching data, try again later", error);
+            this.loading = false;
+          }
+        );
+    }
+  }
+
+  onImageLoad(articleId: number) {
+    this.imageLoading[articleId] = false;
+  }
+
+  scrollOffset: number = 0.95;
+
+  @HostListener("window:scroll", ["$event"])
+  @HostListener("window:touchmove", ["$event"])
+  onScroll() {
+    const body = document.body;
+    const html = document.documentElement;
+    const docHeight = Math.max(
+      body.scrollHeight,
+      body.offsetHeight,
+      html.clientHeight,
+      html.scrollHeight,
+      html.offsetHeight,
+      window.innerHeight
+    );
+    const windowBottom = window.innerHeight + window.pageYOffset;
+
+    const loadMoreTriggerPoint = docHeight * this.scrollOffset;
+
+    if (windowBottom >= loadMoreTriggerPoint) {
+      this.loadMoreElements();
+    }
+  }
 
   ngOnInit() {
-    // api call
-    this.apiCallService
-      .getData("articles/?limit=9&offset=0")
-      .subscribe((data) => {
-        this.apiData = data;
-        this.articles = data.results;
-      });
+    this.apiCall();
   }
 
   getDate(rawDate: string) {
@@ -62,7 +136,8 @@ export class NewsContainerComponent implements OnInit {
     return window.innerWidth > 1200;
   }
 
-  isFirstElement(array: Article[], element: Article): boolean {
-    return array.indexOf(element) === 0;
+  isFullElement(array: Article[], element: Article): boolean {
+    const index = array.indexOf(element);
+    return index === 0 || index % 6 === 0;
   }
 }
