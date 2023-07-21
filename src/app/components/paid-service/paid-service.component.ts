@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-paid-service',
-  templateUrl: './paid-service.component.html',
-  styleUrls: ['./paid-service.component.scss']
+  selector: "app-paid-service",
+  templateUrl: "./paid-service.component.html",
+  styleUrls: ["./paid-service.component.scss"],
 })
 export class PaidServiceComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -31,7 +31,16 @@
       }
     }
 
-    a {
+    .forum-link {
+      color: white;
+      font-weight: bold;
+    }
+
+    .forum-link:hover {
+      text-decoration: underline;
+    }
+
+    .main-button {
       background-color: colors(accentDark);
       border-radius: 5px;
       padding: 10px 5px;
@@ -42,7 +51,7 @@
       border: 1px solid colors(accentDark);
       color: colors(primaryDark);
     }
-    a:hover {
+    .main-button:hover {
       border: 1px solid colors(white);
       color: colors(white);
     }
@@ -50,18 +59,24 @@
 }
 
 @include from(tb) {
-  .publicity-section {
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 20px;
+  .publicity-container {
+    width: 75%;
+    margin: auto;
+    .publicity-section {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 20px;
+    }
   }
 }
 
 @include from(xd) {
   .publicity-container {
+    width: 100%;
+    margin: 0;
     display: flex;
     justify-content: center;
-    height: 90%;
+    height: 85vh;
     .publicity-section {
       width: 100%;
       max-width: 400px;
@@ -79,7 +94,7 @@
         }
       }
 
-      a {
+      .main-button {
         font-size: $fontsizeHeadingThree;
       }
     }
