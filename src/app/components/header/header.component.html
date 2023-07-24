@@ -2,7 +2,7 @@
   <div class="header-wrapper">
     <div class="header-top">
       <div class="header-top-section trending-container">
-        <span class="trending-red">FORUM TRENDING</span>
+        <span class="trending-red">TRENDING</span>
         <div class="trending-new-container">
           <div class="trendig-new-text-container">
             <a href="#"
@@ -51,38 +51,38 @@
           <ul>
             <a
               routerLink=""
-              (click)="setSelectedTab('HOME')"
-              [ngClass]="{ active: selectedTab === 'HOME' }"
+              (click)="setSelectedTab('/')"
+              [ngClass]="{ active: selectedTab === '/' }"
               ><li>HOME</li></a
             >
             <a
               routerLink="/forum"
-              (click)="setSelectedTab('FORUM')"
-              [ngClass]="{ active: selectedTab === 'FORUM' }"
+              (click)="setSelectedTab('/forum')"
+              [ngClass]="{ active: selectedTab === '/forum' }"
               ><li>FORUM</li></a
             >
             <a
               href="#"
-              (click)="setSelectedTab('BLOGS')"
-              [ngClass]="{ active: selectedTab === 'BLOGS' }"
+              (click)="setSelectedTab('/blogs')"
+              [ngClass]="{ active: selectedTab === '/blogs' }"
               ><li>BLOGS</li></a
             >
             <a
               href="#"
-              (click)="setSelectedTab('REPORTS')"
-              [ngClass]="{ active: selectedTab === 'REPORTS' }"
+              (click)="setSelectedTab('/reports')"
+              [ngClass]="{ active: selectedTab === '/reports' }"
               ><li>REPORTS</li></a
             >
             <a
               href="#"
-              (click)="setSelectedTab('ABOUT US')"
-              [ngClass]="{ active: selectedTab === 'ABOUT US' }"
+              (click)="setSelectedTab('/about')"
+              [ngClass]="{ active: selectedTab === '/about' }"
               ><li>ABOUT US</li></a
             >
             <a
               routerLink="/contact"
-              (click)="setSelectedTab('CONTACT US')"
-              [ngClass]="{ active: selectedTab === 'CONTACT US' }"
+              (click)="setSelectedTab('/contact')"
+              [ngClass]="{ active: selectedTab === '/contact' }"
               ><li>CONTACT US</li></a
             >
           </ul>
