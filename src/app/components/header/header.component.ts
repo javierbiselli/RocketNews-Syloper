@@ -18,19 +18,18 @@ export class HeaderComponent implements OnInit {
 
   // nav bar logic
 
-  selectedTab: string = "HOME";
+  selectedTab: string = "";
 
   setSelectedTab(tab: string) {
     this.selectedTab = tab;
-    console.log(this.selectedTab);
   }
 
   trendings: string[] = [];
 
   ngOnInit() {
+    this.setSelectedTab(window.location.pathname);
     this.posts = this.dataHandlingService.posts.getValue();
     this.trendings = this.getTrending();
-    console.log(this.trendings);
 
     // clock logic
     const options: Intl.DateTimeFormatOptions = {
@@ -118,7 +117,6 @@ export class HeaderComponent implements OnInit {
 
   // typed.js configuration
   initializeTyped() {
-    console.log(this.trendings);
     const options = {
       strings: [this.trendings[this.currentStringIndex]],
       typeSpeed: 20,
