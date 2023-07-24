@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from "@angular/core";
-import { Article } from "@shared/models";
+import { Result } from "@shared/models";
 import { ApiCallService } from "@shared/services";
 
 @Component({
@@ -14,9 +14,11 @@ export class NewsContainerComponent implements OnInit {
   imageLoading: { [key: number]: boolean } = {};
 
   apiData: any;
-  articles: Article[] = [];
+  articles: Result[] = [];
   limit: number = 6;
   offset: number = 0;
+
+  showPublicity: boolean = true;
 
   maxNews: number = 48; // Maximum number of articles loaded on scroll
 
@@ -69,7 +71,7 @@ export class NewsContainerComponent implements OnInit {
     this.imageLoading[articleId] = false;
   }
 
-  scrollOffset: number = 0.95;
+  scrollOffset: number = 0.99;
 
   @HostListener("window:scroll", ["$event"])
   @HostListener("window:touchmove", ["$event"])
@@ -136,7 +138,7 @@ export class NewsContainerComponent implements OnInit {
     return window.innerWidth > 1200;
   }
 
-  isFullElement(array: Article[], element: Article): boolean {
+  isFullElement(array: Result[], element: Result): boolean {
     const index = array.indexOf(element);
     return index === 0 || index % 6 === 0;
   }

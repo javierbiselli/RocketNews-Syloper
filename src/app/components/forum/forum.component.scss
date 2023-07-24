@@ -1,0 +1,109 @@
+@import "../../styles/utils/setting";
+@import "../../styles/utils/tools";
+
+.section-container {
+  background-color: colors(primaryDark);
+  font-size: $fontsizeSmallTwo;
+  padding-bottom: 40px;
+  color: colors(white);
+  text-align: center;
+  h3 {
+    font-weight: bold;
+    padding: 20px 0;
+    font-size: $fontsizeHeadingTwo;
+    background-color: colors(warnDark);
+  }
+  .top-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 13%;
+    margin: 0 15px;
+    .select-container {
+      text-align: center;
+      padding: 15px 0;
+      label {
+        margin-right: 5px;
+      }
+    }
+    .main-button {
+      margin: 20px 0;
+      width: 200px;
+    }
+    .main-button:hover {
+      border: 1px solid colors(white);
+      color: colors(white);
+    }
+  }
+  section {
+    .posts-container {
+      width: 95%;
+      margin: auto;
+      background-color: colors(secondaryDark);
+      .headers-container {
+        display: flex;
+        justify-content: space-between;
+        padding: 30px;
+        background-color: colors(warnDark);
+        border-radius: 3px;
+        font-weight: bold;
+        font-size: $fontsize;
+      }
+      .post {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid colors(warnDark);
+        padding: 5px;
+        .title-container {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 30%;
+          text-align: center;
+          a {
+            font-weight: bold;
+            margin-left: 10px;
+            color: colors(white);
+          }
+          a:hover {
+            text-decoration: underline;
+          }
+          i {
+            color: colors(gray);
+          }
+        }
+        .comments {
+          text-align: start;
+          font-weight: bold;
+        }
+
+        .data-container {
+          text-align: end;
+          width: 30%;
+        }
+      }
+      .priority {
+        min-height: 80px;
+        font-size: $fontsizeSmallOne;
+        background-color: colors(primaryDark);
+      }
+    }
+  }
+}
+
+@include from(dt) {
+  .section-container {
+    font-size: $fontsizeSmallOne;
+    section {
+      width: 80%;
+      margin: auto;
+      background-color: colors(secondaryDark);
+      border-radius: 10px;
+      padding: 10px;
+      .posts-container {
+        width: 95%;
+      }
+    }
+  }
+}

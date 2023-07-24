@@ -1,0 +1,91 @@
+@import "../../styles/utils/setting";
+@import "../../styles/utils/tools";
+
+.publicity-container {
+  width: 95%;
+  margin: auto;
+  margin-top: 15px;
+  .publicity-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    padding-top: 40px;
+    background: linear-gradient(
+      to right,
+      colors(secondaryDark),
+      colors(warnDark),
+      colors(secondaryDark)
+    );
+    color: colors(white);
+    text-align: center;
+
+    p:first-child {
+      font-size: $fontsizeHeadingTwo;
+      font-weight: bolder;
+    }
+    p {
+      span {
+        font-size: $fontsizeHeadingThree;
+        color: black;
+        font-weight: bolder;
+      }
+    }
+
+    .forum-link {
+      color: white;
+      font-weight: bold;
+    }
+
+    .forum-link:hover {
+      text-decoration: underline;
+    }
+    .main-button:hover {
+      border: 1px solid colors(white);
+      color: colors(white);
+    }
+  }
+}
+
+@include from(tb) {
+  .publicity-container {
+    .publicity-section {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 20px;
+    }
+  }
+}
+
+@include from(xd) {
+  .publicity-container {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    .publicity-section {
+      width: 100%;
+      max-width: 400px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 30px;
+      padding: 60px 30px;
+      p:first-child {
+        font-size: $fontsizeHeadingOne;
+      }
+      p {
+        font-size: $fontsizeHeadingThree;
+        span {
+          font-size: $fontsizeHeadingTwo;
+        }
+      }
+
+      .main-button {
+        font-size: $fontsizeHeadingThree;
+      }
+    }
+  }
+}

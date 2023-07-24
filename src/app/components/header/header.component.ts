@@ -1,4 +1,6 @@
 import { Component, HostListener, OnInit } from "@angular/core";
+import { Post } from "@shared/models";
+import { DataHandlingService } from "src/app/services/data-handling.service";
 import Typed from "typed.js";
 
 @Component({
@@ -7,7 +9,9 @@ import Typed from "typed.js";
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
-  constructor() {}
+  constructor(private dataHandlingService: DataHandlingService) {}
+
+  posts: Post[] = [];
 
   currentDate: string = "";
   closeIcon: string = "fa-xmark";
@@ -21,7 +25,13 @@ export class HeaderComponent implements OnInit {
     console.log(this.selectedTab);
   }
 
+  trendings: string[] = [];
+
   ngOnInit() {
+    this.posts = this.dataHandlingService.posts.getValue();
+    this.trendings = this.getTrending();
+    console.log(this.trendings);
+
     // clock logic
     const options: Intl.DateTimeFormatOptions = {
       weekday: "short",
@@ -48,17 +58,19 @@ export class HeaderComponent implements OnInit {
   abortController = new AbortController();
 
   changeMenuVisibility(): void {
-    this.menuButtonClicked = !this.menuButtonClicked;  
+    this.menuButtonClicked = !this.menuButtonClicked;
 
     if (this.menuButtonClicked) {
       this.menuButtonClass = this.closeIcon;
-      
+
       let thisFile = this; // to avoid "this" refering to 'document'
-      document.addEventListener('click', function(e){
+      document.addEventListener("click", function (e) {
         // if user clicks outside menu:
-        if (e.target != document.getElementById('nav') && 
-        e.target != document.getElementById('menu-button') &&
-        e.target != document.getElementById('menu-button-icon')){
+        if (
+          e.target != document.getElementById("nav") &&
+          e.target != document.getElementById("menu-button") &&
+          e.target != document.getElementById("menu-button-icon")
+        ) {
           thisFile.menuButtonClass = "fa-bars";
           thisFile.menuButtonClicked = false;
           thisFile.abortController.abort(); // removes event listener
@@ -90,22 +102,11 @@ export class HeaderComponent implements OnInit {
 
   //--------------- TYPED.JS ---------------
 
-  // getTrending() {
-  //   let trending = [];
-  //   for (let i = 0; i < 3; i++) {
-  //     trending.push(this.newsData[i].title);
-  //   }
-  //   console.log(trending);
-  //   return trending;
-  // }
+  getTrending(): string[] {
+    const filteredPosts = this.posts.filter((post) => post.priority === true);
+    return filteredPosts.map((post) => post.title);
+  }
 
-  // trending = this.getTrending();
-
-  strings: string[] = [
-    "Probando un texto corto",
-    "Probando un texto largo muy largo para ver si esto funciona y no se pasa el texto de su contenedor",
-    "Otro texto de longitud media para probar cómo funciona",
-  ];
   currentStringIndex: number = 0;
   typed: Typed | undefined;
   autoChangeInterval: any | undefined;
@@ -117,8 +118,9 @@ export class HeaderComponent implements OnInit {
 
   // typed.js configuration
   initializeTyped() {
+    console.log(this.trendings);
     const options = {
-      strings: [this.strings[this.currentStringIndex]],
+      strings: [this.trendings[this.currentStringIndex]],
       typeSpeed: 20,
       backDelay: 10000,
       loop: true,
@@ -141,7 +143,7 @@ export class HeaderComponent implements OnInit {
   }
 
   incrementStringIndex() {
-    if (this.currentStringIndex < this.strings.length - 1) {
+    if (this.currentStringIndex < this.trendings.length - 1) {
       this.changeTrendingNew(1);
     }
   }
@@ -160,7 +162,7 @@ export class HeaderComponent implements OnInit {
     }
 
     this.currentStringIndex =
-      (this.currentStringIndex + offset) % this.strings.length;
+      (this.currentStringIndex + offset) % this.trendings.length;
     this.initializeTyped();
     this.startAutoChange();
   }

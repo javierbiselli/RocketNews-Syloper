@@ -9,6 +9,31 @@
     3. exclusivamente se usaran selectores de clase
 */
 
+.main-button {
+  background-color: #bc791c;
+  border-radius: 5px;
+  padding: 10px 5px;
+  width: 100%;
+  max-width: 300px;
+  transition: 0.3s;
+  font-weight: bolder;
+  border: 1px solid #bc791c;
+  color: #1b1e21;
+}
+
+.separation-bar {
+  width: 95%;
+  height: 2px;
+  margin: auto;
+  background: linear-gradient(
+    to right,
+    colors(black) 10%,
+    colors(warnDark) 50%
+  );
+  margin-bottom: 20px;
+  max-width: 1500px;
+}
+
 .Spinner {
   position: absolute;
   top: 0;

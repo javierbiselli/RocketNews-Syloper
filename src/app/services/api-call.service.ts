@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "@environment";
+import { Data } from "../models";
 
 @Injectable({
   providedIn: "root",
@@ -9,7 +10,7 @@ import { environment } from "@environment";
 export class ApiCallService {
   constructor(private http: HttpClient) {}
 
-  getData(endPoint: string): Observable<any> {
-    return this.http.get(`${environment.api_URL}/${endPoint}`);
+  getData(endPoint: string): Observable<Data> {
+    return this.http.get<Data>(`${environment.api_URL}/${endPoint}`);
   }
 }
