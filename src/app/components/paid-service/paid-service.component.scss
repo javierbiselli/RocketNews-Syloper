@@ -2,7 +2,9 @@
 @import "../../styles/utils/tools";
 
 .publicity-container {
-  margin-top: 9px;
+  width: 95%;
+  margin: auto;
+  margin-top: 15px;
   .publicity-section {
     display: flex;
     flex-direction: column;
@@ -10,6 +12,7 @@
     align-items: center;
     gap: 15px;
     padding: 15px;
+    padding-top: 40px;
     background: linear-gradient(
       to right,
       colors(secondaryDark),
@@ -39,18 +42,6 @@
     .forum-link:hover {
       text-decoration: underline;
     }
-
-    .main-button {
-      background-color: colors(accentDark);
-      border-radius: 5px;
-      padding: 10px 5px;
-      width: 100%;
-      max-width: 300px;
-      transition: 0.3s;
-      font-weight: bolder;
-      border: 1px solid colors(accentDark);
-      color: colors(primaryDark);
-    }
     .main-button:hover {
       border: 1px solid colors(white);
       color: colors(white);
@@ -60,8 +51,6 @@
 
 @include from(tb) {
   .publicity-container {
-    width: 75%;
-    margin: auto;
     .publicity-section {
       flex-direction: row;
       justify-content: space-between;
@@ -76,7 +65,7 @@
     margin: 0;
     display: flex;
     justify-content: center;
-    height: 85vh;
+    height: 100vh;
     .publicity-section {
       width: 100%;
       max-width: 400px;

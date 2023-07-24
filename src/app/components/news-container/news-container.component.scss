@@ -7,8 +7,30 @@ h2 {
   font-weight: bold;
 }
 
+.publicity {
+  position: relative;
+  width: 95%;
+  margin: auto;
+  button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: $fontsizeHeadingThree;
+    color: white;
+    border: 1px solid red;
+    border-radius: 50%;
+    padding: 2px 7px;
+    margin: 5px 3%;
+    z-index: 1;
+  }
+  button:hover {
+    border: 1px solid colors(white);
+    color: colors(white);
+  }
+}
+
 .separation-bar {
-  width: 90%;
+  width: 95%;
   height: 2px;
   margin: auto;
   background: linear-gradient(
@@ -16,6 +38,8 @@ h2 {
     colors(black) 10%,
     colors(warnDark) 50%
   );
+  margin-bottom: 20px;
+  max-width: 1500px;
 }
 
 .articles-section {
@@ -161,16 +185,24 @@ h2 {
       }
     }
   }
+
   .main-container {
     display: flex;
-    margin: 15px;
     justify-content: center;
     gap: 20px;
+    max-width: 1500px;
+    margin: auto;
+
+    .articles {
+      width: 100%;
+      max-width: 1100px;
+    }
 
     .articles-section {
       flex-grow: 2;
       grid-template-columns: repeat(3, 1fr);
-      margin: 0;
+      margin: auto;
+      width: 100%;
       .articles-container {
         .title {
           font-size: fontsizes(normal);
@@ -179,26 +211,12 @@ h2 {
     }
 
     .publicity {
-      margin-bottom: 10px;
+      width: 30%;
       position: sticky;
-      top: 60px;
+      top: 0;
       height: 100%;
-      button {
-        position: absolute;
-        top: 0;
-        right: 0;
-        font-size: $fontsizeHeadingThree;
-        color: white;
-        border: 1px solid red;
-        border-radius: 50%;
-        padding: 5px 10px;
-        margin: 10px;
-        z-index: 1;
-      }
-      button:hover {
-        border: 1px solid colors(white);
-        color: colors(white);
-      }
+      margin: 0;
+      margin-top: 10px;
     }
   }
 
@@ -244,5 +262,7 @@ h2 {
 
   .ghost-articles {
     grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    max-width: 1100px;
   }
 }
