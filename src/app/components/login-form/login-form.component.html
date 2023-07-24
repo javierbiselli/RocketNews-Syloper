@@ -1,0 +1,21 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  
+  <label>
+    First Name:
+    <input type="text" formControlName="firstName">
+  </label>
+
+  <br />
+
+  <label>
+    Last Name:
+    <input type="text" formControlName="lastName">
+  </label>
+
+    <p>
+    Values: {{ myForm.value | json }}<br />
+    Form valid: {{ myForm.status }}
+    </p>
+
+    <button type="submit" [disabled]="!myForm.valid">Submit</button>
+</form>

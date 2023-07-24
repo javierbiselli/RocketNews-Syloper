@@ -10,9 +10,10 @@ import { HeaderComponent } from "./components/header/header.component";
 import { NewsContainerComponent } from "./components/news-container/news-container.component";
 import { ContactFormComponent } from "./components/contact-form/contact-form.component";
 import { RouterModule } from "@angular/router";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PaidServiceComponent } from "./components/paid-service/paid-service.component";
 import { ForumComponent } from "./components/forum/forum.component";
+import { LoginFormComponent } from './components/login-form/login-form.component';
 
 @NgModule({
   declarations: [
@@ -22,16 +23,19 @@ import { ForumComponent } from "./components/forum/forum.component";
     ContactFormComponent,
     PaidServiceComponent,
     ForumComponent,
+    LoginFormComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: "", component: NewsContainerComponent },
       { path: "contact", component: ContactFormComponent },
       { path: "forum", component: ForumComponent },
+      { path: "login", component: LoginFormComponent },
     ]),
   ],
   providers: [],
