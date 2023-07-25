@@ -1,5 +1,5 @@
-<div class="whole-container">
-  <section *ngIf="selectedPost !== undefined">
+<div class="whole-container" *ngIf="selectedPost !== undefined">
+  <section>
     <div class="post-container">
       <div class="top-container">
         <h3>{{ selectedPost.title }}</h3>
@@ -91,5 +91,5 @@
     </div>
   </section>
   <app-paid-service></app-paid-service>
-  <div *ngIf="selectedPost === undefined">404 NOT FOUND</div>
 </div>
+<div *ngIf="selectedPost === undefined">ERROR 404 NOT FOUND</div>
