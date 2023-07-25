@@ -1,0 +1,19 @@
+<!-- <button (click)="login()">Login/Register</button> -->
+
+<ng-container
+  *ngIf="authenticated | async; then loggedIn; else loggedOut">
+</ng-container>
+
+<ng-template #loggedIn>
+  <a routerLink="/login">Logout</a>
+  <!-- <button (click)="logout()">
+    Log out
+  </button> -->
+</ng-template>
+
+<ng-template #loggedOut>
+  <a routerLink="/login">Login / Singup</a>
+  <!-- <button (click)="login()">
+    Login/Register
+  </button> -->
+</ng-template>  

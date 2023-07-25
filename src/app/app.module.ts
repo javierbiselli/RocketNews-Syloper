@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PaidServiceComponent } from "./components/paid-service/paid-service.component";
 import { ForumComponent } from "./components/forum/forum.component";
 import { LoginFormComponent } from './components/login-form/login-form.component';
+import { LoginButtonComponent } from "./components/login-button/login-button.component";
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
     PaidServiceComponent,
     ForumComponent,
     LoginFormComponent,
+    LoginButtonComponent,
   ],
   imports: [
     BrowserModule,
