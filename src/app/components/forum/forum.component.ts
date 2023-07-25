@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Post } from "@shared/models";
 import { DataHandlingService } from "src/app/services/data-handling.service";
+import { ShareDataService } from "src/app/services/share-data.service";
 
 @Component({
   selector: "app-forum",
@@ -8,13 +9,23 @@ import { DataHandlingService } from "src/app/services/data-handling.service";
   styleUrls: ["./forum.component.scss"],
 })
 export class ForumComponent implements OnInit {
-  constructor(private dataHandlingService: DataHandlingService) {}
+  constructor(
+    private dataHandlingService: DataHandlingService,
+    private shareDataService: ShareDataService
+  ) {}
 
   posts: Post[] = [];
 
   ngOnInit(): void {
-    this.posts = this.dataHandlingService.posts.getValue();
+    this.dataHandlingService.posts.subscribe({
+      next: (posts) => (this.posts = posts),
+      error: (err) => console.error(err),
+    });
     this.sortPosts(0);
+  }
+
+  selectPost(post: Post) {
+    this.shareDataService.setSelectedPost(post);
   }
 
   order: number = 0;

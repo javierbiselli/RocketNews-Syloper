@@ -13,6 +13,7 @@ import { RouterModule } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { PaidServiceComponent } from "./components/paid-service/paid-service.component";
 import { ForumComponent } from "./components/forum/forum.component";
+import { PostComponent } from "./components/forum/post/post.component";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ForumComponent } from "./components/forum/forum.component";
     ContactFormComponent,
     PaidServiceComponent,
     ForumComponent,
+    PostComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +34,7 @@ import { ForumComponent } from "./components/forum/forum.component";
       { path: "", component: NewsContainerComponent },
       { path: "contact", component: ContactFormComponent },
       { path: "forum", component: ForumComponent },
+      { path: "forum/post/:id", component: PostComponent },
     ]),
   ],
   providers: [],

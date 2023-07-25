@@ -1,0 +1,131 @@
+@import "../../../styles/utils/setting";
+@import "../../../styles/utils/tools";
+
+.profile-picture {
+  width: 40px;
+  height: 100%;
+}
+
+.whole-container {
+  display: flex;
+  flex-direction: column;
+  background-color: colors(secondaryDark);
+  min-height: calc(100vh - 158px);
+  padding: 30px 0;
+  section {
+    display: flex;
+    flex-direction: column;
+    color: white;
+
+    .post-container {
+      background-color: colors(primaryDark);
+      padding: 15px;
+      margin-top: 15px;
+      border-bottom: 1px solid colors(gray);
+      .top-container {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid gray;
+        h3 {
+          font-size: $fontsizeHeadingOne;
+          font-weight: bold;
+        }
+        .post-data-container {
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 10px;
+          color: colors(gray);
+
+          .post-data {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+          }
+        }
+      }
+
+      .post-content {
+        p {
+          line-height: 25px;
+        }
+      }
+
+      .post-buttons {
+        display: flex;
+        width: 50%;
+        max-width: 200px;
+        gap: 15px;
+        margin-top: 15px;
+      }
+    }
+
+    .comments-order-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 25px 10px;
+      gap: 10px;
+      p {
+        font-size: $fontsizeHeadingThree;
+        font-weight: bold;
+      }
+      select {
+        font-size: $fontsize;
+        padding: 3px;
+        color: colors(primaryDark);
+        font-weight: bold;
+        width: 75%;
+      }
+    }
+
+    .comments-container {
+      background-color: colors(primaryDark);
+      padding: 25px 15px;
+      border-bottom: 5px solid colors(secondaryDark);
+      .comment-data-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        gap: 10px;
+        color: colors(gray);
+        p:first-child {
+          color: colors(white);
+          font-weight: bold;
+        }
+      }
+      .comment-bottom {
+        .comment-buttons-container {
+          max-width: 120px;
+          display: flex;
+          align-items: center;
+          width: 40%;
+          gap: 10px;
+          margin-top: 15px;
+          p {
+            font-size: $fontsizeSmallOne;
+          }
+          .selected-button-green {
+            background-color: green;
+          }
+          .selected-button-red {
+            background-color: red;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include from(dt) {
+  .whole-container {
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px;
+    section {
+      max-width: 1000px;
+    }
+  }
+}

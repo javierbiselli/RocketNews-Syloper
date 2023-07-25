@@ -21,6 +21,25 @@
   color: #1b1e21;
 }
 
+.secondary-button {
+  background-color: transparent;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 5px;
+  width: 100%;
+  max-width: 300px;
+  transition: 0.3s;
+  font-weight: bolder;
+  border: 1px solid #bc791c;
+}
+
+.selected-button-green {
+  background-color: green;
+}
+.selected-button-red {
+  background-color: red;
+}
+
 .separation-bar {
   width: 95%;
   height: 2px;
