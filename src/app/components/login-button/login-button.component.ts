@@ -18,6 +18,11 @@ export class LoginButtonComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onLogout() {
+    this.authenticationService.logout();
+    console.log('logged out');
+  }
+
   // login() {
   //   this.auth.loginWithRedirect();
   // }

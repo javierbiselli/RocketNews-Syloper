@@ -63,11 +63,13 @@ export class AuthService {
   }
 
   logout() {
+    console.log('logging out')
     localStorage.removeItem('currentUser');
     this.userSubject.next(JSON.parse('null'));
     this.router.navigate(['/']);
     console.log('userSubject value:'); // CONSOLE LOGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-        console.log(this.userSubject); // CONSOLE LOGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-        
+    console.log(this.userSubject); // CONSOLE LOGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+    console.log('logging out success')
+    
   }
 }

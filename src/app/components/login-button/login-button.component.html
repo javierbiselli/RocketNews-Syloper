@@ -5,14 +5,16 @@
 </ng-container>
 
 <ng-template #loggedIn>
-  <a routerLink="/login">Logout</a>
+  <button (click)="onLogout()">Logout</button>
+  <!-- <a (click)="onLogout()">Logout</a> -->
   <!-- <button (click)="logout()">
     Log out
   </button> -->
 </ng-template>
 
 <ng-template #loggedOut>
-  <a routerLink="/login">Login / Singup</a>
+  <button routerLink="/login">Login / Singup</button>
+  <!-- <a routerLink="/login">Login / Singup</a> -->
   <!-- <button (click)="login()">
     Login/Register
   </button> -->
