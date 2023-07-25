@@ -1,21 +1,23 @@
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   
-  <label>
-    First Name:
-    <input type="text" formControlName="firstName">
-  </label>
+  <div class="form-group">
+    <label for="username">Username:</label>
+    <input type="text" formControlName="username">
+  </div>
 
-  <br />
-
-  <label>
-    Last Name:
-    <input type="text" formControlName="lastName">
-  </label>
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input type="text" formControlName="password">
+  </div>
 
     <p>
-    Values: {{ myForm.value | json }}<br />
-    Form valid: {{ myForm.status }}
+    Values: {{ loginForm.value | json }}<br />
+    Form valid: {{ loginForm.status }}
     </p>
 
-    <button type="submit" [disabled]="!myForm.valid">Submit</button>
+    <button [disabled]="!loginForm.valid">Login</button>
+
+    <!-- <div *ngIf="error">* Error: {{ error.message }}</div> -->
 </form>
+
+  <button (click)="onLogout()">Logout</button>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-form',
@@ -8,18 +11,49 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginFormComponent implements OnInit {
 
-  constructor() { }
+  loginForm!: FormGroup;
+  error = '';
 
-  ngOnInit(): void {
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
+    private authenticationService: AuthService
+  ) {}
+    
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    });
   }
 
-  myForm = new FormGroup({
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl(''),
-  });
+  get f() {
+    return this.loginForm.controls;
+  }
 
   onSubmit() {
-    console.log(this.myForm.value);
+    if (this.loginForm.invalid) {
+      return;
+    }
+    console.log(this.f['username'].value);
+    this.authenticationService.login(this.f['username'].value, this.f['password'].value)
+      .pipe(first())
+        .subscribe({
+          next: () => {
+              // get return url from query parameters or default to home page
+              const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+              this.router.navigateByUrl(returnUrl);
+          },
+          error: error => {
+            console.log(error);
+            // this.alertService.error(error);
+          }
+      });
   }
 
+  onLogout() {
+    this.authenticationService.logout();
+    console.log('logged out');
+  }
 }
