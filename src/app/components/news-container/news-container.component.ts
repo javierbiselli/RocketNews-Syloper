@@ -26,20 +26,22 @@ export class NewsContainerComponent implements OnInit {
     this.loading = true;
     this.apiCallService
       .getData(`articles/?limit=${this.limit}&offset=${this.offset}`)
-      .subscribe(
-        (data) => {
+      .subscribe({
+        next: (data) => {
           this.apiData = data;
-          this.articles = data.results;
+          const newArticles = data.results;
+          this.articles.push(...newArticles);
           this.loading = false;
-          this.articles.forEach((article) => {
+
+          newArticles.forEach((article: any) => {
             this.imageLoading[article.id] = true;
           });
         },
-        (error) => {
+        error: (error) => {
           console.error("Error fetching data, try again later", error);
           this.loading = false;
-        }
-      );
+        },
+      });
   }
 
   loadMoreElements() {
@@ -48,8 +50,8 @@ export class NewsContainerComponent implements OnInit {
       this.offset += this.limit;
       this.apiCallService
         .getData(`articles/?limit=${this.limit}&offset=${this.offset}`)
-        .subscribe(
-          (data) => {
+        .subscribe({
+          next: (data) => {
             this.apiData = data;
             const newArticles = data.results;
             this.articles.push(...newArticles);
@@ -59,11 +61,11 @@ export class NewsContainerComponent implements OnInit {
               this.imageLoading[article.id] = true;
             });
           },
-          (error) => {
+          error: (error) => {
             console.error("Error fetching data, try again later", error);
             this.loading = false;
-          }
-        );
+          },
+        });
     }
   }
 
