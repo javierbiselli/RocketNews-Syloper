@@ -36,7 +36,6 @@ export class LoginFormComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    console.log(this.f['username'].value);
     this.authenticationService.login(this.f['username'].value, this.f['password'].value)
       .pipe(first())
         .subscribe({
@@ -54,6 +53,5 @@ export class LoginFormComponent implements OnInit {
 
   onLogout() {
     this.authenticationService.logout();
-    console.log('logged out');
   }
 }

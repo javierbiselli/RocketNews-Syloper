@@ -6,16 +6,9 @@
 
 <ng-template #loggedIn>
   <button (click)="onLogout()">Logout</button>
-  <!-- <a (click)="onLogout()">Logout</a> -->
-  <!-- <button (click)="logout()">
-    Log out
-  </button> -->
+  <p>{{ userValue?.name }}</p>
 </ng-template>
 
 <ng-template #loggedOut>
   <button routerLink="/login">Login / Singup</button>
-  <!-- <a routerLink="/login">Login / Singup</a> -->
-  <!-- <button (click)="login()">
-    Login/Register
-  </button> -->
 </ng-template>  

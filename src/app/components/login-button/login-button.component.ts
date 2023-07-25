@@ -13,6 +13,8 @@ export class LoginButtonComponent implements OnInit {
   ) { }
 
   authenticated = this.authenticationService.user;
+  userValue = this.authenticationService.userValue;
+
   // authenticated = null;
 
   ngOnInit(): void {
@@ -22,17 +24,5 @@ export class LoginButtonComponent implements OnInit {
     this.authenticationService.logout();
     console.log('logged out');
   }
-
-  // login() {
-  //   this.auth.loginWithRedirect();
-  // }
-  
-  // logout() {
-  //   this.auth.logout({
-  //     logoutParams: {
-  //       // returnTo: this.document.location.origin //check if neded
-  //     }
-  //   });
-  // }
 
 }
