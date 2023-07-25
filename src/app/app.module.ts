@@ -30,6 +30,8 @@ import { ForumComponent } from "./components/forum/forum.component";
     FormsModule,
     RouterModule.forRoot([
       { path: "", component: NewsContainerComponent },
+      { path: "blogs", component: NewsContainerComponent },
+      { path: "reports", component: NewsContainerComponent },
       { path: "contact", component: ContactFormComponent },
       { path: "forum", component: ForumComponent },
     ]),

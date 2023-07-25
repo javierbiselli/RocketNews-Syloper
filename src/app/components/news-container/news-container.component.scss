@@ -141,7 +141,7 @@ h2 {
     grid-template-columns: repeat(2, 1fr);
     width: 75%;
     .articles-container {
-      padding: 10px;
+      padding: 15px 10px;
       .image-date-container {
         img {
           height: 200px;
@@ -169,6 +169,12 @@ h2 {
     .mini-separation-bar {
       display: block;
     }
+  }
+
+  .articles-container:nth-child(6n - 1),
+  .articles-container:nth-child(6n) {
+    border-bottom: 3px solid black;
+    margin-bottom: 40px;
   }
 
   .ghost-articles {
@@ -258,6 +264,11 @@ h2 {
     .mini-separation-bar {
       display: none;
     }
+  }
+
+  .articles-container:nth-child(6n - 2) {
+    border-bottom: 3px solid black;
+    margin-bottom: 40px;
   }
 
   .ghost-articles {

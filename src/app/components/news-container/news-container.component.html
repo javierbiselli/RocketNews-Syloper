@@ -1,6 +1,6 @@
 <div class="whole-container">
   <div>
-    <h2>Latest news</h2>
+    <h2>{{ title }}</h2>
     <div class="separation-bar"></div>
   </div>
   <div class="main-container">
@@ -9,7 +9,7 @@
       <app-paid-service></app-paid-service>
     </div>
     <div class="articles" [style.display]="loading ? 'hidden' : 'block'">
-      <section class="articles-section">
+      <section class="articles-section" *ngIf="dataName !== 'reports'">
         <div
           *ngFor="let article of articles; first as first"
           class="articles-container"
@@ -48,9 +48,12 @@
           </div>
         </div>
       </section>
+      <section class="articles-section" *ngIf="dataName === 'reports'">
+        Reports view goes here
+      </section>
     </div>
   </div>
-  <div class="ghost-articles" *ngIf="loading">
+  <div class="ghost-articles" *ngIf="loading && dataName !== 'reports'">
     <div class="ghost-article">
       <div class="ghost-content animation-fade"></div>
       <div class="ghost-content animation-fade"></div>

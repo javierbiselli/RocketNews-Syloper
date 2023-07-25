@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Result } from "@shared/models";
 import { ApiCallService } from "@shared/services";
 
@@ -8,13 +9,17 @@ import { ApiCallService } from "@shared/services";
   styleUrls: ["./news-container.component.scss"],
 })
 export class NewsContainerComponent implements OnInit {
-  constructor(private apiCallService: ApiCallService) {}
+  constructor(
+    private apiCallService: ApiCallService,
+    private route: ActivatedRoute
+  ) {}
 
   loading: boolean = true;
   imageLoading: { [key: number]: boolean } = {};
 
   apiData: any;
   articles: Result[] = [];
+  dataName: string = "articles";
   limit: number = 6;
   offset: number = 0;
 
@@ -25,7 +30,7 @@ export class NewsContainerComponent implements OnInit {
   apiCall() {
     this.loading = true;
     this.apiCallService
-      .getData(`articles/?limit=${this.limit}&offset=${this.offset}`)
+      .getData(`${this.dataName}/?limit=${this.limit}&offset=${this.offset}`)
       .subscribe({
         next: (data) => {
           this.apiData = data;
@@ -49,7 +54,7 @@ export class NewsContainerComponent implements OnInit {
       this.loading = true;
       this.offset += this.limit;
       this.apiCallService
-        .getData(`articles/?limit=${this.limit}&offset=${this.offset}`)
+        .getData(`${this.dataName}/?limit=${this.limit}&offset=${this.offset}`)
         .subscribe({
           next: (data) => {
             this.apiData = data;
@@ -97,7 +102,20 @@ export class NewsContainerComponent implements OnInit {
     }
   }
 
+  title: string = "";
+
   ngOnInit() {
+    const segments = this.route.snapshot.url;
+    if (segments.length > 0 && segments[0].path === "blogs") {
+      this.dataName = "blogs";
+      this.title = "Rocket news Blogs";
+    } else if (segments.length > 0 && segments[0].path === "reports") {
+      this.dataName = "reports";
+      this.title = "ISS latests reports";
+    } else {
+      this.dataName = "articles";
+      this.title = "Latest news on space";
+    }
     this.apiCall();
   }
 
