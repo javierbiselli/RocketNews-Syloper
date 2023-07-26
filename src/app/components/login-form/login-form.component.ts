@@ -4,6 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { first } from 'rxjs/operators';
 
+/*
+  TODO:
+  Add alertService
+  Add routing on html. E.g. to "register" button
+*/
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -13,6 +18,7 @@ export class LoginFormComponent implements OnInit {
 
   loginForm!: FormGroup;
   error = '';
+  submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,6 +39,8 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
+
     if (this.loginForm.invalid) {
       return;
     }
@@ -44,9 +52,9 @@ export class LoginFormComponent implements OnInit {
               const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
               this.router.navigateByUrl(returnUrl);
           },
+          // TODO: pasar a alertService
           error: error => {
             console.log(error);
-            // this.alertService.error(error);
           }
       });
   }
