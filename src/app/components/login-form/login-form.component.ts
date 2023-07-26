@@ -16,8 +16,8 @@ import { first } from 'rxjs/operators';
 })
 export class LoginFormComponent implements OnInit {
 
-  loginForm!: FormGroup;
-  error = '';
+  form!: FormGroup;
+  // error = '';
   submitted = false;
 
   constructor(
@@ -28,23 +28,26 @@ export class LoginFormComponent implements OnInit {
   ) {}
     
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+    this.form = this.formBuilder.group({
+      name: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
 
   get f() {
-    return this.loginForm.controls;
+    return this.form.controls;
   }
 
-  onSubmit() {
+  onSubmitLogin() {
     this.submitted = true;
 
-    if (this.loginForm.invalid) {
+    if (this.form.invalid) {
       return;
     }
-    this.authenticationService.login(this.f['username'].value, this.f['password'].value)
+    console.log('logging......');
+
+    this.authenticationService.login(this.f['email'].value, this.f['password'].value)
       .pipe(first())
         .subscribe({
           next: () => {
@@ -57,6 +60,34 @@ export class LoginFormComponent implements OnInit {
             console.log(error);
           }
       });
+
+      console.log('logged!');
+
+  }
+
+  onSubmitRegister() {
+    this.submitted = true;
+
+    if (this.form.invalid) {
+      return;
+    }
+
+    this.authenticationService.register(this.f['name'].value, this.f['email'].value, this.f['password'].value)
+      // .pipe(first())
+      //   .subscribe({
+      //     next: () => {
+      //         // get return url from query parameters or default to home page
+              const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+              this.router.navigateByUrl(returnUrl);
+          // },
+          console.log('registered');
+          this.onSubmitLogin();
+
+          // TODO: pasar a alertService
+          // error: error => {
+          //   console.log(error);
+          // }
+      // });
   }
 
   onLogout() {

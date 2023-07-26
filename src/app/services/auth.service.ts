@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DataHandlingService } from './data-handling.service';
 import { User } from '@shared/models';
-import { HttpClient } from '@angular/common/http';
+// import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -16,9 +16,9 @@ export class AuthService {
   
   constructor(
     private dataHandlingService: DataHandlingService,
-    private http: HttpClient,
+    // private http: HttpClient,
     private router: Router,
-    ) {
+  ) {
     this.userSubject = new BehaviorSubject<User | null>(
       JSON.parse(localStorage.getItem('currentUser') || 'null')
     );
@@ -51,5 +51,14 @@ export class AuthService {
     localStorage.removeItem('currentUser');
     this.userSubject.next(JSON.parse('null'));
     this.router.navigate(['/']);
+  }
+
+  register(name: string, email: string, password: string) {
+    // TODO: add id counter
+    // TODO: add user already exist
+
+    let newId: string = this.dataHandlingService.users.getValue().length.toString();
+    let user: User = {id: newId, name: name, email: email, password: password, isPremium: false};
+    this.dataHandlingService.pushUser(user);
   }
 }
