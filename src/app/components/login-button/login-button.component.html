@@ -5,8 +5,8 @@
 </ng-container>
 
 <ng-template #loggedIn>
+  <p>Hi! {{ userValue?.name }}</p>
   <button (click)="onLogout()">Logout</button>
-  <p>{{ userValue?.name }}</p>
 </ng-template>
 
 <ng-template #loggedOut>

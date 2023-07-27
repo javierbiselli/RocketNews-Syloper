@@ -20,13 +20,14 @@
     <div *ngIf="error">* Error: {{ error.message }}</div>
 </form> -->
 
-<h4 class="card-header">Login</h4>
+<h4 *ngIf="!singUp" class="card-header">Login</h4>
+<h4 *ngIf="singUp" class="card-header">Register</h4>
 <div class="card-body">
 
   <!-- BUTTON-LOGIN -->
   <!-- <form [formGroup]="form" (ngSubmit)="onSubmitLogin()"> -->
   <!-- BUTTON-REGISTER -->
-  <form [formGroup]="form" (ngSubmit)="onSubmitRegister()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
     <!-- LOGGIN -->
 
@@ -48,7 +49,7 @@
 
     <!-- REGISTER -->
 
-    <div class="mb-3">
+    <div *ngIf="singUp" class="mb-3">
       <label class="form-label">Full name</label>
       <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" />
       <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
@@ -74,12 +75,14 @@
   <!-- BUTTON -->
 
     <div>
-      <button class="btn btn-primary">Login</button>
+      <button *ngIf="!singUp" class="btn btn-primary">Login</button>
+      <button *ngIf="singUp" class="btn btn-primary">Register</button>
       <!-- <button [disabled]="loading" class="btn btn-primary">
         <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
         Login
       </button> -->
-      <a routerLink="../register" class="btn btn-link">Register</a>
+      <a *ngIf="!singUp" (click)="singUpChange()" class="btn btn-link">Register</a>
+      <a *ngIf="singUp" (click)="singUpChange()" class="btn btn-link">Login</a>
     </div>
   </form>
   

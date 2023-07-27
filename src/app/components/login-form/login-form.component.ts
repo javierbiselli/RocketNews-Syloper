@@ -19,6 +19,7 @@ export class LoginFormComponent implements OnInit {
   form!: FormGroup;
   // error = '';
   submitted = false;
+  singUp = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,7 +30,9 @@ export class LoginFormComponent implements OnInit {
     
   ngOnInit() {
     this.form = this.formBuilder.group({
-      name: ['', Validators.required],
+      name: [''],
+      // TODO: search for a conditional validator for name when singUp is true
+      // name: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
@@ -39,13 +42,34 @@ export class LoginFormComponent implements OnInit {
     return this.form.controls;
   }
 
-  onSubmitLogin() {
+  singUpChange() {
+    if (this.singUp) {
+      this.singUp = false;
+    } else {
+      this.singUp = true;
+    }
+  }
+
+  onSubmit() {
+    if (!this.singUp) {
+      console.log('login in ...') // ------------------------------------------------
+      this.login();
+    } else {
+      console.log('registering ...') // -------------------------------------------------
+      this.register();
+    }
+  }
+
+  login() {
+    console.log('login in ...') // --------------------------------------------------
+
     this.submitted = true;
 
     if (this.form.invalid) {
+      console.log('invalid form') // ------------------------------------------------
       return;
     }
-    console.log('logging......');
+    console.log('logging......'); // ----------------------------------------------
 
     this.authenticationService.login(this.f['email'].value, this.f['password'].value)
       .pipe(first())
@@ -61,11 +85,11 @@ export class LoginFormComponent implements OnInit {
           }
       });
 
-      console.log('logged!');
+      console.log('logged!'); // -------------------------------------------
 
   }
 
-  onSubmitRegister() {
+  register() {
     this.submitted = true;
 
     if (this.form.invalid) {
@@ -80,8 +104,8 @@ export class LoginFormComponent implements OnInit {
               const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
               this.router.navigateByUrl(returnUrl);
           // },
-          console.log('registered');
-          this.onSubmitLogin();
+          console.log('registered'); // -----------------------------------------------------
+          this.login();
 
           // TODO: pasar a alertService
           // error: error => {
@@ -90,7 +114,4 @@ export class LoginFormComponent implements OnInit {
       // });
   }
 
-  onLogout() {
-    this.authenticationService.logout();
-  }
 }
