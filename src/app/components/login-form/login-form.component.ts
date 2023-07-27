@@ -8,6 +8,8 @@ import { first } from 'rxjs/operators';
   TODO:
   Add alertService
   Add routing on html. E.g. to "register" button
+  Add validator conditional to "name"
+  Fix/add routing to previous page after login() and register()
 */
 @Component({
   selector: 'app-login-form',
@@ -34,7 +36,7 @@ export class LoginFormComponent implements OnInit {
       // TODO: search for a conditional validator for name when singUp is true
       // name: ['', Validators.required],
       email: ['', Validators.required],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
@@ -61,7 +63,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   login() {
-    console.log('login in ...') // --------------------------------------------------
+    console.log('loging in ...') // --------------------------------------------------
 
     this.submitted = true;
 
@@ -69,49 +71,35 @@ export class LoginFormComponent implements OnInit {
       console.log('invalid form') // ------------------------------------------------
       return;
     }
-    console.log('logging......'); // ----------------------------------------------
 
-    this.authenticationService.login(this.f['email'].value, this.f['password'].value)
-      .pipe(first())
-        .subscribe({
-          next: () => {
-              // get return url from query parameters or default to home page
-              const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-              this.router.navigateByUrl(returnUrl);
-          },
-          // TODO: pasar a alertService
-          error: error => {
-            console.log(error);
-          }
-      });
-
-      console.log('logged!'); // -------------------------------------------
-
+    try {
+      this.authenticationService.login(this.f['email'].value, this.f['password'].value);
+    } catch (error) {
+      console.error(error);
+      return;
+    }
+    
+    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.router.navigateByUrl(returnUrl);
   }
 
   register() {
+    console.log('registering ...') // -------------------------------------------------
     this.submitted = true;
 
     if (this.form.invalid) {
+      console.log('invalid form') // ------------------------------------------------
       return;
     }
 
     this.authenticationService.register(this.f['name'].value, this.f['email'].value, this.f['password'].value)
-      // .pipe(first())
-      //   .subscribe({
-      //     next: () => {
-      //         // get return url from query parameters or default to home page
-              const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-              this.router.navigateByUrl(returnUrl);
-          // },
-          console.log('registered'); // -----------------------------------------------------
-          this.login();
-
-          // TODO: pasar a alertService
-          // error: error => {
-          //   console.log(error);
-          // }
-      // });
+    
+    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.router.navigateByUrl(returnUrl);
+    console.log('registered'); // -----------------------------------------------------
+    
+    this.login();
+    console.log('logged in!'); // -----------------------------------------------------
   }
 
 }

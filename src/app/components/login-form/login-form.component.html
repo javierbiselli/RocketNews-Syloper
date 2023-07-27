@@ -1,53 +1,8 @@
-<!-- <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  
-  <div class="form-group">
-    <label for="username">Username:</label>
-    <input type="text" formControlName="username">
-  </div>
-
-  <div class="form-group">
-    <label for="password">Password:</label>
-    <input type="text" formControlName="password">
-  </div>
-
-    <p>
-    Values: {{ loginForm.value | json }}<br />
-    Form valid: {{ loginForm.status }}
-    </p>
-
-    <button [disabled]="!loginForm.valid">Login</button>
-
-    <div *ngIf="error">* Error: {{ error.message }}</div>
-</form> -->
-
 <h4 *ngIf="!singUp" class="card-header">Login</h4>
 <h4 *ngIf="singUp" class="card-header">Register</h4>
 <div class="card-body">
 
-  <!-- BUTTON-LOGIN -->
-  <!-- <form [formGroup]="form" (ngSubmit)="onSubmitLogin()"> -->
-  <!-- BUTTON-REGISTER -->
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
-    <!-- LOGGIN -->
-
-    <!-- <div class="mb-3">
-      <label class="form-label">E-mail</label>
-      <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
-      <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-        <div *ngIf="f['email'].errors['required']">E-mail is required</div>
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">Password</label>
-      <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
-      <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
-        <div *ngIf="f['password'].errors['required']">Password is required</div>
-      </div>
-    </div> -->
-
-    <!-- REGISTER -->
 
     <div *ngIf="singUp" class="mb-3">
       <label class="form-label">Full name</label>
@@ -55,35 +10,29 @@
       <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
           <div *ngIf="f['name'].errors['required']">Full Name is required</div>
       </div>
-  </div>
-  <div class="mb-3">
-    <label class="form-label">E-mail</label>
-    <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
-    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-      <div *ngIf="f['email'].errors['required']">E-mail is required</div>
     </div>
-  </div>
-  <div class="mb-3">
+    <div class="mb-3">
+      <label class="form-label">E-mail</label>
+      <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+      <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+        <div *ngIf="f['email'].errors['required']">E-mail is required</div>
+      </div>
+    </div>
+    <div class="mb-3">
       <label class="form-label">Password</label>
       <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
       <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
-          <div *ngIf="f['password'].errors['required']">Password is required</div>
-          <div *ngIf="f['password'].errors['minlength']">Password must be at least 6 characters</div>
+        <div *ngIf="f['password'].errors['required']">Password is required</div>
+        <div *ngIf="f['password'].errors['minlength']">Password must be at least 6 characters</div>
       </div>
-  </div>
-
-  <!-- BUTTON -->
+    </div>
 
     <div>
       <button *ngIf="!singUp" class="btn btn-primary">Login</button>
       <button *ngIf="singUp" class="btn btn-primary">Register</button>
-      <!-- <button [disabled]="loading" class="btn btn-primary">
-        <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
-        Login
-      </button> -->
+      <br>
       <a *ngIf="!singUp" (click)="singUpChange()" class="btn btn-link">Register</a>
       <a *ngIf="singUp" (click)="singUpChange()" class="btn btn-link">Login</a>
     </div>
   </form>
-  
 </div>

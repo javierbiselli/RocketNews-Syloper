@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '@shared/models';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,15 +10,14 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginButtonComponent implements OnInit {
 
   constructor(private authenticationService: AuthService,
-    // @Inject(DOCUMENT) public document: Document, //only if "returnTo" is neded
   ) { }
 
   authenticated = this.authenticationService.user;
-  userValue = this.authenticationService.userValue;
-
-  // authenticated = null;
+  // userValue = this.authenticationService.userValue;
+  userValue: User | null | undefined;
 
   ngOnInit(): void {
+    this.authenticated.subscribe(data => this.userValue = data);
   }
 
   onLogout() {

@@ -3,7 +3,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DataHandlingService } from './data-handling.service';
 import { User } from '@shared/models';
-// import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -16,7 +15,6 @@ export class AuthService {
   
   constructor(
     private dataHandlingService: DataHandlingService,
-    // private http: HttpClient,
     private router: Router,
   ) {
     this.userSubject = new BehaviorSubject<User | null>(
@@ -30,21 +28,15 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    let userObservable: BehaviorSubject<User | null>;
-
-    // Search user
     let user = this.dataHandlingService.users.getValue()
                 .find(x => x.email === email && x.password === password);
-                // .find(({email}) => email === email);
 
-    userObservable = new BehaviorSubject<User | null>(user || null);
-    return userObservable.asObservable()
-      .pipe(map(user => {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.userSubject.next(user);
-        return user;
-      }));
+    if (!user) {
+      throw new Error("Username or password is incorrect");
+    }
+    console.log('setting localStorage...') // -----------------------------------------------
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    this.userSubject.next(user);
   }
 
   logout() {
@@ -54,7 +46,6 @@ export class AuthService {
   }
 
   register(name: string, email: string, password: string) {
-    // TODO: add id counter
     // TODO: add user already exist
 
     let newId: string = this.dataHandlingService.users.getValue().length.toString();
