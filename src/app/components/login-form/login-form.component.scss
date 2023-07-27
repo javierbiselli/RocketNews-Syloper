@@ -1,0 +1,125 @@
+@import "../../styles/utils/setting";
+@import "../../styles/utils/tools";
+
+h2 {
+  text-align: center;
+  margin: 15px 0;
+  font-weight: bold;
+}
+
+.separation-bar {
+  width: 90%;
+  height: 2px;
+  margin: auto;
+  background: linear-gradient(
+    to right,
+    colors(black) 10%,
+    colors(warnDark) 50%
+);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.form-group {
+  margin-top: spacing(xxs);
+  margin-bottom: spacing(xs);
+}
+
+.no-focus{
+  outline: none;
+}
+
+.form-group-field {
+  width: 100%;
+  padding: 12px 10px;
+  margin-top: spacing(xxs);
+  display: inline-block;
+  border: 1px solid #ccc;
+  // border-radius: 4px;
+  background-color: colors(light);
+  box-sizing: border-box;
+}
+
+.invalid-feedback {
+  width: 100%;
+  margin-top: .25rem;
+  font-size: .875em;
+  color: #dc3545;
+}
+
+.is-invalid {
+  border-color: #dc3545;
+  /* padding-right: calc(1.5em + .75rem); */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right calc(.375em + .1875rem) center;
+  background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+}
+
+.form-group select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.alert {
+  width: fit-content;
+  font-size: fontsizes(smallOne);
+  background-color: colors(warn);
+  color: white;
+  padding: 4px 10px;
+  border: none;
+}
+
+.required {
+  color: colors(warnDark);
+}
+
+.required-text {
+  font-size: .875em;
+}
+
+.button {
+  font-size: 1.2em;
+  width: 100%;
+  background-color: colors(warnDark);
+  color: white;
+  padding: 10px 20px;
+  margin: 40px 0 8px;
+  border: none;
+  cursor: pointer;
+}
+.button:hover {
+  filter: brightness(0.8);
+  transition-duration: 0.3s;
+}
+:disabled {
+  filter: brightness(45%);
+}
+
+.btn-link {
+  color: colors(warnDark);
+  text-decoration: underline;
+}
+
+@include from(dt) {
+  .container {
+    width: 40%;
+    margin: 30px auto 60px;
+    border-image: linear-gradient(
+      to right,
+      colors(black) 10%,
+      colors(warnDark) 50%
+    ) 1;
+    border-width: 1px;
+    border-style: solid;
+  }
+
+  .form-group-field {
+    display: block;
+  }
+}
