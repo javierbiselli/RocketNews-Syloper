@@ -1,0 +1,26 @@
+@import "../../styles/utils/setting";
+@import "../../styles/utils/tools";
+
+.loginregister-container {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  button {
+    color: black;
+    
+    -webkit-transform: translateZ(0);
+    transform: scale(.95);
+    font-size: 1.05em;
+    -webkit-transition: transform 200ms;
+    transition: transform 200ms;
+  }
+  button:hover {
+    color: colors(warnDark);
+    
+    transform: scale(1);
+  }
+}
+
+.font-initial {
+  font-family: Arial, sans-serif;
+}
