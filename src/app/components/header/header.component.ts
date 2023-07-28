@@ -84,13 +84,13 @@ export class HeaderComponent implements OnInit {
   searchButtonClicked: boolean = false;
   searchButtonClass: string = "fa-magnifying-glass";
 
-  @HostListener("window:resize")
-  onWindowResize() {
-    if (window.innerWidth < 992) {
-      this.searchButtonClicked = false;
-      this.searchButtonClass = "fa-magnifying-glass";
-    }
-  }
+  // @HostListener("window:resize")
+  // onWindowResize() {
+  //   if (window.innerWidth < 992) {
+  //     this.searchButtonClicked = false;
+  //     this.searchButtonClass = "fa-magnifying-glass";
+  //   }
+  // } NOT LONGER NEEDED
 
   changeSearchVisibility(): void {
     this.searchButtonClicked = !this.searchButtonClicked;
@@ -163,5 +163,9 @@ export class HeaderComponent implements OnInit {
       (this.currentStringIndex + offset) % this.trendings.length;
     this.initializeTyped();
     this.startAutoChange();
+  }
+
+  isMobile(): boolean {
+    return window.innerWidth < 992;
   }
 }

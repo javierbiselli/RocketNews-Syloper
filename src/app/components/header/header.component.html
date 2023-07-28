@@ -46,8 +46,13 @@
         visible: menuButtonClicked
       }"
     >
-      <div class="header-bottom-section">
+      <div class="header-bottom-section" id="mobileNav">
         <nav id="nav">
+          <p *ngIf="isMobile()">Search:</p>
+          <button (click)="changeSearchVisibility()">
+            <i class="fa-solid" [ngClass]="searchButtonClass"></i>
+          </button>
+          <p *ngIf="isMobile()">Explore:</p>
           <ul>
             <a
               routerLink=""
@@ -86,9 +91,8 @@
               ><li>CONTACT US</li></a
             >
           </ul>
-          <button (click)="changeSearchVisibility()">
-            <i class="fa-solid" [ngClass]="searchButtonClass"></i>
-          </button>
+          <p *ngIf="isMobile()">Join our community!</p>
+          <button *ngIf="isMobile()">Login/Register</button>
         </nav>
       </div>
     </div>
@@ -100,6 +104,13 @@
             visible: searchButtonClicked
           }"
         >
+          <button
+            (click)="changeSearchVisibility()"
+            class="close-button-mobile"
+            *ngIf="isMobile()"
+          >
+            <i class="fa-solid" [ngClass]="searchButtonClass"></i>
+          </button>
           <input type="text" />
           <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
         </div>
