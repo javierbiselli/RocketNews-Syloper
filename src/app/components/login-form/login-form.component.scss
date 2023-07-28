@@ -18,6 +18,11 @@ h2 {
 );
 }
 
+.container {
+  max-width: 450px;
+  margin: 0 auto;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -117,9 +122,10 @@ h2 {
   text-decoration: underline;
 }
 
-@include from(dt) {
+@include from(ls) {
   .container {
-    width: 40%;
+    width: 60%;
+    max-width: 500px;
     margin: 30px auto 60px;
     border-image: linear-gradient(
       to right,
@@ -134,3 +140,21 @@ h2 {
     display: block;
   }
 }
+
+// @include from(dt) {
+//   .container {
+//     width: 40%;
+//     margin: 30px auto 60px;
+//     border-image: linear-gradient(
+//       to right,
+//       colors(black) 10%,
+//       colors(warnDark) 50%
+//     ) 1;
+//     border-width: 1px;
+//     border-style: solid;
+//   }
+
+//   .form-group-field {
+//     display: block;
+//   }
+// }
