@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { first } from 'rxjs/operators';
 
 /*
   TODO:
@@ -19,9 +18,9 @@ import { first } from 'rxjs/operators';
 export class LoginFormComponent implements OnInit {
 
   form!: FormGroup;
-  // error = '';
   submitted = false;
   singUp = false;
+  valid = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -54,27 +53,25 @@ export class LoginFormComponent implements OnInit {
 
   onSubmit() {
     if (!this.singUp) {
-      console.log('login in ...') // ------------------------------------------------
       this.login();
     } else {
-      console.log('registering ...') // -------------------------------------------------
       this.register();
     }
   }
 
   login() {
-    console.log('loging in ...') // --------------------------------------------------
-
     this.submitted = true;
+    this.valid = true;
 
     if (this.form.invalid) {
-      console.log('invalid form') // ------------------------------------------------
+      console.log('invalid form')
       return;
     }
 
     try {
       this.authenticationService.login(this.f['email'].value, this.f['password'].value);
     } catch (error) {
+      this.valid = false;
       console.error(error);
       return;
     }
@@ -84,22 +81,20 @@ export class LoginFormComponent implements OnInit {
   }
 
   register() {
-    console.log('registering ...') // -------------------------------------------------
     this.submitted = true;
 
     if (this.form.invalid) {
-      console.log('invalid form') // ------------------------------------------------
+      console.log('invalid form')
       return;
     }
 
     this.authenticationService.register(this.f['name'].value, this.f['email'].value, this.f['password'].value)
     
+    window.alert('Register succefull!');
+
     const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.router.navigateByUrl(returnUrl);
-    console.log('registered'); // -----------------------------------------------------
     
     this.login();
-    console.log('logged in!'); // -----------------------------------------------------
   }
-
 }

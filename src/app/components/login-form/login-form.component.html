@@ -22,9 +22,10 @@
           E-mail <span class="required">*</span></label>
         <input type="email" formControlName="email" class="form-group-field no-focus"
           [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" 
-          placeholder="email@address.com"/>
+          placeholder="email@address.com" email/>
         <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
           <div *ngIf="f['email'].errors['required']">E-mail is required</div>
+          <div *ngIf="['email']">Invalid e-mail format</div>
         </div>
       </div>
       <div class="form-group">
@@ -35,19 +36,22 @@
           placeholder="******"/>
         <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
           <div *ngIf="f['password'].errors['required']">Password is required</div>
-          <div *ngIf="f['password'].errors['minlength']">Password must be at least 6 characters</div>
+          <div *ngIf="f['password'].errors['minlength'] && singUp">Password must be at least 6 characters</div>
         </div>
       </div>
 
       <div class="form-group">
         <p class="required-text"><span class="required">*</span> Required fields.</p>
+        <div class=" invalid-login">
+          <div *ngIf="!valid && submitted && !singUp" class="invalid-feedback">Incorrect e-mail or password</div>
+        </div>
         <button *ngIf="!singUp" class="button">Login</button>
         <button *ngIf="singUp" class="button">Register</button>
         <br>
-        <p *ngIf="!singUp">New to RocketNews? <a (click)="singUpChange()" class="btn btn-link">
+        <p *ngIf="!singUp" class="link">New to RocketNews? <a (click)="singUpChange()" class="link link-btn">
           Register
         </a></p>
-        <p *ngIf="singUp">Already have an account? <a (click)="singUpChange()" class="btn btn-link">
+        <p *ngIf="singUp" class="link">Already have an account? <a (click)="singUpChange()" class="link link-btn">
           Log in
         </a></p>
       </div>

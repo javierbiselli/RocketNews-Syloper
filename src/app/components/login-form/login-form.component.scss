@@ -51,6 +51,13 @@ h2 {
   color: #dc3545;
 }
 
+.invalid-login {
+  min-height: 21px;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: 700;
+}
+
 .is-invalid {
   border-color: #dc3545;
   /* padding-right: calc(1.5em + .75rem); */
@@ -89,7 +96,7 @@ h2 {
   background-color: colors(warnDark);
   color: white;
   padding: 10px 20px;
-  margin: 40px 0 8px;
+  margin: 10px 0 15px;
   border: none;
   cursor: pointer;
 }
@@ -101,7 +108,11 @@ h2 {
   filter: brightness(45%);
 }
 
-.btn-link {
+.link {
+  font-weight: 700;
+}
+
+.link-btn {
   color: colors(warnDark);
   text-decoration: underline;
 }

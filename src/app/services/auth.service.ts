@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { DataHandlingService } from './data-handling.service';
 import { User } from '@shared/models';
 import { Router } from '@angular/router';
@@ -20,7 +19,7 @@ export class AuthService {
     this.userSubject = new BehaviorSubject<User | null>(
       JSON.parse(localStorage.getItem('currentUser') || 'null')
     );
-    this.user = this.userSubject.asObservable(); // Ver si se usa en algun lado
+    this.user = this.userSubject.asObservable();
   }
 
   public get userValue(): User | null{
@@ -34,7 +33,7 @@ export class AuthService {
     if (!user) {
       throw new Error("Username or password is incorrect");
     }
-    console.log('setting localStorage...') // -----------------------------------------------
+    console.log('setting localStorage...')
     localStorage.setItem('currentUser', JSON.stringify(user));
     this.userSubject.next(user);
   }
@@ -46,8 +45,6 @@ export class AuthService {
   }
 
   register(name: string, email: string, password: string) {
-    // TODO: add user already exist
-
     let newId: string = this.dataHandlingService.users.getValue().length.toString();
     let user: User = {id: newId, name: name, email: email, password: password, isPremium: false};
     this.dataHandlingService.pushUser(user);
