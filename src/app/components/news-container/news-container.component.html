@@ -37,10 +37,7 @@
           <a class="title" href="{{ article.url }}" target="_blank">{{
             article.title
           }}</a>
-          <div
-            class="summary"
-            *ngIf="isDesktop() && isFullElement(articles, article)"
-          >
+          <div class="summary" *ngIf="isFullElement(articles, article)">
             <p>{{ article.summary }}</p>
             <p class="updated-date">
               Updated at: {{ getDate(article.updated_at) }}
@@ -48,12 +45,36 @@
           </div>
         </div>
       </section>
-      <section class="articles-section" *ngIf="dataName === 'reports'">
-        Reports view goes here
+      <section class="reports-container" *ngIf="dataName === 'reports'">
+        <div
+          *ngFor="let report of articles; first as first"
+          [style.display]="loading ? 'hidden' : 'block'"
+          class="first-element"
+        >
+          <div class="summary">
+            <div>
+              <img [src]="articles[0].image_url" alt="" *ngIf="first" />
+              <a href="{{ report.url }}" class="title">{{ report.title }}</a>
+            </div>
+            <p>{{ report.summary }}</p>
+            <p class="updated-date">
+              Updated at: {{ getDate(report.updated_at) }}
+            </p>
+          </div>
+        </div>
       </section>
     </div>
   </div>
-  <div class="ghost-articles" *ngIf="loading && dataName !== 'reports'">
+  <div class="load-button-container">
+    <button
+      (click)="loadMore()"
+      class="main-button"
+      *ngIf="maxNews === offset + 6 && !loading"
+    >
+      <i class="fa-solid fa-arrow-down"></i> Load More
+    </button>
+  </div>
+  <div class="ghost-articles" *ngIf="loading">
     <div class="ghost-article">
       <div class="ghost-content animation-fade"></div>
       <div class="ghost-content animation-fade"></div>

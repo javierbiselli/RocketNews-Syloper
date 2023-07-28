@@ -90,6 +90,33 @@ h2 {
   }
 }
 
+.reports-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+  }
+  .first-element {
+    .summary {
+      div {
+        .title {
+          margin: 0;
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
+.load-button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
 .ghost-articles {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -123,6 +150,36 @@ h2 {
   }
 }
 
+.first-element,
+.articles-container:nth-child(6n - 5) {
+  grid-column: span 2;
+  grid-row: span 2;
+  margin: 10px;
+  background-color: colors(secondaryDark);
+  color: white;
+  .title:not(.articles-container) {
+    color: white;
+    font-size: fontsizes(headingTwo);
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    padding: 0 2%;
+  }
+  .summary {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 30px;
+    .updated-date {
+      align-self: end;
+    }
+  }
+  .mini-separation-bar {
+    display: none;
+  }
+}
+
 @keyframes fadeAnimation {
   0% {
     opacity: 0.4;
@@ -149,9 +206,6 @@ h2 {
         p {
           padding: 1px 7px;
         }
-      }
-      .title {
-        font-size: $fontsizeSmallOne;
       }
     }
     .mini-separation-bar {
@@ -209,11 +263,6 @@ h2 {
       grid-template-columns: repeat(3, 1fr);
       margin: auto;
       width: 100%;
-      .articles-container {
-        .title {
-          font-size: fontsizes(normal);
-        }
-      }
     }
 
     .publicity {
@@ -226,32 +275,6 @@ h2 {
     }
   }
 
-  .first-element:not(.articles-section),
-  .articles-container:nth-child(6n - 5) {
-    grid-column: span 2;
-    grid-row: span 2;
-    margin: 10px;
-    background-color: colors(secondaryDark);
-    color: white;
-    .title:not(.articles-container) {
-      color: white;
-      font-size: fontsizes(headingTwo);
-      margin: 5px 10px;
-    }
-    .summary {
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 30px;
-      .updated-date {
-        align-self: end;
-      }
-    }
-    .mini-separation-bar {
-      display: none;
-    }
-  }
   .articles-container:nth-child(6n - 4),
   .articles-container:nth-child(6n) {
     grid-column: span 1;

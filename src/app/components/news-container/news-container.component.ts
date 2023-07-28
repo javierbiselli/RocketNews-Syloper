@@ -25,7 +25,7 @@ export class NewsContainerComponent implements OnInit {
 
   showPublicity: boolean = true;
 
-  maxNews: number = 48; // Maximum number of articles loaded on scroll
+  maxNews: number = 30; // Maximum number of articles loaded on scroll
 
   apiCall() {
     this.loading = true;
@@ -38,7 +38,7 @@ export class NewsContainerComponent implements OnInit {
           this.articles.push(...newArticles);
           this.loading = false;
 
-          newArticles.forEach((article: any) => {
+          newArticles.forEach((article: Result) => {
             this.imageLoading[article.id] = true;
           });
         },
@@ -62,7 +62,7 @@ export class NewsContainerComponent implements OnInit {
             this.articles.push(...newArticles);
             this.loading = false;
 
-            newArticles.forEach((article: any) => {
+            newArticles.forEach((article: Result) => {
               this.imageLoading[article.id] = true;
             });
           },
@@ -161,5 +161,10 @@ export class NewsContainerComponent implements OnInit {
   isFullElement(array: Result[], element: Result): boolean {
     const index = array.indexOf(element);
     return index === 0 || index % 6 === 0;
+  }
+
+  loadMore(): void {
+    this.maxNews = this.maxNews + 30;
+    this.loadMoreElements();
   }
 }
