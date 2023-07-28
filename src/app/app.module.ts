@@ -35,6 +35,8 @@ import { LoginButtonComponent } from "./components/login-button/login-button.com
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: "", component: NewsContainerComponent },
+      { path: "blogs", component: NewsContainerComponent },
+      { path: "reports", component: NewsContainerComponent },
       { path: "contact", component: ContactFormComponent },
       { path: "forum", component: ForumComponent },
       { path: "login", component: LoginFormComponent },
