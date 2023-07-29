@@ -111,8 +111,10 @@
           >
             <i class="fa-solid" [ngClass]="searchButtonClass"></i>
           </button>
-          <input type="text" />
-          <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+          <input type="text" [(ngModel)]="userInput" />
+          <button (click)="onSubmitSearch()">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
         </div>
       </div>
       <button
@@ -137,3 +139,4 @@
     </div>
   </div>
 </header>
+<div class="Spinner" *ngIf="loading"><span class="loader"></span></div>

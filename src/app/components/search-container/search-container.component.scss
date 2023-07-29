@@ -1,0 +1,53 @@
+@import "../../styles/utils/setting";
+@import "../../styles/utils/tools";
+
+section {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  width: 95%;
+  margin: auto;
+  margin-bottom: 30px;
+  gap: 20px;
+  h3 {
+    margin: 20px auto;
+  }
+  .search-result {
+    background-color: colors(secondaryDark);
+    .image-date-container {
+      position: relative;
+      p {
+        width: 100%;
+        text-align: start;
+        position: absolute;
+        right: 0;
+        padding: 3px 7px;
+        color: white;
+        background-color: black;
+        opacity: 0.7;
+        font-size: fontsizes(smallOne);
+        font-weight: bolder;
+      }
+      img {
+        width: 100%;
+        object-fit: cover;
+        min-height: 200px;
+      }
+    }
+    .title {
+      color: white;
+      font-size: fontsizes(headingTwo);
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      padding: 0 2%;
+    }
+    .summary {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 30px;
+      color: white;
+    }
+  }
+}

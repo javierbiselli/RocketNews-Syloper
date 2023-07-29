@@ -1,6 +1,9 @@
-import { Component, HostListener, OnInit } from "@angular/core";
-import { Post } from "@shared/models";
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { Post, Result } from "@shared/models";
+import { ApiCallService } from "@shared/services";
 import { DataHandlingService } from "src/app/services/data-handling.service";
+import { SearchResultService } from "src/app/services/search-result.service";
 import Typed from "typed.js";
 
 @Component({
@@ -9,7 +12,12 @@ import Typed from "typed.js";
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private dataHandlingService: DataHandlingService) {}
+  constructor(
+    private dataHandlingService: DataHandlingService,
+    private apiCallService: ApiCallService,
+    private SearchResultService: SearchResultService,
+    private router: Router
+  ) {}
 
   posts: Post[] = [];
 
@@ -94,9 +102,37 @@ export class HeaderComponent implements OnInit {
 
   changeSearchVisibility(): void {
     this.searchButtonClicked = !this.searchButtonClicked;
-    this.searchButtonClicked
-      ? (this.searchButtonClass = this.closeIcon)
-      : (this.searchButtonClass = "fa-magnifying-glass");
+    if (this.searchButtonClicked) {
+      this.searchButtonClass = this.closeIcon;
+      this.router.navigate(["/"]);
+    } else {
+      this.searchButtonClass = "fa-magnifying-glass";
+    }
+  }
+
+  userInput: string = "";
+  limit: number = 10; // Maximum number of results for a search
+  loading: boolean = false;
+  searchResults: Result[] = [];
+
+  onSubmitSearch() {
+    if (this.userInput.length > 0) {
+      this.loading = true;
+      this.apiCallService
+        .getData(`articles/?limit=${this.limit}&search=${this.userInput}`)
+        .subscribe({
+          next: (data) => {
+            this.searchResults = data.results;
+            this.SearchResultService.setSearchResults(this.searchResults);
+            this.loading = false;
+            this.router.navigate(["/search"]);
+          },
+          error: (error) => {
+            console.error("Error fetching data, try again later", error);
+            this.loading = false;
+          },
+        });
+    }
   }
 
   //--------------- TYPED.JS ---------------

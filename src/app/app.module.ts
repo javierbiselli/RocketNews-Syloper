@@ -2,7 +2,6 @@
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { environment } from "@environment";
 // This Module Imports
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -13,6 +12,7 @@ import { RouterModule } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { PaidServiceComponent } from "./components/paid-service/paid-service.component";
 import { ForumComponent } from "./components/forum/forum.component";
+import { SearchContainerComponent } from "./components/search-container/search-container.component";
 
 @NgModule({
   declarations: [
@@ -22,6 +22,7 @@ import { ForumComponent } from "./components/forum/forum.component";
     ContactFormComponent,
     PaidServiceComponent,
     ForumComponent,
+    SearchContainerComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +35,7 @@ import { ForumComponent } from "./components/forum/forum.component";
       { path: "reports", component: NewsContainerComponent },
       { path: "contact", component: ContactFormComponent },
       { path: "forum", component: ForumComponent },
+      { path: "search", component: SearchContainerComponent },
     ]),
   ],
   providers: [],

@@ -217,7 +217,7 @@
     .visible {
       opacity: 1;
     }
-    a {
+    button:not(.close-button-mobile) {
       font-size: $fontsizeNormal;
       background-color: colors(warnDark);
       padding: 5px 10px;
