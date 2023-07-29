@@ -5,7 +5,7 @@
   </div>
   <div class="main-container">
     <div *ngIf="!userValue?.isPremium" class="publicity" [style.display]="showPublicity ? 'block' : 'none'">
-      <button (click)="showPublicity = false">X</button>
+      <button (click)="hidePublicity()">X</button>
       <app-paid-service></app-paid-service>
     </div>
     <div class="articles" [style.display]="loading ? 'hidden' : 'block'">

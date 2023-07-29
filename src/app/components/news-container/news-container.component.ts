@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit, SimpleChanges } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { Result, User } from "@shared/models";
 import { ApiCallService } from "@shared/services";
 import { BehaviorSubject } from "rxjs";
@@ -18,7 +18,6 @@ export class NewsContainerComponent implements OnInit {
     ) {}
     
   userValue: User | null | undefined;
-  // authenticated = this.authenticationService.user;
   userLogged = new BehaviorSubject<boolean>(false);
 
   loading: boolean = true;
@@ -127,10 +126,25 @@ export class NewsContainerComponent implements OnInit {
 
     this.authenticationService.user.subscribe(data => {
       this.userValue = data;
-      console.log('subscribed!'); // -----------------------------------------------
-      console.log(data); // -------------------------------------------------------
-      // this.showPublicityReset();
+      console.log('SUBSCRIBED');
+      console.log(data);
+      if (localStorage.getItem('showPublicity')?.valueOf() === 'false') {
+        console.log(this.showPublicity);
+        this.showPublicity = !this.showPublicity;
+        console.log(this.showPublicity);
+      }
+      // if (!data) {
+      //   console.log(this.showPublicity);
+      //   this.showPublicity = !this.showPublicity;
+      //   console.log(this.showPublicity);
+      //   // this.showPublicity = !this.showPublicity;
+      //   // console.log(this.showPublicity);
+      // }
+      // poner falso al logout y pasar el if de aca abajo a una funcion externa para llamarla
+      //desde aca y desde el subscribe de aca arriba cuando showPublicity es falso 
     });
+
+    this.setShowPublicity();
     
 
     // if (this.userValue != null && !(this.userLogged.asObservable())) { // yes-user, before-no
@@ -199,6 +213,24 @@ export class NewsContainerComponent implements OnInit {
     //   this.showPublicity = true;
     // }
   // }
+
+  setShowPublicity() {
+    if (!localStorage.getItem('showPublicity')) {
+      this.showPublicity = true;
+      localStorage.setItem('showPublicity', 'true');
+    } else {
+      if (localStorage.getItem('showPublicity')?.valueOf() === 'true') {
+        this.showPublicity = true;
+      } else {
+        this.showPublicity = false;
+      }
+    }
+  }
+
+  hidePublicity() {
+    localStorage.setItem('showPublicity', 'false');
+    this.showPublicity = false;
+  }
 
   getDate(rawDate: string) {
     const dateObj: Date = new Date(rawDate);
