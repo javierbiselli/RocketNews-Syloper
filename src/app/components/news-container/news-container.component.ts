@@ -126,93 +126,13 @@ export class NewsContainerComponent implements OnInit {
 
     this.authenticationService.user.subscribe(data => {
       this.userValue = data;
-      console.log('SUBSCRIBED');
-      console.log(data);
       if (localStorage.getItem('showPublicity')?.valueOf() === 'false') {
-        console.log(this.showPublicity);
         this.showPublicity = !this.showPublicity;
-        console.log(this.showPublicity);
       }
-      // if (!data) {
-      //   console.log(this.showPublicity);
-      //   this.showPublicity = !this.showPublicity;
-      //   console.log(this.showPublicity);
-      //   // this.showPublicity = !this.showPublicity;
-      //   // console.log(this.showPublicity);
-      // }
-      // poner falso al logout y pasar el if de aca abajo a una funcion externa para llamarla
-      //desde aca y desde el subscribe de aca arriba cuando showPublicity es falso 
     });
 
     this.setShowPublicity();
-    
-
-    // if (this.userValue != null && !(this.userLogged.asObservable())) { // yes-user, before-no
-    //   console.log('user log in') // --------------------------------------------
-    //   this.showPublicity = true;
-    //   this.userLogged.next(true);
-    // } else if (this.userValue = null && this.userLogged.asObservable()) { //not-user, before-yes
-    //   console.log('user logged out') // --------------------------------------------
-    //   this.showPublicity = true;
-    //   this.userLogged.next(false);
-    // } else {
-    //   console.log('all default') // --------------------------------------------
-    // }
-
-    // if (this.userLogged.asObservable()) {
-    //   this.showPublicity = true;
-    // }
-
-    
-    
-    
-    //show = false
-    // if (this.userValue != null) { // logged!
-    //   console.log('userLogged = true') // --------------------------------------------
-    //   this.userLogged.next(true);
-    // } else if (this.userValue = null) { //not logged
-    //   console.log('userLogged = false') // --------------------------------------------
-    //   this.userLogged.next(false);
-    // } else {
-    //   console.log('userLogged = not value') // --------------------------------------------
-    // }
-
-    // if (this.userLogged.asObservable()) {
-    //   this.showPublicity = true;
-    // }
-
-
-
-
-    // //show = false
-    // if (this.userLogged.asObservable()) { // logged!
-    //   console.log('userLogged = true') // --------------------------------------------
-      
-    //   this.userLogged.next(true);
-    // } else if (!this.userLogged.asObservable()) { //not logged
-    //   console.log('userLogged = false') // --------------------------------------------
-    // } else {
-    //   console.log('userLogged = not value') // --------------------------------------------
-    // }
   }
-
-  // showPublicityReset() {
-    // if (this.userValue != null && !(this.userLogged.asObservable())) { // yes-user, before-no
-    //   console.log('user log in') // --------------------------------------------
-    //   this.showPublicity = true;
-    //   this.userLogged.next(true);
-    // } else if (this.userValue = null && this.userLogged.asObservable()) { //not-user, before-yes
-    //   console.log('user logged out') // --------------------------------------------
-    //   this.showPublicity = true;
-    //   this.userLogged.next(false);
-    // } else {
-    //   console.log('all default') // --------------------------------------------
-    // }
-
-    // if (this.userLogged.asObservable()) {  
-    //   this.showPublicity = true;
-    // }
-  // }
 
   setShowPublicity() {
     if (!localStorage.getItem('showPublicity')) {
