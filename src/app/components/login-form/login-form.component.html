@@ -1,0 +1,60 @@
+<section class="section">
+
+  <h2 *ngIf="!singUp" class="card-header">Login</h2>
+  <h2 *ngIf="singUp" class="card-header">Register</h2>
+  <div class="separation-bar"></div>
+
+  <div class="container">
+    <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <div *ngIf="singUp" class="form-group">
+        <label class="form-group-label">
+          Full name <span class="required">*</span></label>
+        <input type="text" formControlName="name" class="form-group-field no-focus"
+          [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"
+          placeholder="Your full name"/>
+        <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+            <div *ngIf="f['name'].errors['required']">Full Name is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-group-label">
+          E-mail <span class="required">*</span></label>
+        <input type="email" formControlName="email" class="form-group-field no-focus"
+          [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" 
+          placeholder="email@address.com" email/>
+        <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+          <div *ngIf="f['email'].errors['required']">E-mail is required</div>
+          <div *ngIf="['email']">Invalid e-mail format</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-group-label">
+          Password <span class="required">*</span></label>
+        <input type="password" formControlName="password" class="form-group-field no-focus"
+          [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+          placeholder="******"/>
+        <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+          <div *ngIf="f['password'].errors['required']">Password is required</div>
+          <div *ngIf="f['password'].errors['minlength'] && singUp">Password must be at least 6 characters</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <p class="required-text"><span class="required">*</span> Required fields.</p>
+        <div class=" invalid-login">
+          <div *ngIf="!valid && submitted && !singUp" class="invalid-feedback">Incorrect e-mail or password</div>
+        </div>
+        <button *ngIf="!singUp" class="button">Login</button>
+        <button *ngIf="singUp" class="button">Register</button>
+        <br>
+        <p *ngIf="!singUp" class="link">New to RocketNews? <button (click)="singUpChange()" class="link link-btn">
+          Register
+        </button></p>
+        <p *ngIf="singUp" class="link">Already have an account? <button (click)="singUpChange()" class="link link-btn">
+          Log in
+        </button></p>
+      </div>
+    </form>
+  </div>
+</section>
