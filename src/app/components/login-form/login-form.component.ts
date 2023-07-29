@@ -3,13 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
-/*
-  TODO:
-  Add alertService
-  Add routing on html. E.g. to "register" button
-  Add validator conditional to "name"
-  Fix/add routing to previous page after login() and register()
-*/
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -31,11 +24,9 @@ export class LoginFormComponent implements OnInit {
     
   ngOnInit() {
     this.form = this.formBuilder.group({
-      name: [''],
-      // TODO: search for a conditional validator for name when singUp is true
-      // name: ['', Validators.required],
+      name: ['', ],
       email: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required]],
     });
   }
 
@@ -43,12 +34,25 @@ export class LoginFormComponent implements OnInit {
     return this.form.controls;
   }
 
+  /**
+   * Change form config to login or register
+   */
   singUpChange() {
+    this.submitted = false;
+    
+    this.singUp = !this.singUp;
+
+    // Change validators depending on whether the form is loggin or register
     if (this.singUp) {
-      this.singUp = false;
+      this.form.controls['name'].setValidators([Validators.required]);
+      this.form.controls['password'].setValue('');
+      this.form.controls['password'].setValidators([Validators.required, Validators.minLength(6)]);
     } else {
-      this.singUp = true;
+      this.form.controls['name'].clearValidators();
+      this.form.controls['password'].setValue('');
+      this.form.controls['password'].setValidators([Validators.required]);
     }
+    this.form.updateValueAndValidity();
   }
 
   onSubmit() {

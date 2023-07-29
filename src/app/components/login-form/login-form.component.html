@@ -48,12 +48,12 @@
         <button *ngIf="!singUp" class="button">Login</button>
         <button *ngIf="singUp" class="button">Register</button>
         <br>
-        <p *ngIf="!singUp" class="link">New to RocketNews? <a (click)="singUpChange()" class="link link-btn">
+        <p *ngIf="!singUp" class="link">New to RocketNews? <button (click)="singUpChange()" class="link link-btn">
           Register
-        </a></p>
-        <p *ngIf="singUp" class="link">Already have an account? <a (click)="singUpChange()" class="link link-btn">
+        </button></p>
+        <p *ngIf="singUp" class="link">Already have an account? <button (click)="singUpChange()" class="link link-btn">
           Log in
-        </a></p>
+        </button></p>
       </div>
     </form>
   </div>
