@@ -1,7 +1,9 @@
-import { Component, HostListener, OnInit } from "@angular/core";
+import { Component, HostListener, OnInit, SimpleChanges } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Result } from "@shared/models";
+import { Result, User } from "@shared/models";
 import { ApiCallService } from "@shared/services";
+import { BehaviorSubject } from "rxjs";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-news-container",
@@ -11,8 +13,13 @@ import { ApiCallService } from "@shared/services";
 export class NewsContainerComponent implements OnInit {
   constructor(
     private apiCallService: ApiCallService,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private authenticationService: AuthService,
+    ) {}
+    
+  userValue: User | null | undefined;
+  // authenticated = this.authenticationService.user;
+  userLogged = new BehaviorSubject<boolean>(false);
 
   loading: boolean = true;
   imageLoading: { [key: number]: boolean } = {};
@@ -117,7 +124,81 @@ export class NewsContainerComponent implements OnInit {
       this.title = "Latest news on space";
     }
     this.apiCall();
+
+    this.authenticationService.user.subscribe(data => {
+      this.userValue = data;
+      console.log('subscribed!'); // -----------------------------------------------
+      console.log(data); // -------------------------------------------------------
+      // this.showPublicityReset();
+    });
+    
+
+    // if (this.userValue != null && !(this.userLogged.asObservable())) { // yes-user, before-no
+    //   console.log('user log in') // --------------------------------------------
+    //   this.showPublicity = true;
+    //   this.userLogged.next(true);
+    // } else if (this.userValue = null && this.userLogged.asObservable()) { //not-user, before-yes
+    //   console.log('user logged out') // --------------------------------------------
+    //   this.showPublicity = true;
+    //   this.userLogged.next(false);
+    // } else {
+    //   console.log('all default') // --------------------------------------------
+    // }
+
+    // if (this.userLogged.asObservable()) {
+    //   this.showPublicity = true;
+    // }
+
+    
+    
+    
+    //show = false
+    // if (this.userValue != null) { // logged!
+    //   console.log('userLogged = true') // --------------------------------------------
+    //   this.userLogged.next(true);
+    // } else if (this.userValue = null) { //not logged
+    //   console.log('userLogged = false') // --------------------------------------------
+    //   this.userLogged.next(false);
+    // } else {
+    //   console.log('userLogged = not value') // --------------------------------------------
+    // }
+
+    // if (this.userLogged.asObservable()) {
+    //   this.showPublicity = true;
+    // }
+
+
+
+
+    // //show = false
+    // if (this.userLogged.asObservable()) { // logged!
+    //   console.log('userLogged = true') // --------------------------------------------
+      
+    //   this.userLogged.next(true);
+    // } else if (!this.userLogged.asObservable()) { //not logged
+    //   console.log('userLogged = false') // --------------------------------------------
+    // } else {
+    //   console.log('userLogged = not value') // --------------------------------------------
+    // }
   }
+
+  // showPublicityReset() {
+    // if (this.userValue != null && !(this.userLogged.asObservable())) { // yes-user, before-no
+    //   console.log('user log in') // --------------------------------------------
+    //   this.showPublicity = true;
+    //   this.userLogged.next(true);
+    // } else if (this.userValue = null && this.userLogged.asObservable()) { //not-user, before-yes
+    //   console.log('user logged out') // --------------------------------------------
+    //   this.showPublicity = true;
+    //   this.userLogged.next(false);
+    // } else {
+    //   console.log('all default') // --------------------------------------------
+    // }
+
+    // if (this.userLogged.asObservable()) {  
+    //   this.showPublicity = true;
+    // }
+  // }
 
   getDate(rawDate: string) {
     const dateObj: Date = new Date(rawDate);

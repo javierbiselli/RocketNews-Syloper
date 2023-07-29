@@ -4,7 +4,7 @@
     <div class="separation-bar"></div>
   </div>
   <div class="main-container">
-    <div class="publicity" [style.display]="showPublicity ? 'block' : 'none'">
+    <div *ngIf="!userValue?.isPremium" class="publicity" [style.display]="showPublicity ? 'block' : 'none'">
       <button (click)="showPublicity = false">X</button>
       <app-paid-service></app-paid-service>
     </div>
