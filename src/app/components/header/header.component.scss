@@ -45,7 +45,7 @@
         display: flex;
         justify-content: space-between;
         .trendig-new-text-container {
-          width: 170px;
+          width: 100px;
         }
         a {
           margin-left: 7px;
@@ -98,6 +98,11 @@
       button:hover {
         color: colors(warnDark);
       }
+    }
+
+    .loginregister-component {
+      display: flex;
+      width: 100%;
     }
   }
 
@@ -250,7 +255,7 @@
       margin: auto;
     }
     .trending-container {
-      min-width: 550px;
+      min-width: 400px;
     }
     .header-top-section {
       display: flex;
