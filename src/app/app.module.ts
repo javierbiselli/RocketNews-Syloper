@@ -15,6 +15,7 @@ import { PaidServiceComponent } from "./components/paid-service/paid-service.com
 import { ForumComponent } from "./components/forum/forum.component";
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { LoginButtonComponent } from "./components/login-button/login-button.component";
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { LoginButtonComponent } from "./components/login-button/login-button.com
     ForumComponent,
     LoginFormComponent,
     LoginButtonComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
