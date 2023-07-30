@@ -80,6 +80,8 @@ export class LoginFormComponent implements OnInit {
       return;
     }
     
+    localStorage.removeItem('showPublicity');
+
     const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.router.navigateByUrl(returnUrl);
   }

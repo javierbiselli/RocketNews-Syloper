@@ -24,6 +24,7 @@ export class LoginButtonComponent implements OnInit {
     this.authenticationService.logout();
     console.log('logged out');
     window.alert('Logged out.');
+    localStorage.setItem('showPublicity', 'false');
   }
 
 }
