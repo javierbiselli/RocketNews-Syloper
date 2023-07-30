@@ -20,8 +20,9 @@ export class LoginButtonComponent implements OnInit {
 
   onLogout() {
     this.authenticationService.logout();
-    console.log("logged out");
-    window.alert("Logged out.");
+    console.log('logged out');
+    window.alert('Logged out.');
+    localStorage.setItem('showPublicity', 'false');
   }
 
   isMobile(): boolean {
