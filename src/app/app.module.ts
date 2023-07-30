@@ -15,6 +15,7 @@ import { PaidServiceComponent } from "./components/paid-service/paid-service.com
 import { ForumComponent } from "./components/forum/forum.component";
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { LoginButtonComponent } from "./components/login-button/login-button.component";
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { LoginButtonComponent } from "./components/login-button/login-button.com
     ForumComponent,
     LoginFormComponent,
     LoginButtonComponent,
+    AboutUsComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,7 @@ import { LoginButtonComponent } from "./components/login-button/login-button.com
       { path: "contact", component: ContactFormComponent },
       { path: "forum", component: ForumComponent },
       { path: "login", component: LoginFormComponent },
+      { path: "about", component: AboutUsComponent },
     ]),
   ],
   providers: [],
