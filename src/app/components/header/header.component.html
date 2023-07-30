@@ -92,7 +92,10 @@
             >
           </ul>
           <p *ngIf="isMobile()">Join our community!</p>
-          <button *ngIf="isMobile()">Login/Register</button>
+          <app-login-button
+            *ngIf="isMobile()"
+            class="loginregister-component-mobile"
+          ></app-login-button>
         </nav>
       </div>
     </div>
@@ -112,7 +115,7 @@
             <i class="fa-solid" [ngClass]="searchButtonClass"></i>
           </button>
           <input type="text" [(ngModel)]="userInput" />
-          <button (click)="onSubmitSearch()">
+          <button (click)="performSearch()">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </div>

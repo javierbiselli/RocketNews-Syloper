@@ -40,7 +40,7 @@ import { LoginButtonComponent } from "./components/login-button/login-button.com
       { path: "reports", component: NewsContainerComponent },
       { path: "contact", component: ContactFormComponent },
       { path: "forum", component: ForumComponent },
-      { path: "search", component: SearchContainerComponent },
+      { path: "search/:userInput", component: SearchContainerComponent },
       { path: "login", component: LoginFormComponent },
     ]),
   ],

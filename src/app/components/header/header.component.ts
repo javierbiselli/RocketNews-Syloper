@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Post, Result } from "@shared/models";
 import { ApiCallService } from "@shared/services";
 import { DataHandlingService } from "src/app/services/data-handling.service";
@@ -16,7 +16,8 @@ export class HeaderComponent implements OnInit {
     private dataHandlingService: DataHandlingService,
     private apiCallService: ApiCallService,
     private SearchResultService: SearchResultService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   posts: Post[] = [];
@@ -57,6 +58,10 @@ export class HeaderComponent implements OnInit {
     updateDateTime();
 
     setInterval(updateDateTime, 1000);
+    console.log("logueo", this.route.snapshot.url);
+
+    this.userInput = window.location.pathname.slice(8);
+    this.onSubmitSearch();
   }
 
   // menu logic
@@ -104,34 +109,37 @@ export class HeaderComponent implements OnInit {
     this.searchButtonClicked = !this.searchButtonClicked;
     if (this.searchButtonClicked) {
       this.searchButtonClass = this.closeIcon;
-      this.router.navigate(["/"]);
     } else {
       this.searchButtonClass = "fa-magnifying-glass";
     }
   }
 
   userInput: string = "";
-  limit: number = 10; // Maximum number of results for a search
+  limit: number = 30; // Maximum number of results for a search
   loading: boolean = false;
   searchResults: Result[] = [];
 
   onSubmitSearch() {
+    this.loading = true;
+    this.apiCallService
+      .getData(`articles/?limit=${this.limit}&search=${this.userInput}`)
+      .subscribe({
+        next: (data) => {
+          this.searchResults = data.results;
+          this.SearchResultService.setSearchResults(this.searchResults);
+          this.loading = false;
+        },
+        error: (error) => {
+          console.error("Error fetching data, try again later", error);
+          this.loading = false;
+        },
+      });
+  }
+
+  performSearch() {
     if (this.userInput.length > 0) {
-      this.loading = true;
-      this.apiCallService
-        .getData(`articles/?limit=${this.limit}&search=${this.userInput}`)
-        .subscribe({
-          next: (data) => {
-            this.searchResults = data.results;
-            this.SearchResultService.setSearchResults(this.searchResults);
-            this.loading = false;
-            this.router.navigate(["/search"]);
-          },
-          error: (error) => {
-            console.error("Error fetching data, try again later", error);
-            this.loading = false;
-          },
-        });
+      this.onSubmitSearch();
+      this.router.navigate([`/search/${this.userInput}`]);
     }
   }
 

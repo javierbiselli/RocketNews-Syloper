@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { Result } from "@shared/models";
 import { SearchResultService } from "src/app/services/search-result.service";
 
@@ -8,13 +9,31 @@ import { SearchResultService } from "src/app/services/search-result.service";
   styleUrls: ["./search-container.component.scss"],
 })
 export class SearchContainerComponent implements OnInit {
+  searchParam: string = "";
   searchResults: Result[] = [];
 
-  constructor(private searchResultService: SearchResultService) {}
+  constructor(
+    private searchResultService: SearchResultService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.searchResults = this.searchResultService.getSearchResults();
-    console.log(this.searchResults);
+    this.route.paramMap.subscribe((params) => {
+      this.searchParam = params.get("userInput") || "";
+      console.log(this.searchParam);
+      this.searchResults = this.searchResultService.getSearchResults();
+    });
+
+    this.searchResultService.searchResults$.subscribe((results) => {
+      this.searchResults = results;
+      console.log("search", this.searchResults);
+    });
+  }
+
+  displayLimit: number = 12;
+
+  loadMore() {
+    this.displayLimit += 6;
   }
 
   getDate(rawDate: string) {

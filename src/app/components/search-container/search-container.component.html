@@ -1,27 +1,43 @@
 <section>
-  <h3>Search results:</h3>
+  <h3>Search results for '{{ searchParam }}':</h3>
   <p *ngIf="searchResults.length === 0">
-    No results <a routerLink="/">GO BACK</a>
+    No results: <a routerLink="/">BACK TO HOME</a>
   </p>
-  <div *ngFor="let result of searchResults" class="search-container">
-    <div class="search-result">
-      <div class="image-date-container">
-        <p>
-          <i class="fa-regular fa-calendar"></i>
-          &nbsp;
-          {{ getDate(result.published_at) }}
-        </p>
-        <a href="{{ result.url }}" target="_blank">
-          <img [src]="result.image_url" alt="{{ result.title }}" />
-        </a>
-      </div>
-      <a class="title" href="{{ result.url }}" target="_blank">{{
-        result.title
-      }}</a>
-      <div class="summary">
-        <p>{{ result.summary }}</p>
-        <p class="updated-date">Updated at: {{ getDate(result.updated_at) }}</p>
+  <div class="container">
+    <div
+      *ngFor="let result of searchResults.slice(0, displayLimit)"
+      class="search-container"
+    >
+      <div class="search-result">
+        <div class="image-date-container">
+          <p>
+            <i class="fa-regular fa-calendar"></i>
+            &nbsp;
+            {{ getDate(result.published_at) }}
+          </p>
+          <a href="{{ result.url }}" target="_blank">
+            <img [src]="result.image_url" alt="{{ result.title }}" />
+          </a>
+        </div>
+        <a class="title" href="{{ result.url }}" target="_blank">{{
+          result.title
+        }}</a>
+        <div class="summary">
+          <p>{{ result.summary }}</p>
+          <p class="updated-date">
+            Updated at: {{ getDate(result.updated_at) }}
+          </p>
+        </div>
       </div>
     </div>
+  </div>
+  <div class="load-button-container">
+    <button
+      (click)="loadMore()"
+      class="main-button"
+      *ngIf="displayLimit < searchResults.length"
+    >
+      <i class="fa-solid fa-arrow-down"></i> Load More
+    </button>
   </div>
 </section>

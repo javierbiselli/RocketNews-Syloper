@@ -90,16 +90,6 @@
       }
     }
 
-    .loginregister-button-container {
-      button {
-        color: colors(grayDark);
-        transition: 0.3s;
-      }
-      button:hover {
-        color: colors(warnDark);
-      }
-    }
-
     .loginregister-component {
       display: flex;
       width: 100%;
