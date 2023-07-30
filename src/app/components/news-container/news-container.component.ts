@@ -1,7 +1,9 @@
-import { Component, HostListener, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { Result } from "@shared/models";
+import { Component, HostListener, OnInit, SimpleChanges } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { Result, User } from "@shared/models";
 import { ApiCallService } from "@shared/services";
+import { BehaviorSubject } from "rxjs";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-news-container",
@@ -11,8 +13,12 @@ import { ApiCallService } from "@shared/services";
 export class NewsContainerComponent implements OnInit {
   constructor(
     private apiCallService: ApiCallService,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private authenticationService: AuthService,
+    ) {}
+    
+  userValue: User | null | undefined;
+  userLogged = new BehaviorSubject<boolean>(false);
 
   loading: boolean = true;
   imageLoading: { [key: number]: boolean } = {};
@@ -117,6 +123,33 @@ export class NewsContainerComponent implements OnInit {
       this.title = "Latest news on space";
     }
     this.apiCall();
+
+    this.authenticationService.user.subscribe(data => {
+      this.userValue = data;
+      if (localStorage.getItem('showPublicity')?.valueOf() === 'false') {
+        this.showPublicity = !this.showPublicity;
+      }
+    });
+
+    this.setShowPublicity();
+  }
+
+  setShowPublicity() {
+    if (!localStorage.getItem('showPublicity')) {
+      this.showPublicity = true;
+      localStorage.setItem('showPublicity', 'true');
+    } else {
+      if (localStorage.getItem('showPublicity')?.valueOf() === 'true') {
+        this.showPublicity = true;
+      } else {
+        this.showPublicity = false;
+      }
+    }
+  }
+
+  hidePublicity() {
+    localStorage.setItem('showPublicity', 'false');
+    this.showPublicity = false;
   }
 
   getDate(rawDate: string) {
