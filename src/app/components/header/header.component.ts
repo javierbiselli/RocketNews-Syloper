@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Post, Result } from "@shared/models";
 import { ApiCallService } from "@shared/services";
@@ -12,6 +12,8 @@ import Typed from "typed.js";
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
+  @ViewChild("searchInput", { static: false }) searchInput!: ElementRef;
+
   constructor(
     private dataHandlingService: DataHandlingService,
     private apiCallService: ApiCallService,
@@ -58,7 +60,6 @@ export class HeaderComponent implements OnInit {
     updateDateTime();
 
     setInterval(updateDateTime, 1000);
-    console.log("logueo", this.route.snapshot.url);
 
     this.userInput = window.location.pathname.slice(8);
     this.onSubmitSearch();
@@ -109,6 +110,9 @@ export class HeaderComponent implements OnInit {
     this.searchButtonClicked = !this.searchButtonClicked;
     if (this.searchButtonClicked) {
       this.searchButtonClass = this.closeIcon;
+      if (this.searchInput) {
+        this.searchInput.nativeElement.focus();
+      }
     } else {
       this.searchButtonClass = "fa-magnifying-glass";
     }

@@ -114,7 +114,13 @@
           >
             <i class="fa-solid" [ngClass]="searchButtonClass"></i>
           </button>
-          <input type="text" [(ngModel)]="userInput" />
+          <input
+            #searchInput
+            type="text"
+            placeholder="Search for news..."
+            [(ngModel)]="userInput"
+            (keyup.enter)="performSearch()"
+          />
           <button (click)="performSearch()">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>

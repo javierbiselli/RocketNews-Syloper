@@ -20,13 +20,11 @@ export class SearchContainerComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.searchParam = params.get("userInput") || "";
-      console.log(this.searchParam);
       this.searchResults = this.searchResultService.getSearchResults();
     });
 
     this.searchResultService.searchResults$.subscribe((results) => {
       this.searchResults = results;
-      console.log("search", this.searchResults);
     });
   }
 
