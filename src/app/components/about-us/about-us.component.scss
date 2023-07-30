@@ -75,14 +75,15 @@ a {
 }
 
 .link {
+  font-size: inherit;
   font-weight: 700;
-  button {
-    font-size: inherit;
-  }
 }
 .link-btn {
   color: colors(warnDark);
   text-decoration: underline;
+}
+.link-light {
+  font-weight: inherit;
 }
 
 .social-networks-container {
@@ -97,5 +98,42 @@ a {
   }
   a:hover {
     color: colors(warnDark);
+  }
+}
+
+@include from(ls) {
+  .container {
+    width: 70%;
+    margin: 60px auto;
+  }
+
+  .separation-bar-slim {
+    width: 70%;
+  }
+  .separation-bar-slim-short {
+    width: 35%;
+  }
+}
+
+@include from(dt) {
+  .separation-bar-slim {
+    width: 70%;
+    height: 2px;
+  }
+
+  h3 {
+    margin-top: 70px;
+  }
+
+  h4 {
+    margin-top: 25px;
+  }
+
+  .list-container {
+    margin: 30px 0;
+  }
+
+  .social-networks-container {
+    margin-top: 25px;
   }
 }
