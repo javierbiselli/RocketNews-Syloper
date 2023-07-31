@@ -1,6 +1,9 @@
-import { Component, HostListener, OnInit } from "@angular/core";
-import { Post } from "@shared/models";
+import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Post, Result } from "@shared/models";
+import { ApiCallService } from "@shared/services";
 import { DataHandlingService } from "src/app/services/data-handling.service";
+import { SearchResultService } from "src/app/services/search-result.service";
 import Typed from "typed.js";
 
 @Component({
@@ -9,7 +12,15 @@ import Typed from "typed.js";
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private dataHandlingService: DataHandlingService) {}
+  @ViewChild("searchInput", { static: false }) searchInput!: ElementRef;
+
+  constructor(
+    private dataHandlingService: DataHandlingService,
+    private apiCallService: ApiCallService,
+    private SearchResultService: SearchResultService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   posts: Post[] = [];
 
@@ -49,6 +60,9 @@ export class HeaderComponent implements OnInit {
     updateDateTime();
 
     setInterval(updateDateTime, 1000);
+
+    this.userInput = window.location.pathname.slice(8);
+    this.onSubmitSearch();
   }
 
   // menu logic
@@ -84,19 +98,53 @@ export class HeaderComponent implements OnInit {
   searchButtonClicked: boolean = false;
   searchButtonClass: string = "fa-magnifying-glass";
 
-  @HostListener("window:resize")
-  onWindowResize() {
-    if (window.innerWidth < 992) {
-      this.searchButtonClicked = false;
+  // @HostListener("window:resize")
+  // onWindowResize() {
+  //   if (window.innerWidth < 992) {
+  //     this.searchButtonClicked = false;
+  //     this.searchButtonClass = "fa-magnifying-glass";
+  //   }
+  // } NOT LONGER NEEDED
+
+  changeSearchVisibility(): void {
+    this.searchButtonClicked = !this.searchButtonClicked;
+    if (this.searchButtonClicked) {
+      this.searchButtonClass = this.closeIcon;
+      if (this.searchInput) {
+        this.searchInput.nativeElement.focus();
+      }
+    } else {
       this.searchButtonClass = "fa-magnifying-glass";
     }
   }
 
-  changeSearchVisibility(): void {
-    this.searchButtonClicked = !this.searchButtonClicked;
-    this.searchButtonClicked
-      ? (this.searchButtonClass = this.closeIcon)
-      : (this.searchButtonClass = "fa-magnifying-glass");
+  userInput: string = "";
+  limit: number = 30; // Maximum number of results for a search
+  loading: boolean = false;
+  searchResults: Result[] = [];
+
+  onSubmitSearch() {
+    this.loading = true;
+    this.apiCallService
+      .getData(`articles/?limit=${this.limit}&search=${this.userInput}`)
+      .subscribe({
+        next: (data) => {
+          this.searchResults = data.results;
+          this.SearchResultService.setSearchResults(this.searchResults);
+          this.loading = false;
+        },
+        error: (error) => {
+          console.error("Error fetching data, try again later", error);
+          this.loading = false;
+        },
+      });
+  }
+
+  performSearch() {
+    if (this.userInput.length > 0) {
+      this.onSubmitSearch();
+      this.router.navigate([`/search/${this.userInput}`]);
+    }
   }
 
   //--------------- TYPED.JS ---------------
@@ -163,5 +211,9 @@ export class HeaderComponent implements OnInit {
       (this.currentStringIndex + offset) % this.trendings.length;
     this.initializeTyped();
     this.startAutoChange();
+  }
+
+  isMobile(): boolean {
+    return window.innerWidth < 992;
   }
 }

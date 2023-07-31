@@ -2,7 +2,6 @@
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { environment } from "@environment";
 // This Module Imports
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -13,7 +12,8 @@ import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PaidServiceComponent } from "./components/paid-service/paid-service.component";
 import { ForumComponent } from "./components/forum/forum.component";
-import { LoginFormComponent } from './components/login-form/login-form.component';
+import { SearchContainerComponent } from "./components/search-container/search-container.component";
+import { LoginFormComponent } from "./components/login-form/login-form.component";
 import { LoginButtonComponent } from "./components/login-button/login-button.component";
 import { FooterComponent } from './components/footer/footer.component';
 
@@ -25,6 +25,7 @@ import { FooterComponent } from './components/footer/footer.component';
     ContactFormComponent,
     PaidServiceComponent,
     ForumComponent,
+    SearchContainerComponent,
     LoginFormComponent,
     LoginButtonComponent,
     FooterComponent,
@@ -41,6 +42,7 @@ import { FooterComponent } from './components/footer/footer.component';
       { path: "reports", component: NewsContainerComponent },
       { path: "contact", component: ContactFormComponent },
       { path: "forum", component: ForumComponent },
+      { path: "search/:userInput", component: SearchContainerComponent },
       { path: "login", component: LoginFormComponent },
     ]),
   ],
