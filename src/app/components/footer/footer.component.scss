@@ -15,7 +15,7 @@
 .footer-top {
   background-color: colors(primaryDark);
   padding: 30px 20px;
-  img{
+  .logo {
     display: block;
     width: 50%;
     max-width: 120px;
@@ -30,6 +30,34 @@
 .footer-top-info {
   max-width: 550px;
   margin: auto;
+}
+
+.footer-top-news {
+  margin: 40px auto 0;
+  max-width: 550px;
+}
+
+.news-title {
+  font-size: fontsizes(headingThree);
+  text-align: center !important;
+}
+
+.articles-container {
+  // margin-top: 15px;
+  margin: 15px 10px 0;
+}
+
+.news-img {
+  width: 100%;
+}
+
+.title {
+  font-size: fontsizes(normal);
+  font-weight: bold;
+  color: colors(white);
+}
+.title:hover {
+  text-decoration: underline;
 }
 
 // BOOTOM FOOTER
@@ -89,12 +117,31 @@
 
   .footer-top-info {
     flex: 1 1 0px;
+    max-width: 500px;
+    padding-right: 20px;
   }
   .footer-top-news {
     flex: 1 1 0px;
+    padding-left: 20px;
   }
+
+  .logo {
+    margin: 0 0 30px !important;
+  }
+
+  .news-title {
+    text-align: unset !important;
+    margin-left: 10px;
+  }
+
   .footer-top-news {
-    flex: 1 1 0px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .news-img {
+    max-height: 200px;
+    object-fit: cover;
   }
 
   // BOTTOM FOOTER
@@ -116,5 +163,13 @@
   }
   .copyright-container {
     margin: 0 auto;
+  }
+}
+@include from(ls) {
+  .footer-top-info {
+    padding-right: 30px;
+  }
+  .footer-top-news {
+    padding-left: 30px;
   }
 }

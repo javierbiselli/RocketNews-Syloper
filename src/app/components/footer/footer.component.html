@@ -1,7 +1,7 @@
 <footer class="footer">
   <section class="footer-top">
     <div class="footer-top-info">
-      <img src="assets/logo.png" alt="RocketNews">
+      <img src="assets/logo.png" alt="RocketNews" class="logo">
       <p>
         <strong>Explore the Cosmos with RocketNews</strong>
       </p>
@@ -11,20 +11,32 @@
     </div>
 
     <div class="footer-top-news">
-
-      <!-- TODO -->
-
-      <p>&#60; LAST NEW HERE &#62;</p>
-      
+      <div class="news-container">
+        <p class="news-title">Latest news:</p>
+        <div class="articles-container" [style.visibility]="loading ? 'hidden' : 'visible'">
+          <div class="image-date-container">
+            <a *ngIf="!loading" href="{{ article.url }}" target="_blank">
+              <img
+                class="news-img"
+                [style.visibility]="imageLoading[article.id] ? 'hidden' : 'visible'"
+                [src]="article.image_url"
+                alt="{{ article.title }}"
+                (load)="onImageLoad(article.id)"
+              />
+            </a>
+          </div>
+          <a *ngIf="!loading" class="title" href="{{ article.url }}" target="_blank">{{
+            article.title
+          }}</a>
+        </div>
+      </div>
     </div>
     
-    <div class="footer-top-news">
-      
-      <!-- TODO -->
-      
+    <!-- <div class="footer-top-news">
+            
       <p>&#60; LAST REPORT HERE &#62;</p>
       
-    </div>
+    </div> -->
   </section>
 
   <section class="footer-bottom">
