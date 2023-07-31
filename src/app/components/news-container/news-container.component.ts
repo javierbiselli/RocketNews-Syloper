@@ -14,11 +14,10 @@ export class NewsContainerComponent implements OnInit {
   constructor(
     private apiCallService: ApiCallService,
     private route: ActivatedRoute,
-    private authenticationService: AuthService,
-    ) {}
-    
+    private authenticationService: AuthService
+  ) {}
+
   userValue: User | null | undefined;
-  userLogged = new BehaviorSubject<boolean>(false);
 
   loading: boolean = true;
   imageLoading: { [key: number]: boolean } = {};
@@ -124,22 +123,21 @@ export class NewsContainerComponent implements OnInit {
     }
     this.apiCall();
 
-    this.authenticationService.user.subscribe(data => {
+    this.authenticationService.user.subscribe((data) => {
       this.userValue = data;
-      if (localStorage.getItem('showPublicity')?.valueOf() === 'false') {
-        this.showPublicity = !this.showPublicity;
-      }
     });
 
     this.setShowPublicity();
   }
 
   setShowPublicity() {
-    if (!localStorage.getItem('showPublicity')) {
-      this.showPublicity = true;
-      localStorage.setItem('showPublicity', 'true');
+    if (this.userValue?.isPremium) {
+      this.showPublicity = false;
+      localStorage.setItem("showPublicity", "false");
     } else {
-      if (localStorage.getItem('showPublicity')?.valueOf() === 'true') {
+      this.showPublicity = true;
+      localStorage.setItem("showPublicity", "true");
+      if (localStorage.getItem("showPublicity")?.valueOf() === "true") {
         this.showPublicity = true;
       } else {
         this.showPublicity = false;
@@ -148,7 +146,7 @@ export class NewsContainerComponent implements OnInit {
   }
 
   hidePublicity() {
-    localStorage.setItem('showPublicity', 'false');
+    localStorage.setItem("showPublicity", "false");
     this.showPublicity = false;
   }
 

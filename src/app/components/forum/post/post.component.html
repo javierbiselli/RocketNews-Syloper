@@ -90,6 +90,6 @@
       </div>
     </div>
   </section>
-  <app-paid-service></app-paid-service>
+  <app-paid-service *ngIf="showPublicity"></app-paid-service>
 </div>
 <div *ngIf="selectedPost === undefined">ERROR 404 NOT FOUND</div>

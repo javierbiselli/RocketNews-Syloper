@@ -18,6 +18,9 @@ export class PostComponent implements OnInit {
 
   selectedPost: Post | undefined = undefined;
 
+  storedValue = localStorage.getItem("showPublicity");
+  showPublicity: boolean = this.storedValue === "true";
+
   ngOnInit(): void {
     this.shareDataService.selectedPost$.subscribe((post) => {
       this.selectedPost = post;
