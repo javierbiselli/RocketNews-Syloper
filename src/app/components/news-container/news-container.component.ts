@@ -1,6 +1,9 @@
-import { Component, HostListener, OnInit } from "@angular/core";
-import { Result } from "@shared/models";
+import { Component, HostListener, OnInit, SimpleChanges } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { Result, User } from "@shared/models";
 import { ApiCallService } from "@shared/services";
+import { BehaviorSubject } from "rxjs";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
   selector: "app-news-container",
@@ -8,38 +11,48 @@ import { ApiCallService } from "@shared/services";
   styleUrls: ["./news-container.component.scss"],
 })
 export class NewsContainerComponent implements OnInit {
-  constructor(private apiCallService: ApiCallService) {}
+  constructor(
+    private apiCallService: ApiCallService,
+    private route: ActivatedRoute,
+    private authenticationService: AuthService,
+    ) {}
+    
+  userValue: User | null | undefined;
+  userLogged = new BehaviorSubject<boolean>(false);
 
   loading: boolean = true;
   imageLoading: { [key: number]: boolean } = {};
 
   apiData: any;
   articles: Result[] = [];
+  dataName: string = "articles";
   limit: number = 6;
   offset: number = 0;
 
   showPublicity: boolean = true;
 
-  maxNews: number = 48; // Maximum number of articles loaded on scroll
+  maxNews: number = 30; // Maximum number of articles loaded on scroll
 
   apiCall() {
     this.loading = true;
     this.apiCallService
-      .getData(`articles/?limit=${this.limit}&offset=${this.offset}`)
-      .subscribe(
-        (data) => {
+      .getData(`${this.dataName}/?limit=${this.limit}&offset=${this.offset}`)
+      .subscribe({
+        next: (data) => {
           this.apiData = data;
-          this.articles = data.results;
+          const newArticles = data.results;
+          this.articles.push(...newArticles);
           this.loading = false;
-          this.articles.forEach((article) => {
+
+          newArticles.forEach((article: Result) => {
             this.imageLoading[article.id] = true;
           });
         },
-        (error) => {
+        error: (error) => {
           console.error("Error fetching data, try again later", error);
           this.loading = false;
-        }
-      );
+        },
+      });
   }
 
   loadMoreElements() {
@@ -47,23 +60,23 @@ export class NewsContainerComponent implements OnInit {
       this.loading = true;
       this.offset += this.limit;
       this.apiCallService
-        .getData(`articles/?limit=${this.limit}&offset=${this.offset}`)
-        .subscribe(
-          (data) => {
+        .getData(`${this.dataName}/?limit=${this.limit}&offset=${this.offset}`)
+        .subscribe({
+          next: (data) => {
             this.apiData = data;
             const newArticles = data.results;
             this.articles.push(...newArticles);
             this.loading = false;
 
-            newArticles.forEach((article: any) => {
+            newArticles.forEach((article: Result) => {
               this.imageLoading[article.id] = true;
             });
           },
-          (error) => {
+          error: (error) => {
             console.error("Error fetching data, try again later", error);
             this.loading = false;
-          }
-        );
+          },
+        });
     }
   }
 
@@ -95,8 +108,48 @@ export class NewsContainerComponent implements OnInit {
     }
   }
 
+  title: string = "";
+
   ngOnInit() {
+    const segments = this.route.snapshot.url;
+    if (segments.length > 0 && segments[0].path === "blogs") {
+      this.dataName = "blogs";
+      this.title = "Rocket news Blogs";
+    } else if (segments.length > 0 && segments[0].path === "reports") {
+      this.dataName = "reports";
+      this.title = "ISS latests reports";
+    } else {
+      this.dataName = "articles";
+      this.title = "Latest news on space";
+    }
     this.apiCall();
+
+    this.authenticationService.user.subscribe(data => {
+      this.userValue = data;
+      if (localStorage.getItem('showPublicity')?.valueOf() === 'false') {
+        this.showPublicity = !this.showPublicity;
+      }
+    });
+
+    this.setShowPublicity();
+  }
+
+  setShowPublicity() {
+    if (!localStorage.getItem('showPublicity')) {
+      this.showPublicity = true;
+      localStorage.setItem('showPublicity', 'true');
+    } else {
+      if (localStorage.getItem('showPublicity')?.valueOf() === 'true') {
+        this.showPublicity = true;
+      } else {
+        this.showPublicity = false;
+      }
+    }
+  }
+
+  hidePublicity() {
+    localStorage.setItem('showPublicity', 'false');
+    this.showPublicity = false;
   }
 
   getDate(rawDate: string) {
@@ -141,5 +194,10 @@ export class NewsContainerComponent implements OnInit {
   isFullElement(array: Result[], element: Result): boolean {
     const index = array.indexOf(element);
     return index === 0 || index % 6 === 0;
+  }
+
+  loadMore(): void {
+    this.maxNews = this.maxNews + 30;
+    this.loadMoreElements();
   }
 }

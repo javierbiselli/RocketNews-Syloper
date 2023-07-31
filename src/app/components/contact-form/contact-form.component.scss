@@ -96,13 +96,17 @@ select.arrow:focus {
   color: colors(warnDark);
 }
 
+.required-text {
+  font-size: .875em;
+}
+
 .button {
   font-size: 1.2em;
   width: 100%;
   background-color: colors(warnDark);
   color: white;
   padding: 14px 20px;
-  margin: 8px 0;
+  margin: 40px 0 8px;
   border: none;
   cursor: pointer;
 }
@@ -116,16 +120,18 @@ select.arrow:focus {
 
 @include from(dt) {
   .container {
-    width: 50%;
-    margin-left: 5%;
+    width: 40%;
+    margin: 30px auto 60px;
+    border-image: linear-gradient(
+      to right,
+      colors(black) 10%,
+      colors(warnDark) 50%
+    ) 1;
+    border-width: 1px;
+    border-style: solid;
   }
 
   .form-group-field {
-    width: 70%;
     display: block;
-  }
-
-  .message-field {
-    width: 100%;
   }
 }

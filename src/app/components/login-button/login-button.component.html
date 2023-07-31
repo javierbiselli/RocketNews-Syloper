@@ -1,0 +1,20 @@
+<div class="loginregister-container font-initial">
+  <ng-container *ngIf="authenticated | async; then loggedIn; else loggedOut">
+  </ng-container>
+</div>
+
+<ng-template #loggedIn>
+  <p>Hi! {{ userValue?.name }}</p>
+  <button (click)="onLogout()">Logout</button>
+</ng-template>
+
+<ng-template #loggedOut>
+  <button
+    routerLink="/login"
+    [ngClass]="
+      isMobile() ? 'loginregister-button-mobile' : 'loginregister-button'
+    "
+  >
+    Login / Singup
+  </button>
+</ng-template>

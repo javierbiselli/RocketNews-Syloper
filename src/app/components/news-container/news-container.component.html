@@ -1,15 +1,15 @@
 <div class="whole-container">
   <div>
-    <h2>Latest news</h2>
+    <h2>{{ title }}</h2>
     <div class="separation-bar"></div>
   </div>
   <div class="main-container">
-    <div class="publicity" [style.display]="showPublicity ? 'block' : 'none'">
-      <button (click)="showPublicity = false">X</button>
+    <div *ngIf="!userValue?.isPremium" class="publicity" [style.display]="showPublicity ? 'block' : 'none'">
+      <button (click)="hidePublicity()">X</button>
       <app-paid-service></app-paid-service>
     </div>
     <div class="articles" [style.display]="loading ? 'hidden' : 'block'">
-      <section class="articles-section">
+      <section class="articles-section" *ngIf="dataName !== 'reports'">
         <div
           *ngFor="let article of articles; first as first"
           class="articles-container"
@@ -37,10 +37,7 @@
           <a class="title" href="{{ article.url }}" target="_blank">{{
             article.title
           }}</a>
-          <div
-            class="summary"
-            *ngIf="isDesktop() && isFullElement(articles, article)"
-          >
+          <div class="summary" *ngIf="isFullElement(articles, article)">
             <p>{{ article.summary }}</p>
             <p class="updated-date">
               Updated at: {{ getDate(article.updated_at) }}
@@ -48,7 +45,34 @@
           </div>
         </div>
       </section>
+      <section class="reports-container" *ngIf="dataName === 'reports'">
+        <div
+          *ngFor="let report of articles; first as first"
+          [style.display]="loading ? 'hidden' : 'block'"
+          class="first-element"
+        >
+          <div class="summary">
+            <div>
+              <img [src]="articles[0].image_url" alt="" *ngIf="first" />
+              <a href="{{ report.url }}" class="title">{{ report.title }}</a>
+            </div>
+            <p>{{ report.summary }}</p>
+            <p class="updated-date">
+              Updated at: {{ getDate(report.updated_at) }}
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
+  </div>
+  <div class="load-button-container">
+    <button
+      (click)="loadMore()"
+      class="main-button"
+      *ngIf="maxNews === offset + 6 && !loading"
+    >
+      <i class="fa-solid fa-arrow-down"></i> Load More
+    </button>
   </div>
   <div class="ghost-articles" *ngIf="loading">
     <div class="ghost-article">

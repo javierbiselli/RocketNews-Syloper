@@ -37,7 +37,7 @@
         ></a>
       </div>
       <div class="header-top-section loginregister-button-container">
-        <button>Login/Register</button>
+        <app-login-button class="loginregister-component"></app-login-button>
       </div>
     </div>
     <div
@@ -46,8 +46,13 @@
         visible: menuButtonClicked
       }"
     >
-      <div class="header-bottom-section">
+      <div class="header-bottom-section" id="mobileNav">
         <nav id="nav">
+          <p *ngIf="isMobile()">Search:</p>
+          <button (click)="changeSearchVisibility()">
+            <i class="fa-solid" [ngClass]="searchButtonClass"></i>
+          </button>
+          <p *ngIf="isMobile()">Explore:</p>
           <ul>
             <a
               routerLink=""
@@ -62,19 +67,19 @@
               ><li>FORUM</li></a
             >
             <a
-              href="#"
+              routerLink="/blogs"
               (click)="setSelectedTab('/blogs')"
               [ngClass]="{ active: selectedTab === '/blogs' }"
               ><li>BLOGS</li></a
             >
             <a
-              href="#"
+              routerLink="/reports"
               (click)="setSelectedTab('/reports')"
               [ngClass]="{ active: selectedTab === '/reports' }"
               ><li>REPORTS</li></a
             >
             <a
-              href="#"
+              routerLink="/about"
               (click)="setSelectedTab('/about')"
               [ngClass]="{ active: selectedTab === '/about' }"
               ><li>ABOUT US</li></a
@@ -86,9 +91,11 @@
               ><li>CONTACT US</li></a
             >
           </ul>
-          <button (click)="changeSearchVisibility()">
-            <i class="fa-solid" [ngClass]="searchButtonClass"></i>
-          </button>
+          <p *ngIf="isMobile()">Join our community!</p>
+          <app-login-button
+            *ngIf="isMobile()"
+            class="loginregister-component-mobile"
+          ></app-login-button>
         </nav>
       </div>
     </div>
@@ -100,8 +107,23 @@
             visible: searchButtonClicked
           }"
         >
-          <input type="text" />
-          <a href=""><i class="fa-solid fa-magnifying-glass"></i></a>
+          <button
+            (click)="changeSearchVisibility()"
+            class="close-button-mobile"
+            *ngIf="isMobile()"
+          >
+            <i class="fa-solid" [ngClass]="searchButtonClass"></i>
+          </button>
+          <input
+            #searchInput
+            type="text"
+            placeholder="Search for news..."
+            [(ngModel)]="userInput"
+            (keyup.enter)="performSearch()"
+          />
+          <button (click)="performSearch()">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
         </div>
       </div>
       <button
@@ -126,3 +148,4 @@
     </div>
   </div>
 </header>
+<div class="Spinner" *ngIf="loading"><span class="loader"></span></div>
