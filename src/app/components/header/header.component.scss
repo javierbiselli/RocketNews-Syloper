@@ -212,11 +212,14 @@
     .visible {
       opacity: 1;
     }
+    button {
+      line-height: normal;
+    }
     button:not(.close-button-mobile) {
-      font-size: $fontsizeNormal;
-      background-color: colors(warnDark);
-      padding: 5px 10px;
-      color: white;
+      // font-size: $fontsizeNormal;
+      // background-color: colors(warnDark);
+      // padding: 5px 10px;
+      // color: white;
     }
     input {
       border: none;
