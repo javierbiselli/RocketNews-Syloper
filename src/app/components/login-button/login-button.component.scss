@@ -2,19 +2,25 @@
 @import "../../styles/utils/tools";
 
 .loginregister-container {
+  font-size: fontsizes(normal);
   display: flex;
   justify-content: space-around;
   width: 100%;
+  // height: ;
+  background-color: colors(dark);
   .loginregister-button {
     color: black;
 
     -webkit-transform: translateZ(0);
     transform: scale(0.95);
-    font-size: 1.05em;
+    font-size: 1.12em;
     -webkit-transition: transform 200ms;
     transition: transform 200ms;
   }
   .loginregister-button:hover,
+  .mobile {
+    padding: 0 20px;
+  }
   .loginregister-button-mobile:hover {
     color: colors(warnDark);
 
@@ -22,11 +28,19 @@
   }
 
   .loginregister-button-mobile {
+    padding: 10px 0;
     color: white;
     transition: 0.3s;
   }
 }
 
 .font-initial {
-  font-family: Arial, sans-serif;
+  // font-family: Arial, sans-serif;
+}
+
+@include from(dt) {
+  .loginregister-container {
+    font-size: $fontsizeSmallOne;
+    background-color: inherit;
+  }
 }
