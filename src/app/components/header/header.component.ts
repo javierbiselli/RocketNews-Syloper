@@ -72,7 +72,9 @@ export class HeaderComponent implements OnInit {
 
     setInterval(updateDateTime, 1000);
 
-    this.userInput = window.location.pathname.slice(8);
+    if (window.location.pathname.startsWith("/search")) {
+      this.userInput = window.location.pathname.slice(8);
+    }
     this.onSubmitSearch();
   }
 
