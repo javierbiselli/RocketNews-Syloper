@@ -42,7 +42,7 @@ import { LoginButtonComponent } from "./components/login-button/login-button.com
       { path: "forum", component: ForumComponent },
       { path: "search/:userInput", component: SearchContainerComponent },
       { path: "login", component: LoginFormComponent },
-    ]),
+    ], {scrollPositionRestoration: 'enabled'}),
   ],
   providers: [],
   bootstrap: [AppComponent],
