@@ -62,6 +62,23 @@
       }
     }
 
+    .addcomment-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 95%;
+      margin: 10px auto;
+      .addcomment-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        width: 100%;
+        button {
+          width: 20%;
+        }
+      }
+    }
+
     .comments-order-container {
       display: flex;
       flex-direction: column;
@@ -91,6 +108,15 @@
         margin-bottom: 10px;
         gap: 10px;
         color: colors(gray);
+        position: relative;
+        .delete-button {
+          position: absolute;
+          color: red;
+          right: 0;
+          top: 0;
+          border: 1px solid red;
+          padding: 0 6px;
+        }
         p:first-child {
           color: colors(white);
           font-weight: bold;
@@ -110,6 +136,9 @@
         }
       }
     }
+    .login-form-post {
+      color: white;
+    }
   }
 }
 
@@ -119,7 +148,7 @@
     justify-content: center;
     gap: 30px;
     section {
-      max-width: 1000px;
+      max-width: 900px;
     }
   }
 }

@@ -25,7 +25,9 @@
         </p>
       </div>
       <div class="post-buttons">
-        <button class="comment-button main-button">Comment</button>
+        <button class="comment-button main-button" (click)="toggleComment()">
+          Comment
+        </button>
         <button
           class="like-button secondary-button"
           [class.selected-button-green]="isLiked"
@@ -36,12 +38,36 @@
       </div>
     </div>
 
+    <div
+      class="addcomment-container"
+      [@commentAnimation]="commentOpen ? 'open' : 'closed'"
+    >
+      <h5>Add a comment</h5>
+      <textarea
+        name=""
+        id=""
+        cols="30"
+        rows="5"
+        [(ngModel)]="commentContent"
+      ></textarea>
+      <div class="addcomment-buttons">
+        <button class="secondary-button" (click)="toggleComment()">
+          Cancel
+        </button>
+        <button class="main-button" (click)="pushComment()">Comment</button>
+      </div>
+    </div>
+
     <div class="comments-order-container">
       <p>{{ selectedPost.comments.length }} comments</p>
-      <select name="" id="" *ngIf="selectedPost.comments.length > 1">
-        <option value="oldest">Newest</option>
-        <option value="oldest">Oldest</option>
-        <option value="oldest">Most likes</option>
+      <select
+        name="order"
+        *ngIf="selectedPost.comments.length > 1"
+        (change)="changeOrder($event)"
+      >
+        <option value="0" [selected]="order === 0">Newest</option>
+        <option value="1" [selected]="order === 1">Oldest</option>
+        <option value="2" [selected]="order === 2">Most likes</option>
       </select>
     </div>
 
@@ -50,6 +76,13 @@
       *ngFor="let comment of selectedPost.comments"
     >
       <div class="comment-data-container">
+        <button
+          class="delete-button"
+          (click)="deleteComment(comment.id)"
+          *ngIf="isDeletable() && comment.author.id === currentUser.id"
+        >
+          X
+        </button>
         <img
           class="profile-picture"
           src="assets/profile-picture-default.png"
@@ -89,7 +122,13 @@
         </div>
       </div>
     </div>
+    <app-login-form
+      class="login-form-post"
+      *ngIf="!currentUser"
+    ></app-login-form>
   </section>
-  <app-paid-service *ngIf="showPublicity"></app-paid-service>
+  <div>
+    <app-paid-service *ngIf="showPublicity"></app-paid-service>
+  </div>
 </div>
 <div *ngIf="selectedPost === undefined">ERROR 404 NOT FOUND</div>

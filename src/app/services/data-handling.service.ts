@@ -349,4 +349,20 @@ export class DataHandlingService {
     currentPosts.push(post);
     this.posts.next(currentPosts);
   }
+
+  pushCommentToPost(postId: string | undefined, comment: Comment): void {
+    const currentPosts = this.posts.getValue();
+    const targetPost = currentPosts.find((post) => post.id === postId);
+
+    if (targetPost) {
+      // Asegurarnos de que "targetPost.comments" sea un array.
+      if (!Array.isArray(targetPost.comments)) {
+        targetPost.comments = [];
+      }
+
+      // Agregar el nuevo comentario al array "comments" del post.
+      targetPost.comments.push(comment);
+      this.posts.next(currentPosts);
+    }
+  }
 }
