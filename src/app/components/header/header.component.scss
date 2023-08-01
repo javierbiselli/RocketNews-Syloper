@@ -166,6 +166,9 @@
             position: absolute;
           }
         }
+        .active {
+          background-color: colors(warnDark);
+        }
         button:hover {
           background-color: colors(warnDark);
         }
@@ -188,7 +191,8 @@
       position: fixed;
       top: 0;
       z-index: 50;
-      width: 100%;
+      // width: 100%;
+      width: -webkit-fill-available;
       max-width: 1700px;
       margin: auto;
       display: flex;
@@ -197,7 +201,8 @@
     .search-input {
       display: flex;
       justify-content: center;
-      padding: 20px 30px;
+      // padding: 20px 30px;
+      padding: 15px min(25px, 5%);
       background-color: colors(primaryDark);
       opacity: 0;
       transition: opacity 0.3s ease;

@@ -69,6 +69,7 @@ export class HeaderComponent implements OnInit {
   menuButtonClicked: boolean = false;
   menuButtonClass: string = "fa-bars";
   abortController = new AbortController();
+  searchButtonActive: string = '';
 
   changeMenuVisibility(): void {
     this.menuButtonClicked = !this.menuButtonClicked;
@@ -113,9 +114,11 @@ export class HeaderComponent implements OnInit {
       if (this.searchInput) {
         this.searchInput.nativeElement.focus();
       }
+      this.searchButtonActive = 'active';
     } else {
       this.searchButtonClass = "fa-magnifying-glass";
-    }
+      this.searchButtonActive = '';
+    } 
   }
 
   userInput: string = "";

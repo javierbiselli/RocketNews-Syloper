@@ -49,7 +49,7 @@
       <div class="header-bottom-section" id="mobileNav">
         <nav id="nav">
           <p *ngIf="isMobile()">Search:</p>
-          <button (click)="changeSearchVisibility()">
+          <button (click)="changeSearchVisibility()" [ngClass]="searchButtonActive">
             <i class="fa-solid" [ngClass]="searchButtonClass"></i>
           </button>
           <p *ngIf="isMobile()">Explore:</p>
