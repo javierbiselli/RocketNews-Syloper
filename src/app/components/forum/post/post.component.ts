@@ -141,18 +141,23 @@ export class PostComponent implements OnInit {
   id: number = 15;
 
   pushComment(): void {
-    this.id = this.id + 1;
-    const comment: Comment = {
-      id: this.id.toString(),
-      content: this.commentContent,
-      date: this.getFormattedDate(),
-      author: this.currentUser,
-      rating: 0,
-    };
-    this.dataHandlingService.pushComment(comment);
-    this.dataHandlingService.pushCommentToPost(this.selectedPost?.id, comment);
-    this.toggleComment();
-    this.commentContent = "";
+    if (this.commentContent.length > 0) {
+      this.id = this.id + 1;
+      const comment: Comment = {
+        id: this.id.toString(),
+        content: this.commentContent,
+        date: this.getFormattedDate(),
+        author: this.currentUser,
+        rating: 0,
+      };
+      this.dataHandlingService.pushComment(comment);
+      this.dataHandlingService.pushCommentToPost(
+        this.selectedPost?.id,
+        comment
+      );
+      this.toggleComment();
+      this.commentContent = "";
+    }
   }
 
   isDeletable(): boolean {
