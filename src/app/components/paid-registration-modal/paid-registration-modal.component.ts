@@ -72,6 +72,8 @@ export class PaidRegistrationModalComponent implements OnInit {
       console.log('premium!!!!!');
       console.log(this.authenticated.subscribe((data) => (data?.isPremium)));
       this.close();
+
+      window.alert('Now you are Premium user!');
     } else {
       console.log('REGISTER NOW!!')
     }

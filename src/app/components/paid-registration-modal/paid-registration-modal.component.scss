@@ -31,7 +31,9 @@ section {
     // top: 50%;
     // left: 50%;
     // transform: translate(-50%, -50%);
-    margin: 100px 25px;
+    margin: 80px auto;
+    max-width: 420px;
+
 
     // height: 200px;
     // width: 300px;
@@ -74,6 +76,8 @@ section {
     text-align: center;
     // margin: 15px 0;
     font-weight: bold;
+    color: colors(accentDark);
+    text-decoration: underline;
   }
   p {
     text-align: justify;
@@ -165,6 +169,13 @@ section {
   border: none;
 }
 
+.validate-card-container {
+  display: flex;
+  .form-group{
+    margin: 0 5px;
+  }
+}
+
 .required {
   color: colors(warnDark);
 }
@@ -193,6 +204,7 @@ section {
 .button-cancel {
   margin-left: 5px;
   background-color: colors(grayDark);
+  text-align: center;
 }
 .button:hover {
   filter: brightness(0.8);
@@ -214,21 +226,40 @@ section {
   text-decoration: underline;
 }
 
-@include from(ls) {
-  .container {
-    width: 60%;
-    max-width: 500px;
-    margin: 30px auto 60px;
-    border-image: linear-gradient(
-      to right,
-      colors(black) 10%,
-      colors(warnDark) 50%
-    ) 1;
-    border-width: 1px;
-    border-style: solid;
-  }
+// @include from(ls) {
+//   .container {
+//     width: 60%;
+//     min-width: 320px;
+//     max-width: 500px;
+//     margin: 30px auto 60px;
+//     border-image: linear-gradient(
+//       to right,
+//       colors(black) 10%,
+//       colors(warnDark) 50%
+//     ) 1;
+//     border-width: 1px;
+//     border-style: solid;
+//   }
 
-  .form-group-field {
-    display: block;
-  }
-}
+//   .info-container {
+//     margin: auto;
+//     width: 60%;
+//     min-width: 320px;
+//     max-width: 500px;
+//   }
+
+//   .form {
+//     max-width: 400px;
+//     margin: 0 auto;
+//   }
+
+//   .form-group-field {
+//     display: block;
+//   }
+// }
+
+// @include from(dt) {
+//   .container {
+//     padding-top: 40px;
+//   }
+// }
