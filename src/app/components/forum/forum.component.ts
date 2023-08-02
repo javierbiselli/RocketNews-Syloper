@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Post } from "@shared/models";
+import { Post, User } from "@shared/models";
 import { DataHandlingService } from "src/app/services/data-handling.service";
 import { ShareDataService } from "src/app/services/share-data.service";
 
@@ -15,6 +15,7 @@ export class ForumComponent implements OnInit {
   ) {}
 
   posts: Post[] = [];
+  currentUser!: User;
 
   ngOnInit(): void {
     this.dataHandlingService.posts.subscribe({
@@ -22,6 +23,17 @@ export class ForumComponent implements OnInit {
       error: (err) => console.error(err),
     });
     this.sortPosts(0);
+  }
+
+  loadCurrentUserFromLocalStorage() {
+    const currentUserJSON = localStorage.getItem("currentUser");
+    if (currentUserJSON) {
+      try {
+        this.currentUser = JSON.parse(currentUserJSON) as User;
+      } catch (error) {
+        console.error("Error parsing currentUser from localStorage:", error);
+      }
+    }
   }
 
   selectPost(post: Post) {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { Post, User } from "@shared/models";
 import { DataHandlingService } from "src/app/services/data-handling.service";
 
@@ -8,7 +9,10 @@ import { DataHandlingService } from "src/app/services/data-handling.service";
   styleUrls: ["./posting.component.scss"],
 })
 export class PostingComponent implements OnInit {
-  constructor(private dataHandlingService: DataHandlingService) {}
+  constructor(
+    private dataHandlingService: DataHandlingService,
+    private router: Router
+  ) {}
 
   posts: Post[] = [];
   currentUser!: User;
@@ -25,6 +29,7 @@ export class PostingComponent implements OnInit {
       error: (err) => console.error(err),
     });
     this.loadCurrentUserFromLocalStorage();
+    console.log(this.currentUser);
   }
 
   private getFormattedDate(): string {
@@ -60,6 +65,7 @@ export class PostingComponent implements OnInit {
         }
       }
       this.dataHandlingService.pushPost(post);
+      this.router.navigate(["/forum"]);
     }
   }
 
