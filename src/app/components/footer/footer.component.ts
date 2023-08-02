@@ -1,17 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiCallService } from '@shared/services';
+import { Component, OnInit } from "@angular/core";
+import { ApiCallService } from "@shared/services";
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  selector: "app-footer",
+  templateUrl: "./footer.component.html",
+  styleUrls: ["./footer.component.scss"],
 })
 export class FooterComponent implements OnInit {
-
-  constructor(
-    private apiCallService: ApiCallService,
-
-  ) { }
+  constructor(private apiCallService: ApiCallService) {}
 
   imageLoading: { [key: number]: boolean } = {};
   loading: boolean = true;
@@ -36,7 +32,7 @@ export class FooterComponent implements OnInit {
           const newArticles = data.results[0];
           console.log(newArticles); // ----------------------------------------------------
           this.article = newArticles;
-          
+
           this.imageLoading[newArticles.id] = true;
           console.log(this.imageLoading); // ---------------------------------------------
           this.loading = false;
@@ -50,5 +46,9 @@ export class FooterComponent implements OnInit {
 
   onImageLoad(articleId: number) {
     this.imageLoading[articleId] = false;
+  }
+
+  scrollTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 }

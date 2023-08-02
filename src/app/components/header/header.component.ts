@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
     this.selectedTab = tab;
   }
 
-  trendings: string[] = [];
+  trendings: { title: string; id: string }[] = [];
 
   handleLocationChange() {
     const currentPath = window.location.pathname;
@@ -162,9 +162,13 @@ export class HeaderComponent implements OnInit {
 
   //--------------- TYPED.JS ---------------
 
-  getTrending(): string[] {
+  getTrending(): { title: string; id: string }[] {
     const filteredPosts = this.posts.filter((post) => post.priority === true);
-    return filteredPosts.map((post) => post.title);
+    return filteredPosts.map((post) => ({ title: post.title, id: post.id }));
+  }
+
+  getPostUrl(postId: string): string {
+    return `/forum/post/${postId}`;
   }
 
   currentStringIndex: number = 0;
@@ -179,7 +183,7 @@ export class HeaderComponent implements OnInit {
   // typed.js configuration
   initializeTyped() {
     const options = {
-      strings: [this.trendings[this.currentStringIndex]],
+      strings: [this.trendings[this.currentStringIndex].title],
       typeSpeed: 20,
       backDelay: 10000,
       loop: true,
