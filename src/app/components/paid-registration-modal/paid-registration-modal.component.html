@@ -1,12 +1,76 @@
 <ng-container *ngIf="display$ | async as display">
   <section [class.open]="display"
            (click)="close()">
-    <div (click)="$event.stopPropagation()">
-      <button class="close"
-              type="button" 
-              (click)="close()">X</button>
+    <div class="paid-registration-modal" (click)="$event.stopPropagation()">
 
-      <h1>Hello World</h1>
+      <div class="section">
+
+        <h2 class="card-header">Get Premium!</h2>
+        <div class="separation-bar"></div>
+      
+        <div class="container">
+          <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      
+            <div class="form-group">
+              <label class="form-group-label">
+                Card Number <span class="required">*</span></label>
+              <input type="number" formControlName="cardNumber" class="form-group-field no-focus"
+                [ngClass]="{ 'is-invalid': submitted && f['cardNumber'].errors }"
+                placeholder="1234 5678 9012 3456"/>
+              <div *ngIf="submitted && f['cardNumber'].errors" class="invalid-feedback">
+                  <div *ngIf="f['cardNumber'].errors['required']">Card number required</div>
+                  <div *ngIf="f['cardNumber'].errors['minlength']">Card number invalid</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-group-label">
+                Name on card <span class="required">*</span></label>
+              <input type="name" formControlName="name" class="form-group-field no-focus"
+                [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" 
+                placeholder="Full name"/>
+              <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                <div *ngIf="f['name'].errors['required']">Name on card required</div>
+              </div>
+            </div>
+
+            <div class="validate-card-container">
+              <div class="form-group">
+                <label class="form-group-label">
+                  Expiry date <span class="required">*</span></label>
+                <input type="text" formControlName="date" class="form-group-field no-focus"
+                  [ngClass]="{ 'is-invalid': submitted && f['date'].errors }"
+                  placeholder="01/23"/>
+                <div *ngIf="submitted && f['date'].errors" class="invalid-feedback">
+                  <div *ngIf="f['date'].errors['required']">Expiry date required</div>
+                  <div *ngIf="f['date'].errors['pattern']">Date format invalid</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-group-label">
+                  Security code <span class="required">*</span></label>
+                <input type="password" formControlName="code" class="form-group-field no-focus"
+                  [ngClass]="{ 'is-invalid': submitted && f['code'].errors }"
+                  placeholder="* * *"/>
+                <div *ngIf="submitted && f['code'].errors" class="invalid-feedback">
+                  <div *ngIf="f['code'].errors['required']">Security code required</div>
+                </div>
+              </div>
+            </div>
+      
+            <div class="form-group">
+              <p class="required-text"><span class="required">*</span> Required fields.</p>
+              <div class="buttons-container">
+                <button class="button button-continue">Continue</button>
+                <a (click)="close()" class="button button-cancel">Cancel</a>
+              </div>
+              <br>
+            </div>
+          </form>
+        </div>
+      </div>
+
     </div>
   </section>
 </ng-container>
