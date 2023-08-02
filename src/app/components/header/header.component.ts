@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { NavigationEnd, Router } from "@angular/router";
 import { Post, Result } from "@shared/models";
 import { ApiCallService } from "@shared/services";
 import { DataHandlingService } from "src/app/services/data-handling.service";
@@ -18,9 +18,14 @@ export class HeaderComponent implements OnInit {
     private dataHandlingService: DataHandlingService,
     private apiCallService: ApiCallService,
     private SearchResultService: SearchResultService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+    private router: Router
+  ) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.handleLocationChange();
+      }
+    });
+  }
 
   posts: Post[] = [];
 
@@ -35,10 +40,16 @@ export class HeaderComponent implements OnInit {
     this.selectedTab = tab;
   }
 
-  trendings: string[] = [];
+  trendings: { title: string; id: string }[] = [];
+
+  handleLocationChange() {
+    const currentPath = window.location.pathname;
+    this.setSelectedTab(currentPath);
+  }
 
   ngOnInit() {
     this.setSelectedTab(window.location.pathname);
+    this.handleLocationChange();
     this.posts = this.dataHandlingService.posts.getValue();
     this.trendings = this.getTrending();
 
@@ -61,7 +72,9 @@ export class HeaderComponent implements OnInit {
 
     setInterval(updateDateTime, 1000);
 
-    this.userInput = window.location.pathname.slice(8);
+    if (window.location.pathname.startsWith("/search")) {
+      this.userInput = window.location.pathname.slice(8);
+    }
     this.onSubmitSearch();
   }
 
@@ -152,9 +165,13 @@ export class HeaderComponent implements OnInit {
 
   //--------------- TYPED.JS ---------------
 
-  getTrending(): string[] {
+  getTrending(): { title: string; id: string }[] {
     const filteredPosts = this.posts.filter((post) => post.priority === true);
-    return filteredPosts.map((post) => post.title);
+    return filteredPosts.map((post) => ({ title: post.title, id: post.id }));
+  }
+
+  getPostUrl(postId: string): string {
+    return `/forum/post/${postId}`;
   }
 
   currentStringIndex: number = 0;
@@ -169,7 +186,7 @@ export class HeaderComponent implements OnInit {
   // typed.js configuration
   initializeTyped() {
     const options = {
-      strings: [this.trendings[this.currentStringIndex]],
+      strings: [this.trendings[this.currentStringIndex].title],
       typeSpeed: 20,
       backDelay: 10000,
       loop: true,

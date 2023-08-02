@@ -1,0 +1,84 @@
+<footer class="footer">
+  <button (click)="scrollTop()" class="scroll-to-top-button">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+  <section class="footer-top">
+    <div class="footer-top-info">
+      <img src="assets/logo.png" alt="RocketNews" class="logo" />
+      <p>
+        <strong>Explore the Cosmos with RocketNews</strong>
+      </p>
+      <p>
+        Your ultimate destination for the latest and most captivating space
+        flight news. Discover the wonders of the universe with us!
+      </p>
+    </div>
+
+    <div class="footer-top-news">
+      <div class="news-container">
+        <p class="news-title">Latest news:</p>
+        <div
+          class="articles-container"
+          [style.visibility]="loading ? 'hidden' : 'visible'"
+        >
+          <div class="image-date-container">
+            <a *ngIf="!loading" href="{{ article.url }}" target="_blank">
+              <img
+                class="news-img"
+                [style.visibility]="
+                  imageLoading[article.id] ? 'hidden' : 'visible'
+                "
+                [src]="article.image_url"
+                alt="{{ article.title }}"
+                (load)="onImageLoad(article.id)"
+              />
+            </a>
+          </div>
+          <a
+            *ngIf="!loading"
+            class="title"
+            href="{{ article.url }}"
+            target="_blank"
+            >{{ article.title }}</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="footer-top-news">
+            
+      <p>&#60; LAST REPORT HERE &#62;</p>
+      
+    </div> -->
+  </section>
+
+  <section class="footer-bottom">
+    <div class="social-networks-container">
+      <a href="https://www.facebook.com/" target="_blank"
+        ><i class="fa-brands fa-facebook-f"></i
+      ></a>
+
+      <a href="https://www.instagram.com/" target="_blank"
+        ><i class="fa-brands fa-instagram"></i
+      ></a>
+
+      <a href="https://twitter.com/" target="_blank"
+        ><i class="fa-brands fa-twitter"></i
+      ></a>
+    </div>
+
+    <!-- <div class="separation-bar"></div> -->
+
+    <div class="links-container dt-order">
+      <a routerLink="" class="link link-light">Home</a>
+      <a routerLink="/forum" class="link link-light">Forum</a>
+      <a routerLink="/contact" class="link link-light">Contact Us</a>
+    </div>
+
+    <!-- <div class="separation-bar"></div> -->
+
+    <div class="copyright-container">
+      <p>&#169; Copyright 2023 - Developed for Syloper</p>
+    </div>
+  </section>
+</footer>

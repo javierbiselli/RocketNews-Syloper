@@ -1,125 +1,55 @@
-# Angular Template
+# Página web de noticias y blogs sobre cohetes espaciales y reportes de la ISS - ROCKETNEWS
 
-This template was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.8
+Este proyecto es una página web desarrollada en Angular que proporciona noticias y blogs relacionados con cohetes espaciales, así como reportes de la Estación Espacial Internacional (ISS). También cuenta con un foro donde los usuarios pueden interactuar y discutir sobre temas relacionados con el espacio.
 
----
+## Integrantes
 
-## Development server
+- Javier Biselli
+- Santiago Bártoli
 
-Run `yarn start` or `npm run start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Año de cursado
 
-### Development server options
+2023, Syloper
 
-to serve normal use this configuration:
+## Instrucciones para correr el proyecto
 
-```
-  yarn start || npm run start
-```
+Para ejecutar el proyecto:
 
-to serve and automatically open the browser use this configuration:
-
-```
-  yarn start:open || npm run start:open
-```
-
-to serve and access from a local network use this configuration:
+1. En la terminal, ubicado en la carpeta del proyecto, ejecutar el siguiente comando para instalar las dependencias:
 
 ```
-  yarn start:host || npm run start:host
+npm install
 ```
 
-to serve as `production` run use this configuration:
+2. Una vez finalizada la instalación de las dependencias, se puede iniciar el servidor de desarrollo con el siguiente comando:
 
 ```
-  yarn start:prod || npm run start:prod
+npm run start:open
 ```
 
-<!-- ## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`. -->
-
----
-
-## Build
-
-Run `yarn build:option` or `npm run build:option` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-### Build options
-
-to compile for `development` use this configuration:
+3. Si no se inicia automaticamente, se puede acceder introduciendo la siguiente URL en el navegador
 
 ```
-  yarn build:dev || npm run build:dev
+http://localhost:4200/
 ```
 
-to compile for `production` use this configuration:
+## Datos adicionales
 
-```
-  yarn build:prod || npm run build:prod
-```
+- La api utilizada para obtener articulos, blogs, y reportes, ademas de hacer busquedas es [Spaceflight News API]( https://www.spaceflightnewsapi.net/)
 
-to compile for `webpack-bundle-analyzer` use this configuration:
+- La página web es completamente responsive, lo que significa que se adapta y se ve correctamente en diferentes dispositivos y tamaños de pantalla.
 
-```
-  yarn build:stats || npm run build:stats
-```
+- Para acceder a las funcionalidades principales del foro, los usuarios deben registrarse e iniciar sesión. Una vez que están logueados, pueden participar en discusiones, agregar comentarios y publicar nuevos temas.
 
----
+- Para acceder a funcionalidades extras del foro como la posibilidad de destacar comentarios o posts, ademas de ocultar automaticamente la publicidad, se puede optar por dos opciones:
 
-## Linter
+  1. Realizar una "inscripción paga" a través de la publicidad disponible en el home o en los posts.
+  2. Acceder con un usuario premium pre-cargado:
+     - Email: "tveque0@myspace.com"
+     - Password: "pass123"
 
-Run `yarn lint` or `npm run lint` to show in the terminal the error that linter finds according to the configuration
+- Las puntuaciones de los comentarios cambian cada vez que vez que se accede a un post porque estas son generadas aleatoriamente y toman un valor entre -10 y 10
 
-### Linter options
+- Es importante tener en cuenta que los datos del foro, como los comentarios o publicaciones agregadas, solo subsisten durante la sesión actual. Esto significa que al actualizar la página o cerrarla, los datos del foro se perderán, ya que no se ha implementado una base de datos para almacenarlos de manera permanente.
 
-to show error use this configuration:
-
-```
-  yarn lint || npm run lint
-```
-
-to show error and automatically fix it use this configuration:
-
-```
-  yarn lint:fix || npm run lint:fix
-```
-
-to run linter default inside angular use this configuration:
-
-```
-  yarn lint:ng || npm run lint:ng
-```
-
-to show error and automatically fix it use ng configuration:
-
-```
-  yarn lint:ng:fix || npm run lint:ng:fix
-```
-
----
-
-## Husky
-
-At the end of the installation of all the packages, husky will be installed, a tool that will allow us to automatically run `git hooks`, in our case to run the `commitlint` and `eslint` linters before committing.
-
----
-
-## Tools
-
-### Webpack Bundle Analyzer
-
-`Webpack-bundle-analyzer` is a tool that allows us to graphically see when our application weighs and segmented by modules, this helps us to discover failures in the application's performance
-
-to use `webpack-bundle-analyzer`, before you must use this command `yarn build:stats` or `npm run build:stats` which generates the stats files that allow webpack-bundle-analyzer to work properly
-
-```
-  yarn analyze || npm run analyze
-```
-
-<!-- ## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io). -->
-
-<!-- ## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities. -->
+- Las imagenes de las noticias y/o blogs que vienen de la api suelen ser de muy alta resolucion, lo que disminuye el rendimiento de la pagina y aumenta los tiempos de carga de las imagenes, no se pudo encontrar una manera de solucionar este problema desde del frontend, la solucion parcial fue mostrar menos noticias/blogs por request.

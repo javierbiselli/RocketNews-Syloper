@@ -5,12 +5,12 @@
         <span class="trending-red">TRENDING</span>
         <div class="trending-new-container">
           <div class="trendig-new-text-container">
-            <a href="#"
-              ><span
-                [attr.title]="trendings[currentStringIndex]"
+            <a [routerLink]="getPostUrl(trendings[currentStringIndex].id)">
+              <span
+                [attr.title]="trendings[currentStringIndex].title"
                 class="trending-new-text"
-              ></span
-            ></a>
+              ></span>
+            </a>
           </div>
         </div>
         <div class="trending-new-navigation">

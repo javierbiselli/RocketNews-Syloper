@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { User, Post, Comment } from "../models";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable, map } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -59,6 +59,7 @@ export class DataHandlingService {
         "Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.",
       date: "4/6/2023",
       author: this.users.getValue()[2],
+      rating: 0,
     },
     {
       id: "2",
@@ -66,12 +67,14 @@ export class DataHandlingService {
         "Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.",
       date: "12/12/2022",
       author: this.users.getValue()[2],
+      rating: 0,
     },
     {
       id: "3",
       content: "Sed ante. Vivamus tortor. Duis mattis egestas metus.",
       date: "6/29/2023",
       author: this.users.getValue()[2],
+      rating: 0,
     },
     {
       id: "4",
@@ -79,6 +82,7 @@ export class DataHandlingService {
         "Sed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
       date: "1/16/2023",
       author: this.users.getValue()[2],
+      rating: 0,
     },
     {
       id: "5",
@@ -86,6 +90,7 @@ export class DataHandlingService {
         "Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.\n\nNullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.",
       date: "3/23/2023",
       author: this.users.getValue()[2],
+      rating: 0,
     },
     {
       id: "6",
@@ -93,6 +98,7 @@ export class DataHandlingService {
         "Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\n\nDuis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.",
       date: "2/3/2023",
       author: this.users.getValue()[2],
+      rating: 0,
     },
     {
       id: "7",
@@ -100,6 +106,7 @@ export class DataHandlingService {
         "Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.\n\nSuspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.",
       date: "7/1/2023",
       author: this.users.getValue()[2],
+      rating: 0,
     },
     {
       id: "8",
@@ -107,6 +114,7 @@ export class DataHandlingService {
         "Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.",
       date: "7/12/2022",
       author: this.users.getValue()[2],
+      rating: 0,
     },
     {
       id: "9",
@@ -114,6 +122,7 @@ export class DataHandlingService {
         "Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.",
       date: "7/27/2022",
       author: this.users.getValue()[2],
+      rating: 0,
     },
     {
       id: "10",
@@ -121,6 +130,7 @@ export class DataHandlingService {
         "Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.",
       date: "9/10/2022",
       author: this.users.getValue()[2],
+      rating: 0,
     },
     {
       id: "11",
@@ -128,6 +138,7 @@ export class DataHandlingService {
         "Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.",
       date: "2/23/2023",
       author: this.users.getValue()[2],
+      rating: 0,
     },
     {
       id: "12",
@@ -135,6 +146,7 @@ export class DataHandlingService {
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.\n\nVestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.",
       date: "12/10/2022",
       author: this.users.getValue()[2],
+      rating: 0,
     },
     {
       id: "13",
@@ -142,6 +154,7 @@ export class DataHandlingService {
         "Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
       date: "7/15/2022",
       author: this.users.getValue()[2],
+      rating: 0,
     },
     {
       id: "14",
@@ -149,6 +162,7 @@ export class DataHandlingService {
         "In congue. Etiam justo. Etiam pretium iaculis justo.\n\nIn hac habitasse platea dictumst. Etiam faucibus cursus urna. Ut tellus.\n\nNulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.",
       date: "6/1/2023",
       author: this.users.getValue()[2],
+      rating: 0,
     },
     {
       id: "15",
@@ -156,6 +170,7 @@ export class DataHandlingService {
         "In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.",
       date: "4/10/2023",
       author: this.users.getValue()[2],
+      rating: 0,
     },
   ]);
 
@@ -323,9 +338,31 @@ export class DataHandlingService {
     },
   ]);
 
+  getPostById(id: string): Observable<Post | undefined> {
+    return this.posts.pipe(
+      map((posts: Post[]) => posts.find((post) => post.id === id))
+    );
+  }
+
   pushPost(post: Post): void {
     const currentPosts = this.posts.getValue();
     currentPosts.push(post);
     this.posts.next(currentPosts);
+  }
+
+  pushCommentToPost(postId: string | undefined, comment: Comment): void {
+    const currentPosts = this.posts.getValue();
+    const targetPost = currentPosts.find((post) => post.id === postId);
+
+    if (targetPost) {
+      // Asegurarnos de que "targetPost.comments" sea un array.
+      if (!Array.isArray(targetPost.comments)) {
+        targetPost.comments = [];
+      }
+
+      // Agregar el nuevo comentario al array "comments" del post.
+      targetPost.comments.push(comment);
+      this.posts.next(currentPosts);
+    }
   }
 }
