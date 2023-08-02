@@ -23,6 +23,7 @@ export class ForumComponent implements OnInit {
       error: (err) => console.error(err),
     });
     this.sortPosts(0);
+    this.loadCurrentUserFromLocalStorage()
   }
 
   loadCurrentUserFromLocalStorage() {
