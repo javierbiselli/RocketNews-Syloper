@@ -50,7 +50,7 @@ import { FooterComponent } from './components/footer/footer.component';
       { path: "forum/post/:id", component: PostComponent },
       { path: "search/:userInput", component: SearchContainerComponent },
       { path: "login", component: LoginFormComponent },
-    ]),
+    ], {scrollPositionRestoration: 'enabled'}),
   ],
   providers: [],
   bootstrap: [AppComponent],
