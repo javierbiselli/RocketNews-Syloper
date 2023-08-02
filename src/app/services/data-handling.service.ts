@@ -54,10 +54,13 @@ export class DataHandlingService {
   makeUserPremium(userId: string) {
     const currentUsers = this.users.getValue();
     let index: any;
+    let userIndex: string;
+
+    userIndex = (Number(userId) -1).toString();
 
     // Find id
     for (var i in currentUsers) {
-      if (currentUsers[i].id == userId) {
+      if (currentUsers[i].id == (userId)) {
           index = i;
          break;
       }

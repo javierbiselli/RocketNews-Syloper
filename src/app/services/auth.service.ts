@@ -46,7 +46,9 @@ export class AuthService {
   }
 
   register(name: string, email: string, password: string) {
-    let newId: string = this.dataHandlingService.users.getValue().length.toString();
+    let newId: string = (this.dataHandlingService.users.getValue().length +1).toString();
+    console.log('NEW ID' + newId);
+    console.log('LENGTH' + this.dataHandlingService.users.getValue().length);
     let user: User = {id: newId, name: name, email: email, password: password, isPremium: false};
     this.dataHandlingService.pushUser(user);
   }

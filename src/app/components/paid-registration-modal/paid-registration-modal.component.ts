@@ -39,6 +39,11 @@ export class PaidRegistrationModalComponent implements OnInit {
   }
 
   close() {
+    this.form.controls['cardNumber'].reset();
+    this.form.controls['name'].reset();
+    this.form.controls['date'].reset();
+    this.form.controls['code'].reset();
+    this.submitted = false;
     this.modalService.close();
   }
 
@@ -56,13 +61,17 @@ export class PaidRegistrationModalComponent implements OnInit {
       return;
     }
     
+    console.log(localStorage.getItem('currentUser'));
     if (this.authenticated != null) {
       console.log(this.authenticated.subscribe((data) => (data?.isPremium)));
-      this.authenticated.subscribe((data) => (
-        this.dataHandlingService.makeUserPremium(data!.id)
-      ));
+      this.authenticated.subscribe((data) => {
+        this.dataHandlingService.makeUserPremium(data!.id);
+        localStorage.setItem('currentUser', JSON.stringify(data));
+        console.log(localStorage.getItem('currentUser'));
+      });
       console.log('premium!!!!!');
       console.log(this.authenticated.subscribe((data) => (data?.isPremium)));
+      this.close();
     } else {
       console.log('REGISTER NOW!!')
     }
