@@ -19,6 +19,7 @@ import { SearchContainerComponent } from "./components/search-container/search-c
 import { LoginFormComponent } from "./components/login-form/login-form.component";
 import { LoginButtonComponent } from "./components/login-button/login-button.component";
 import { FooterComponent } from './components/footer/footer.component';
+import { PaidRegistrationModalComponent } from './components/paid-registration-modal/paid-registration-modal.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { FooterComponent } from './components/footer/footer.component';
     LoginFormComponent,
     LoginButtonComponent,
     FooterComponent,
+    PaidRegistrationModalComponent,
   ],
   imports: [
     BrowserModule,
