@@ -180,6 +180,39 @@ export class PostComponent implements OnInit {
     }
   }
 
+  highLightPost(post: Post): void {
+    if (
+      this.currentUser.isPremium &&
+      post.priority === false &&
+      post.author.id === this.currentUser.id
+    ) {
+      const shouldHighlight = confirm(
+        "You can prioritize your post since you are a premium user. Do you want to do it?"
+      );
+
+      if (shouldHighlight) {
+        post.priority = true;
+      } else {
+        post.priority = false;
+      }
+    } else if (
+      this.currentUser.isPremium &&
+      post.priority === true &&
+      post.author.id === this.currentUser.id
+    ) {
+      const deleteHighlight = confirm(
+        "Do you want to stop prioritizing your post?"
+      );
+      if (deleteHighlight) {
+        post.priority = false;
+      } else {
+        post.priority = true;
+      }
+    } else {
+      post.priority = false;
+    }
+  }
+
   highLightComment(comment: Comment): void {
     if (this.currentUser.isPremium && comment.priority === false) {
       const shouldHighlight = confirm(

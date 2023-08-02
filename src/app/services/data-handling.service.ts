@@ -26,14 +26,14 @@ export class DataHandlingService {
       name: "Corabel Polland",
       email: "cpolland2@etsy.com",
       password: "pass123",
-      isPremium: false,
+      isPremium: true,
     },
     {
       id: "4",
       name: "Kyle Pember",
       email: "kpember3@mlb.com",
       password: "pass123",
-      isPremium: true,
+      isPremium: false,
     },
     {
       id: "5",

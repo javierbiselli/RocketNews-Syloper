@@ -22,15 +22,26 @@
       padding: 15px;
       margin-top: 15px;
       border-bottom: 1px solid colors(gray);
+      position: relative;
       .top-container {
         display: flex;
         flex-direction: column;
         padding-bottom: 15px;
         margin-bottom: 15px;
         border-bottom: 1px solid gray;
+        position: relative;
         h3 {
           font-size: $fontsizeHeadingOne;
           font-weight: bold;
+        }
+        .priority-button-post {
+          position: absolute;
+          top: 0;
+          right: 0;
+          i {
+            font-size: $fontsizeHeadingThree;
+            color: colors(accent);
+          }
         }
         .post-data-container {
           display: flex;
@@ -65,6 +76,13 @@
         max-width: 200px;
         gap: 15px;
         margin-top: 15px;
+      }
+      .priority-post-text {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        color: colors(accent);
+        font-weight: bold;
       }
     }
 
@@ -161,6 +179,14 @@
   }
 }
 
+button {
+  transition: 0.3s;
+}
+
+button:hover {
+  scale: 1.05;
+}
+
 @include from(tb) {
   .whole-container {
     section {
@@ -177,6 +203,9 @@
     gap: 30px;
     section {
       margin: 0;
+      .post-container {
+        min-width: 750px;
+      }
     }
   }
 }

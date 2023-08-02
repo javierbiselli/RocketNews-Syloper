@@ -3,6 +3,15 @@
     <div class="post-container">
       <div class="top-container">
         <h3>{{ selectedPost.title }}</h3>
+        <button
+          class="priority-button-post"
+          (click)="highLightPost(selectedPost)"
+          *ngIf="
+            currentUser.isPremium && selectedPost.author.id === currentUser.id
+          "
+        >
+          <i class="fa-regular fa-star"></i>
+        </button>
         <div class="post-data-container">
           <img
             class="profile-picture"
@@ -40,6 +49,9 @@
           <i class="fa-regular fa-heart"></i> Like
         </button>
       </div>
+      <p *ngIf="selectedPost.priority" class="priority-post-text">
+        Proiritized post!
+      </p>
     </div>
 
     <div

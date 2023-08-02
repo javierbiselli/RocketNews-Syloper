@@ -1,1 +1,15 @@
-<p>posting works!</p>
+<section>
+  <div class="posting-container">
+    <div class="title-container">
+      <h4>Title</h4>
+      <input type="text" [(ngModel)]="title" />
+    </div>
+    <div class="subject-container">
+      <textarea [(ngModel)]="content"></textarea>
+    </div>
+    <div class="buttons-container">
+      <button (click)="post()">Post to forum</button>
+      <button routerLink="/forum">Cancel</button>
+    </div>
+  </div>
+</section>
