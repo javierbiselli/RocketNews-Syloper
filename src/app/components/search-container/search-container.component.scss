@@ -8,7 +8,16 @@ section {
   h3 {
     margin: 20px auto;
     text-align: center;
+    font-size: $fontsizeHeadingTwo;
     font-weight: bold;
+  }
+  .no-results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-size: $fontsizeHeadingThree;
+    min-height: 25vh;
   }
   .container {
     display: grid;

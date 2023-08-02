@@ -142,13 +142,22 @@
   }
 }
 
-@include from(dt) {
+@include from(tb) {
+  .whole-container {
+    section {
+      margin: 0 auto;
+      max-width: 800px;
+    }
+  }
+}
+
+@include from(xd) {
   .whole-container {
     flex-direction: row;
     justify-content: center;
     gap: 30px;
     section {
-      max-width: 900px;
+      margin: 0;
     }
   }
 }

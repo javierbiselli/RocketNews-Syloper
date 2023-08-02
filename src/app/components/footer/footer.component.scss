@@ -3,9 +3,28 @@
 
 .footer {
   color: colors(white);
+  position: relative;
+  .scroll-to-top-button {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .scroll-to-top-button i {
+    margin-top: 8px;
+  }
 }
 
-.footer-top, .footer-bottom{
+.footer-top,
+.footer-bottom {
   display: flex;
   flex-direction: column;
 }
@@ -109,7 +128,8 @@
 }
 
 @include from(tb) {
-  .footer-top, .footer-bottom {
+  .footer-top,
+  .footer-bottom {
     flex-direction: row;
   }
 
