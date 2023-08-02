@@ -35,6 +35,8 @@ http://localhost:4200/
 
 ## Datos adicionales
 
+- La api utilizada para obtener articulos, blogs, y reportes, ademas de hacer busquedas es [Spaceflight News API]( https://www.spaceflightnewsapi.net/)
+
 - La página web es completamente responsive, lo que significa que se adapta y se ve correctamente en diferentes dispositivos y tamaños de pantalla.
 
 - Para acceder a las funcionalidades principales del foro, los usuarios deben registrarse e iniciar sesión. Una vez que están logueados, pueden participar en discusiones, agregar comentarios y publicar nuevos temas.
