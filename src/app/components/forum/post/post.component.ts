@@ -31,6 +31,7 @@ export class PostComponent implements OnInit {
     private dataHandlingService: DataHandlingService
   ) {}
 
+  posts: Post[] = [];
   selectedPost: Post | undefined = undefined;
   comments: Comment[] = [];
 
@@ -39,6 +40,13 @@ export class PostComponent implements OnInit {
   showPublicity: boolean = true;
   id: number = 0;
   ngOnInit(): void {
+    this.dataHandlingService.posts.subscribe({
+      next: (posts) => {
+        this.posts = posts;
+      },
+      error: (err) => console.error(err),
+    });
+
     this.dataHandlingService.comments.subscribe({
       next: (comments) => {
         this.comments = comments;
@@ -210,6 +218,21 @@ export class PostComponent implements OnInit {
       }
     } else {
       post.priority = false;
+    }
+  }
+
+  deletePost(postId: string) {
+    const index = this.posts.findIndex((post) => postId === post.id);
+
+    if (index !== undefined && index !== -1) {
+      const shouldDelete = window.confirm(
+        "Are you sure you want to delete this post?"
+      );
+
+      if (shouldDelete) {
+        this.posts.splice(index, 1);
+        this.router.navigate(["/forum"]);
+      }
     }
   }
 

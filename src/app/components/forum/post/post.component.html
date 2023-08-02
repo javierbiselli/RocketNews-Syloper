@@ -7,7 +7,9 @@
           class="priority-button-post"
           (click)="highLightPost(selectedPost)"
           *ngIf="
-            currentUser.isPremium && selectedPost.author.id === currentUser.id
+            currentUser &&
+            currentUser.isPremium &&
+            selectedPost.author.id === currentUser.id
           "
         >
           <i class="fa-regular fa-star"></i>
@@ -30,6 +32,13 @@
             <p>~</p>
             <p>{{ selectedPost.comments.length }} comments</p>
           </div>
+          <button
+            class="delete-post-button secondary-button"
+            *ngIf="currentUser && selectedPost.author.id === currentUser.id"
+            (click)="deletePost(selectedPost.id)"
+          >
+            Delete post
+          </button>
         </div>
       </div>
       <div class="post-content">
