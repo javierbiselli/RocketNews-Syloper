@@ -68,10 +68,9 @@ export class DataHandlingService {
   
     // Change to premium
     currentUsers[index].isPremium = true;
-
-    this.printUser(index);
   }
 
+  // For debugging purposes
   printUser(index: any) {
     const currentUsers = this.users.getValue();
     // let indexString = index.toString();

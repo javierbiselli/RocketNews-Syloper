@@ -57,25 +57,18 @@ export class PaidRegistrationModalComponent implements OnInit {
     this.submitted = true;
 
     if (this.form.invalid) {
-      console.log('invalid form')
       return;
     }
     
-    console.log(localStorage.getItem('currentUser'));
     if (this.authenticated != null) {
-      console.log(this.authenticated.subscribe((data) => (data?.isPremium)));
       this.authenticated.subscribe((data) => {
         this.dataHandlingService.makeUserPremium(data!.id);
         localStorage.setItem('currentUser', JSON.stringify(data));
-        console.log(localStorage.getItem('currentUser'));
       });
-      console.log('premium!!!!!');
-      console.log(this.authenticated.subscribe((data) => (data?.isPremium)));
       this.close();
 
       window.alert('Now you are Premium user!');
     } else {
-      console.log('REGISTER NOW!!')
     }
   }
 

@@ -28,9 +28,7 @@ export class PaidServiceComponent implements OnInit {
   open() {
     if (localStorage.getItem('currentUser') != null) {
       this.modalService.open();
-      console.log('open called');
     } else {
-      console.log('no user');
       this.router.navigateByUrl("login");
     }
   }

@@ -27,21 +27,10 @@ section {
 
   .paid-registration-modal {
     box-sizing: border-box;
-    // position: absolute;
-    // top: 50%;
-    // left: 50%;
-    // transform: translate(-50%, -50%);
     margin: 80px auto;
     max-width: 420px;
 
-
-    // height: 200px;
-    // width: 300px;
-
     background: white;
-    // padding: 64px;
-
-    // border-radius: 8px;
 
     box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.1);
   }
@@ -58,10 +47,6 @@ section {
     cursor: pointer;
     outline: none;
 
-    // position: absolute;
-    // top: 0;
-    // left: 0;
-
     padding: 16px;
   }
 }
@@ -74,7 +59,6 @@ section {
 .info-container {
   h2 {
     text-align: center;
-    // margin: 15px 0;
     font-weight: bold;
     color: colors(accentDark);
     text-decoration: underline;
@@ -88,7 +72,6 @@ section {
 .separation-bar {
   width: 100%;
   height: 2px;
-  // margin: auto;
   background: linear-gradient(
     to right,
     colors(black) 10%,
@@ -126,7 +109,6 @@ section {
   margin-top: 5px;
   display: inline-block;
   border: 1px solid #ccc;
-  // border-radius: 4px;
   background-color: colors(light);
   box-sizing: border-box;
 }
@@ -225,41 +207,3 @@ section {
   color: colors(warnDark);
   text-decoration: underline;
 }
-
-// @include from(ls) {
-//   .container {
-//     width: 60%;
-//     min-width: 320px;
-//     max-width: 500px;
-//     margin: 30px auto 60px;
-//     border-image: linear-gradient(
-//       to right,
-//       colors(black) 10%,
-//       colors(warnDark) 50%
-//     ) 1;
-//     border-width: 1px;
-//     border-style: solid;
-//   }
-
-//   .info-container {
-//     margin: auto;
-//     width: 60%;
-//     min-width: 320px;
-//     max-width: 500px;
-//   }
-
-//   .form {
-//     max-width: 400px;
-//     margin: 0 auto;
-//   }
-
-//   .form-group-field {
-//     display: block;
-//   }
-// }
-
-// @include from(dt) {
-//   .container {
-//     padding-top: 40px;
-//   }
-// }
