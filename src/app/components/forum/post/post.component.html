@@ -10,9 +10,13 @@
             alt=""
           />
           <div class="post-data">
-            <p>
+            <p class="post-name-date">
               on {{ selectedPost.date }} by
               <b>{{ selectedPost.author.name }}</b>
+              <i
+                *ngIf="selectedPost.author.isPremium"
+                class="fa-regular fa-star"
+              ></i>
             </p>
             <p>~</p>
             <p>{{ selectedPost.comments.length }} comments</p>
@@ -65,17 +69,30 @@
         *ngIf="selectedPost.comments.length > 1"
         (change)="changeOrder($event)"
       >
-        <option value="0" [selected]="order === 0">Newest</option>
-        <option value="1" [selected]="order === 1">Oldest</option>
-        <option value="2" [selected]="order === 2">Most likes</option>
+        <option value="1" [selected]="order === 1">Newest</option>
+        <option value="2" [selected]="order === 2">Oldest</option>
+        <option value="3" [selected]="order === 3">Most likes</option>
       </select>
     </div>
 
     <div
-      class="comments-container"
       *ngFor="let comment of selectedPost.comments"
+      [ngClass]="
+        comment.priority ? 'comments-container-premium' : 'comments-container'
+      "
     >
       <div class="comment-data-container">
+        <button
+          class="priority-button"
+          (click)="highLightComment(comment)"
+          *ngIf="
+            currentUser &&
+            comment.author.id === currentUser.id &&
+            currentUser.isPremium
+          "
+        >
+          <i class="fa-regular fa-star"></i>
+        </button>
         <button
           class="delete-button"
           (click)="deleteComment(comment.id)"
@@ -83,6 +100,7 @@
         >
           X
         </button>
+
         <img
           class="profile-picture"
           src="assets/profile-picture-default.png"

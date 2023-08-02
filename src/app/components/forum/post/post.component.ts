@@ -32,12 +32,20 @@ export class PostComponent implements OnInit {
   ) {}
 
   selectedPost: Post | undefined = undefined;
+  comments: Comment[] = [];
 
   currentUser!: User;
 
   showPublicity: boolean = true;
-
+  id: number = 0;
   ngOnInit(): void {
+    this.dataHandlingService.comments.subscribe({
+      next: (comments) => {
+        this.comments = comments;
+        this.id = this.comments.length + 1;
+      },
+      error: (err) => console.error(err),
+    });
     this.loadCurrentUserFromLocalStorage();
     this.shareDataService.selectedPost$.subscribe((post) => {
       this.selectedPost = post;
@@ -126,30 +134,42 @@ export class PostComponent implements OnInit {
   sortComments(order: number): void {
     this.order = order;
     if (this.order === 0) {
+      this.selectedPost?.comments.sort((a, b) => {
+        if (a.priority && !b.priority) {
+          return -1;
+        } else if (!a.priority && b.priority) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    } else if (this.order === 1) {
       this.selectedPost?.comments.sort(
         (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
       );
-    } else if (this.order === 1) {
+    } else if (this.order === 2) {
       this.selectedPost?.comments.sort(
         (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
       );
-    } else if (this.order === 2) {
+    } else if (this.order === 3) {
       this.selectedPost?.comments.sort((a, b) => b.rating - a.rating);
     }
   }
 
-  id: number = 15;
-
   pushComment(): void {
+    console.log(this.comments);
     if (this.commentContent.length > 0) {
       this.id = this.id + 1;
+
       const comment: Comment = {
         id: this.id.toString(),
         content: this.commentContent,
         date: this.getFormattedDate(),
         author: this.currentUser,
         rating: 0,
+        priority: false,
       };
+      this.highLightComment(comment);
       this.dataHandlingService.pushComment(comment);
       this.dataHandlingService.pushCommentToPost(
         this.selectedPost?.id,
@@ -157,6 +177,31 @@ export class PostComponent implements OnInit {
       );
       this.toggleComment();
       this.commentContent = "";
+    }
+  }
+
+  highLightComment(comment: Comment): void {
+    if (this.currentUser.isPremium && comment.priority === false) {
+      const shouldHighlight = confirm(
+        "You can highlight your comment since you are a premium user. Do you want to do it?"
+      );
+
+      if (shouldHighlight) {
+        comment.priority = true;
+      } else {
+        comment.priority = false;
+      }
+    } else if (this.currentUser.isPremium && comment.priority === true) {
+      const deleteHighlight = confirm(
+        "Do you want to stop highlighting your comment?"
+      );
+      if (deleteHighlight) {
+        comment.priority = false;
+      } else {
+        comment.priority = true;
+      }
+    } else {
+      comment.priority = false;
     }
   }
 

@@ -43,6 +43,12 @@
             display: flex;
             flex-wrap: wrap;
             gap: 9px;
+            .post-name-date {
+              i {
+                margin-left: 5px;
+                color: colors(accent);
+              }
+            }
           }
         }
       }
@@ -98,7 +104,8 @@
       }
     }
 
-    .comments-container {
+    .comments-container,
+    .comments-container-premium {
       background-color: colors(primaryDark);
       padding: 25px 15px;
       border-bottom: 5px solid colors(secondaryDark);
@@ -109,13 +116,19 @@
         gap: 10px;
         color: colors(gray);
         position: relative;
-        .delete-button {
+        .delete-button,
+        .priority-button {
           position: absolute;
-          color: red;
+          color: colors(warnDark);
           right: 0;
           top: 0;
-          border: 1px solid red;
+          border: 1px solid colors(warnDark);
           padding: 0 6px;
+        }
+        .priority-button {
+          color: colors(accent);
+          border: 1px solid colors(accent);
+          right: 30px;
         }
         p:first-child {
           color: colors(white);
@@ -135,6 +148,12 @@
           }
         }
       }
+    }
+    .comments-container-premium {
+      border: 1px solid gold;
+      border-radius: 4px;
+      margin: 10px 0;
+      font-weight: bold;
     }
     .login-form-post {
       color: white;
