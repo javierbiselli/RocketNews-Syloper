@@ -6,4 +6,5 @@ export interface Comment {
   date: string;
   author: User;
   rating: number;
+  priority: boolean;
 }
