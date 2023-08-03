@@ -36,6 +36,7 @@ export class AuthService {
     console.log("setting localStorage...");
     localStorage.setItem("currentUser", JSON.stringify(user));
     this.userSubject.next(user);
+    console.log('auth.service login()' + JSON.stringify(user));
   }
 
   logout() {

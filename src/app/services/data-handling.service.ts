@@ -51,6 +51,39 @@ export class DataHandlingService {
     this.users.next(currentUsers);
   }
 
+  makeUserPremium(userId: string) {
+    console.log('data.handling MAKING PREMIUM')
+    const currentUsers = this.users.getValue();
+    let index: any;
+    let userIndex: string;
+
+    userIndex = (Number(userId) -1).toString();
+
+    // Find id
+    for (var i in currentUsers) {
+      if (currentUsers[i].id == (userId)) {
+          index = i;
+         break;
+      }
+    }
+  
+    // Change to premium
+    currentUsers[index].isPremium = true;
+  }
+
+  // For debugging purposes
+  printUser(index: any) {
+    const currentUsers = this.users.getValue();
+    // let indexString = index.toString();
+
+    for (var i in currentUsers) {
+      if (currentUsers[i].id == index) {
+          console.log(JSON.stringify(currentUsers[i]));
+         break;
+      }
+    }
+  }
+
   // comentarios
   comments = new BehaviorSubject<Comment[]>([
     {
@@ -363,6 +396,23 @@ export class DataHandlingService {
     const currentPosts = this.posts.getValue();
     currentPosts.push(post);
     this.posts.next(currentPosts);
+  }
+
+  deletePost(post: Post): void {
+    const currentPosts = this.posts.getValue();
+    const updatedPosts = currentPosts.filter((p) => p.id !== post.id);
+    this.posts.next(updatedPosts);
+  }
+
+  changePriority(post: Post): void {
+    const currentPosts = this.posts.getValue();
+    const updatedPosts = currentPosts.map((p) => {
+      if (p.id === post.id) {
+        return { ...p, priority: !p.priority };
+      }
+      return p;
+    });
+    this.posts.next(updatedPosts);
   }
 
   pushCommentToPost(postId: string | undefined, comment: Comment): void {

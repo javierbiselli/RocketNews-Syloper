@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { Post, Result } from "@shared/models";
 import { ApiCallService } from "@shared/services";
+import { Subscription } from "rxjs";
 import { DataHandlingService } from "src/app/services/data-handling.service";
 import { SearchResultService } from "src/app/services/search-result.service";
 import Typed from "typed.js";
@@ -47,11 +48,19 @@ export class HeaderComponent implements OnInit {
     this.setSelectedTab(currentPath);
   }
 
+  postsSubscription: Subscription | undefined;
+
   ngOnInit() {
     this.setSelectedTab(window.location.pathname);
     this.handleLocationChange();
-    this.posts = this.dataHandlingService.posts.getValue();
-    this.trendings = this.getTrending();
+    this.postsSubscription = this.dataHandlingService.posts.subscribe(
+      (newPosts: Post[]) => {
+        this.posts = newPosts;
+        this.trendings = this.getTrending();
+      }
+    );
+    this.initializeTyped();
+    this.startAutoChange();
 
     // clock logic
     const options: Intl.DateTimeFormatOptions = {
@@ -178,10 +187,10 @@ export class HeaderComponent implements OnInit {
   typed: Typed | undefined;
   autoChangeInterval: any | undefined;
 
-  ngAfterViewInit() {
-    this.initializeTyped();
-    this.startAutoChange();
-  }
+  // ngAfterViewInit() {
+  //   this.initializeTyped();
+  //   this.startAutoChange();
+  // }
 
   // typed.js configuration
   initializeTyped() {
