@@ -199,9 +199,11 @@ export class PostComponent implements OnInit {
       );
 
       if (shouldHighlight) {
-        post.priority = true;
-      } else {
-        post.priority = false;
+        // Use changePriority() to update the priority in the array
+        this.dataHandlingService.changePriority(post);
+        this.selectedPost = this.selectedPost
+          ? { ...this.selectedPost, priority: true }
+          : undefined;
       }
     } else if (
       this.currentUser.isPremium &&
@@ -212,27 +214,23 @@ export class PostComponent implements OnInit {
         "Do you want to stop prioritizing your post?"
       );
       if (deleteHighlight) {
-        post.priority = false;
-      } else {
-        post.priority = true;
+        // Use changePriority() to update the priority in the array
+        this.dataHandlingService.changePriority(post);
+        this.selectedPost = this.selectedPost
+          ? { ...this.selectedPost, priority: false }
+          : undefined;
       }
-    } else {
-      post.priority = false;
     }
   }
 
-  deletePost(postId: string) {
-    const index = this.posts.findIndex((post) => postId === post.id);
+  deletePost(thispost: Post) {
+    const shouldDelete = window.confirm(
+      "Are you sure you want to delete this post?"
+    );
 
-    if (index !== undefined && index !== -1) {
-      const shouldDelete = window.confirm(
-        "Are you sure you want to delete this post?"
-      );
-
-      if (shouldDelete) {
-        this.posts.splice(index, 1);
-        this.router.navigate(["/forum"]);
-      }
+    if (shouldDelete) {
+      this.dataHandlingService.deletePost(thispost);
+      this.router.navigate(["/forum"]);
     }
   }
 
