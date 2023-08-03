@@ -18,8 +18,9 @@ import { PostComponent } from "./components/forum/post/post.component";
 import { SearchContainerComponent } from "./components/search-container/search-container.component";
 import { LoginFormComponent } from "./components/login-form/login-form.component";
 import { LoginButtonComponent } from "./components/login-button/login-button.component";
+import { FooterComponent } from './components/footer/footer.component';
+import { PaidRegistrationModalComponent } from './components/paid-registration-modal/paid-registration-modal.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
-import { FooterComponent } from "./components/footer/footer.component";
 import { PostingComponent } from "./components/forum/posting/posting.component";
 
 @NgModule({
@@ -36,6 +37,7 @@ import { PostingComponent } from "./components/forum/posting/posting.component";
     LoginButtonComponent,
     AboutUsComponent,
     FooterComponent,
+    PaidRegistrationModalComponent,
     PostingComponent,
   ],
   imports: [
