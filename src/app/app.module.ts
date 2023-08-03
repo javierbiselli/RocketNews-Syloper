@@ -2,7 +2,8 @@
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { environment } from "@environment";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+
 // This Module Imports
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -13,9 +14,13 @@ import { RouterModule } from "@angular/router";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { PaidServiceComponent } from "./components/paid-service/paid-service.component";
 import { ForumComponent } from "./components/forum/forum.component";
-import { LoginFormComponent } from './components/login-form/login-form.component';
+import { PostComponent } from "./components/forum/post/post.component";
+import { SearchContainerComponent } from "./components/search-container/search-container.component";
+import { LoginFormComponent } from "./components/login-form/login-form.component";
 import { LoginButtonComponent } from "./components/login-button/login-button.component";
 import { AboutUsComponent } from './components/about-us/about-us.component';
+import { FooterComponent } from "./components/footer/footer.component";
+import { PostingComponent } from "./components/forum/posting/posting.component";
 
 @NgModule({
   declarations: [
@@ -25,9 +30,13 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
     ContactFormComponent,
     PaidServiceComponent,
     ForumComponent,
+    PostComponent,
+    SearchContainerComponent,
     LoginFormComponent,
     LoginButtonComponent,
     AboutUsComponent,
+    FooterComponent,
+    PostingComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,15 +44,22 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([
-      { path: "", component: NewsContainerComponent },
-      { path: "blogs", component: NewsContainerComponent },
-      { path: "reports", component: NewsContainerComponent },
-      { path: "contact", component: ContactFormComponent },
-      { path: "forum", component: ForumComponent },
-      { path: "login", component: LoginFormComponent },
-      { path: "about", component: AboutUsComponent },
-    ]),
+    BrowserAnimationsModule,
+    RouterModule.forRoot(
+      [
+        { path: "", component: NewsContainerComponent },
+        { path: "blogs", component: NewsContainerComponent },
+        { path: "reports", component: NewsContainerComponent },
+        { path: "about", component: AboutUsComponent },
+        { path: "contact", component: ContactFormComponent },
+        { path: "forum", component: ForumComponent },
+        { path: "forum/posting", component: PostingComponent },
+        { path: "forum/post/:id", component: PostComponent },
+        { path: "search/:userInput", component: SearchContainerComponent },
+        { path: "login", component: LoginFormComponent },
+      ],
+      { scrollPositionRestoration: "enabled" }
+    ),
   ],
   providers: [],
   bootstrap: [AppComponent],

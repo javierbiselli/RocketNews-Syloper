@@ -1,0 +1,173 @@
+<div class="whole-container" *ngIf="selectedPost !== undefined">
+  <section>
+    <div class="post-container">
+      <div class="top-container">
+        <h3>{{ selectedPost.title }}</h3>
+        <button
+          class="priority-button-post"
+          (click)="highLightPost(selectedPost)"
+          *ngIf="
+            currentUser &&
+            currentUser.isPremium &&
+            selectedPost.author.id === currentUser.id
+          "
+        >
+          <i class="fa-regular fa-star"></i>
+        </button>
+        <div class="post-data-container">
+          <img
+            class="profile-picture"
+            src="assets/profile-picture-default.png"
+            alt=""
+          />
+          <div class="post-data">
+            <p class="post-name-date">
+              on {{ selectedPost.date }} by
+              <b>{{ selectedPost.author.name }}</b>
+              <i
+                *ngIf="selectedPost.author.isPremium"
+                class="fa-regular fa-star"
+              ></i>
+            </p>
+            <p>~</p>
+            <p>{{ selectedPost.comments.length }} comments</p>
+          </div>
+          <button
+            class="delete-post-button secondary-button"
+            *ngIf="currentUser && selectedPost.author.id === currentUser.id"
+            (click)="deletePost(selectedPost)"
+          >
+            Delete post
+          </button>
+        </div>
+      </div>
+      <div class="post-content">
+        <p>
+          {{ selectedPost.content }}
+        </p>
+      </div>
+      <div class="post-buttons">
+        <button class="comment-button main-button" (click)="toggleComment()">
+          Comment
+        </button>
+        <button
+          class="like-button secondary-button"
+          [class.selected-button-green]="isLiked"
+          (click)="toggleButton()"
+        >
+          <i class="fa-regular fa-heart"></i> Like
+        </button>
+      </div>
+      <p *ngIf="selectedPost.priority" class="priority-post-text">
+        Proiritized post!
+      </p>
+    </div>
+
+    <div
+      class="addcomment-container"
+      [@commentAnimation]="commentOpen ? 'open' : 'closed'"
+    >
+      <h5>Add a comment</h5>
+      <textarea
+        name=""
+        id=""
+        cols="30"
+        rows="5"
+        [(ngModel)]="commentContent"
+      ></textarea>
+      <div class="addcomment-buttons">
+        <button class="secondary-button" (click)="toggleComment()">
+          Cancel
+        </button>
+        <button class="main-button" (click)="pushComment()">Comment</button>
+      </div>
+    </div>
+
+    <div class="comments-order-container">
+      <p>{{ selectedPost.comments.length }} comments</p>
+      <select
+        name="order"
+        *ngIf="selectedPost.comments.length > 1"
+        (change)="changeOrder($event)"
+      >
+        <option value="1" [selected]="order === 1">Newest</option>
+        <option value="2" [selected]="order === 2">Oldest</option>
+        <option value="3" [selected]="order === 3">Most likes</option>
+      </select>
+    </div>
+
+    <div
+      *ngFor="let comment of selectedPost.comments"
+      [ngClass]="
+        comment.priority ? 'comments-container-premium' : 'comments-container'
+      "
+    >
+      <div class="comment-data-container">
+        <button
+          class="priority-button"
+          (click)="highLightComment(comment)"
+          *ngIf="
+            currentUser &&
+            comment.author.id === currentUser.id &&
+            currentUser.isPremium
+          "
+        >
+          <i class="fa-regular fa-star"></i>
+        </button>
+        <button
+          class="delete-button"
+          (click)="deleteComment(comment.id)"
+          *ngIf="isDeletable() && comment.author.id === currentUser.id"
+        >
+          X
+        </button>
+
+        <img
+          class="profile-picture"
+          src="assets/profile-picture-default.png"
+          alt=""
+        />
+        <div>
+          <p>{{ comment.author.name }}</p>
+          <p>{{ comment.date }}</p>
+        </div>
+      </div>
+      <div class="comment-content">
+        <p>
+          {{ comment.content }}
+        </p>
+      </div>
+      <div class="comment-bottom">
+        <div class="comment-buttons-container">
+          <button
+            class="like-button secondary-button"
+            [class.selected-button-green]="
+              selectedButtons[comment.id] === 'add'
+            "
+            (click)="rate(comment, 1)"
+          >
+            <i class="fa-regular fa-thumbs-up"></i>
+          </button>
+          <p>{{ comment.rating > 0 ? "+" : "" }}{{ comment.rating }}</p>
+          <button
+            class="like-button secondary-button"
+            [class.selected-button-red]="
+              selectedButtons[comment.id] === 'subtract'
+            "
+            (click)="rate(comment, -1)"
+          >
+            <i class="fa-regular fa-thumbs-down"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <app-login-form
+      class="login-form-post"
+      *ngIf="!currentUser"
+    ></app-login-form>
+  </section>
+  <div>
+    <app-paid-service *ngIf="showPublicity"></app-paid-service>
+  </div>
+</div>
+<div *ngIf="selectedPost === undefined">ERROR 404 NOT FOUND</div>

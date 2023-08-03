@@ -11,7 +11,12 @@
         <option value="3" [selected]="order === 3">Oldest</option>
       </select>
     </div>
-    <button class="main-button">New post</button>
+    <button
+      class="main-button"
+      [routerLink]="currentUser ? '/forum/posting' : '/login'"
+    >
+      New post
+    </button>
   </div>
   <section>
     <div class="posts-container">
@@ -27,7 +32,11 @@
       >
         <div class="title-container">
           <i class="fa-solid fa-unlock"></i>
-          <a href="#">{{ post.title }}</a>
+          <a
+            [routerLink]="['/forum/post', post.id]"
+            (click)="selectPost(post)"
+            >{{ post.title }}</a
+          >
         </div>
         <p class="comments">{{ post.comments.length }}</p>
         <div class="data-container">
@@ -39,4 +48,5 @@
       </div>
     </div>
   </section>
+  <div class="separation-bar-footer"></div>
 </div>

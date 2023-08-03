@@ -5,19 +5,25 @@
   display: flex;
   justify-content: space-around;
   width: 100%;
-  button {
+  .loginregister-button {
     color: black;
-    
+
     -webkit-transform: translateZ(0);
-    transform: scale(.95);
+    transform: scale(0.95);
     font-size: 1.05em;
     -webkit-transition: transform 200ms;
     transition: transform 200ms;
   }
-  button:hover {
+  .loginregister-button:hover,
+  .loginregister-button-mobile:hover {
     color: colors(warnDark);
-    
+
     transform: scale(1);
+  }
+
+  .loginregister-button-mobile {
+    color: white;
+    transition: 0.3s;
   }
 }
 

@@ -1,6 +1,10 @@
-import { Component, HostListener, OnInit } from "@angular/core";
-import { Post } from "@shared/models";
+import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
+import { NavigationEnd, Router } from "@angular/router";
+import { Post, Result } from "@shared/models";
+import { ApiCallService } from "@shared/services";
+import { Subscription } from "rxjs";
 import { DataHandlingService } from "src/app/services/data-handling.service";
+import { SearchResultService } from "src/app/services/search-result.service";
 import Typed from "typed.js";
 
 @Component({
@@ -9,7 +13,20 @@ import Typed from "typed.js";
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private dataHandlingService: DataHandlingService) {}
+  @ViewChild("searchInput", { static: false }) searchInput!: ElementRef;
+
+  constructor(
+    private dataHandlingService: DataHandlingService,
+    private apiCallService: ApiCallService,
+    private SearchResultService: SearchResultService,
+    private router: Router
+  ) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.handleLocationChange();
+      }
+    });
+  }
 
   posts: Post[] = [];
 
@@ -24,12 +41,26 @@ export class HeaderComponent implements OnInit {
     this.selectedTab = tab;
   }
 
-  trendings: string[] = [];
+  trendings: { title: string; id: string }[] = [];
+
+  handleLocationChange() {
+    const currentPath = window.location.pathname;
+    this.setSelectedTab(currentPath);
+  }
+
+  postsSubscription: Subscription | undefined;
 
   ngOnInit() {
     this.setSelectedTab(window.location.pathname);
-    this.posts = this.dataHandlingService.posts.getValue();
-    this.trendings = this.getTrending();
+    this.handleLocationChange();
+    this.postsSubscription = this.dataHandlingService.posts.subscribe(
+      (newPosts: Post[]) => {
+        this.posts = newPosts;
+        this.trendings = this.getTrending();
+      }
+    );
+    this.initializeTyped();
+    this.startAutoChange();
 
     // clock logic
     const options: Intl.DateTimeFormatOptions = {
@@ -49,6 +80,11 @@ export class HeaderComponent implements OnInit {
     updateDateTime();
 
     setInterval(updateDateTime, 1000);
+
+    if (window.location.pathname.startsWith("/search")) {
+      this.userInput = window.location.pathname.slice(8);
+    }
+    this.onSubmitSearch();
   }
 
   // menu logic
@@ -84,41 +120,79 @@ export class HeaderComponent implements OnInit {
   searchButtonClicked: boolean = false;
   searchButtonClass: string = "fa-magnifying-glass";
 
-  @HostListener("window:resize")
-  onWindowResize() {
-    if (window.innerWidth < 992) {
-      this.searchButtonClicked = false;
+  // @HostListener("window:resize")
+  // onWindowResize() {
+  //   if (window.innerWidth < 992) {
+  //     this.searchButtonClicked = false;
+  //     this.searchButtonClass = "fa-magnifying-glass";
+  //   }
+  // } NOT LONGER NEEDED
+
+  changeSearchVisibility(): void {
+    this.searchButtonClicked = !this.searchButtonClicked;
+    if (this.searchButtonClicked) {
+      this.searchButtonClass = this.closeIcon;
+      if (this.searchInput) {
+        this.searchInput.nativeElement.focus();
+      }
+    } else {
       this.searchButtonClass = "fa-magnifying-glass";
     }
   }
 
-  changeSearchVisibility(): void {
-    this.searchButtonClicked = !this.searchButtonClicked;
-    this.searchButtonClicked
-      ? (this.searchButtonClass = this.closeIcon)
-      : (this.searchButtonClass = "fa-magnifying-glass");
+  userInput: string = "";
+  limit: number = 30; // Maximum number of results for a search
+  loading: boolean = false;
+  searchResults: Result[] = [];
+
+  onSubmitSearch() {
+    this.loading = true;
+    this.apiCallService
+      .getData(`articles/?limit=${this.limit}&search=${this.userInput}`)
+      .subscribe({
+        next: (data) => {
+          this.searchResults = data.results;
+          this.SearchResultService.setSearchResults(this.searchResults);
+          this.loading = false;
+        },
+        error: (error) => {
+          console.error("Error fetching data, try again later", error);
+          this.loading = false;
+        },
+      });
+  }
+
+  performSearch() {
+    if (this.userInput.length > 0) {
+      this.onSubmitSearch();
+      this.router.navigate([`/search/${this.userInput}`]);
+    }
   }
 
   //--------------- TYPED.JS ---------------
 
-  getTrending(): string[] {
+  getTrending(): { title: string; id: string }[] {
     const filteredPosts = this.posts.filter((post) => post.priority === true);
-    return filteredPosts.map((post) => post.title);
+    return filteredPosts.map((post) => ({ title: post.title, id: post.id }));
+  }
+
+  getPostUrl(postId: string): string {
+    return `/forum/post/${postId}`;
   }
 
   currentStringIndex: number = 0;
   typed: Typed | undefined;
   autoChangeInterval: any | undefined;
 
-  ngAfterViewInit() {
-    this.initializeTyped();
-    this.startAutoChange();
-  }
+  // ngAfterViewInit() {
+  //   this.initializeTyped();
+  //   this.startAutoChange();
+  // }
 
   // typed.js configuration
   initializeTyped() {
     const options = {
-      strings: [this.trendings[this.currentStringIndex]],
+      strings: [this.trendings[this.currentStringIndex].title],
       typeSpeed: 20,
       backDelay: 10000,
       loop: true,
@@ -163,5 +237,9 @@ export class HeaderComponent implements OnInit {
       (this.currentStringIndex + offset) % this.trendings.length;
     this.initializeTyped();
     this.startAutoChange();
+  }
+
+  isMobile(): boolean {
+    return window.innerWidth < 992;
   }
 }

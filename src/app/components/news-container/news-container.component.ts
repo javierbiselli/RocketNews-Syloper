@@ -1,8 +1,7 @@
-import { Component, HostListener, OnInit, SimpleChanges } from "@angular/core";
+import { Component, HostListener, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Result, User } from "@shared/models";
 import { ApiCallService } from "@shared/services";
-import { BehaviorSubject } from "rxjs";
 import { AuthService } from "src/app/services/auth.service";
 
 @Component({
@@ -14,11 +13,10 @@ export class NewsContainerComponent implements OnInit {
   constructor(
     private apiCallService: ApiCallService,
     private route: ActivatedRoute,
-    private authenticationService: AuthService,
-    ) {}
-    
+    private authenticationService: AuthService
+  ) {}
+
   userValue: User | null | undefined;
-  userLogged = new BehaviorSubject<boolean>(false);
 
   loading: boolean = true;
   imageLoading: { [key: number]: boolean } = {};
@@ -31,7 +29,7 @@ export class NewsContainerComponent implements OnInit {
 
   showPublicity: boolean = true;
 
-  maxNews: number = 30; // Maximum number of articles loaded on scroll
+  maxNews: number = 18; // Maximum number of articles loaded on scroll
 
   apiCall() {
     this.loading = true;
@@ -80,15 +78,21 @@ export class NewsContainerComponent implements OnInit {
     }
   }
 
+  loadMore(): void {
+    this.maxNews = this.maxNews + 18;
+    this.loadMoreElements();
+  }
+
   onImageLoad(articleId: number) {
     this.imageLoading[articleId] = false;
   }
 
-  scrollOffset: number = 0.99;
+  scrollOffset: number = 0.9;
 
   @HostListener("window:scroll", ["$event"])
   @HostListener("window:touchmove", ["$event"])
   onScroll() {
+    const windowHeight = window.innerHeight;
     const body = document.body;
     const html = document.documentElement;
     const docHeight = Math.max(
@@ -101,7 +105,7 @@ export class NewsContainerComponent implements OnInit {
     );
     const windowBottom = window.innerHeight + window.pageYOffset;
 
-    const loadMoreTriggerPoint = docHeight * this.scrollOffset;
+    const loadMoreTriggerPoint = docHeight - windowHeight * this.scrollOffset;
 
     if (windowBottom >= loadMoreTriggerPoint) {
       this.loadMoreElements();
@@ -124,22 +128,21 @@ export class NewsContainerComponent implements OnInit {
     }
     this.apiCall();
 
-    this.authenticationService.user.subscribe(data => {
+    this.authenticationService.user.subscribe((data) => {
       this.userValue = data;
-      if (localStorage.getItem('showPublicity')?.valueOf() === 'false') {
-        this.showPublicity = !this.showPublicity;
-      }
     });
 
     this.setShowPublicity();
   }
 
   setShowPublicity() {
-    if (!localStorage.getItem('showPublicity')) {
-      this.showPublicity = true;
-      localStorage.setItem('showPublicity', 'true');
+    if (this.userValue?.isPremium) {
+      this.showPublicity = false;
+      localStorage.setItem("showPublicity", "false");
     } else {
-      if (localStorage.getItem('showPublicity')?.valueOf() === 'true') {
+      this.showPublicity = true;
+      localStorage.setItem("showPublicity", "true");
+      if (localStorage.getItem("showPublicity")?.valueOf() === "true") {
         this.showPublicity = true;
       } else {
         this.showPublicity = false;
@@ -148,7 +151,7 @@ export class NewsContainerComponent implements OnInit {
   }
 
   hidePublicity() {
-    localStorage.setItem('showPublicity', 'false');
+    localStorage.setItem("showPublicity", "false");
     this.showPublicity = false;
   }
 
@@ -194,10 +197,5 @@ export class NewsContainerComponent implements OnInit {
   isFullElement(array: Result[], element: Result): boolean {
     const index = array.indexOf(element);
     return index === 0 || index % 6 === 0;
-  }
-
-  loadMore(): void {
-    this.maxNews = this.maxNews + 30;
-    this.loadMoreElements();
   }
 }
