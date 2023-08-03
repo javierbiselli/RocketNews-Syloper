@@ -35,7 +35,7 @@
           <button
             class="delete-post-button secondary-button"
             *ngIf="currentUser && selectedPost.author.id === currentUser.id"
-            (click)="deletePost(selectedPost.id)"
+            (click)="deletePost(selectedPost)"
           >
             Delete post
           </button>

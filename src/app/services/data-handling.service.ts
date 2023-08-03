@@ -398,6 +398,23 @@ export class DataHandlingService {
     this.posts.next(currentPosts);
   }
 
+  deletePost(post: Post): void {
+    const currentPosts = this.posts.getValue();
+    const updatedPosts = currentPosts.filter((p) => p.id !== post.id);
+    this.posts.next(updatedPosts);
+  }
+
+  changePriority(post: Post): void {
+    const currentPosts = this.posts.getValue();
+    const updatedPosts = currentPosts.map((p) => {
+      if (p.id === post.id) {
+        return { ...p, priority: !p.priority };
+      }
+      return p;
+    });
+    this.posts.next(updatedPosts);
+  }
+
   pushCommentToPost(postId: string | undefined, comment: Comment): void {
     const currentPosts = this.posts.getValue();
     const targetPost = currentPosts.find((post) => post.id === postId);
