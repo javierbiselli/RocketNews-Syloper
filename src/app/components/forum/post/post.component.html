@@ -3,6 +3,17 @@
     <div class="post-container">
       <div class="top-container">
         <h3>{{ selectedPost.title }}</h3>
+        <button
+          class="priority-button-post"
+          (click)="highLightPost(selectedPost)"
+          *ngIf="
+            currentUser &&
+            currentUser.isPremium &&
+            selectedPost.author.id === currentUser.id
+          "
+        >
+          <i class="fa-regular fa-star"></i>
+        </button>
         <div class="post-data-container">
           <img
             class="profile-picture"
@@ -10,13 +21,24 @@
             alt=""
           />
           <div class="post-data">
-            <p>
+            <p class="post-name-date">
               on {{ selectedPost.date }} by
               <b>{{ selectedPost.author.name }}</b>
+              <i
+                *ngIf="selectedPost.author.isPremium"
+                class="fa-regular fa-star"
+              ></i>
             </p>
             <p>~</p>
             <p>{{ selectedPost.comments.length }} comments</p>
           </div>
+          <button
+            class="delete-post-button secondary-button"
+            *ngIf="currentUser && selectedPost.author.id === currentUser.id"
+            (click)="deletePost(selectedPost.id)"
+          >
+            Delete post
+          </button>
         </div>
       </div>
       <div class="post-content">
@@ -36,6 +58,9 @@
           <i class="fa-regular fa-heart"></i> Like
         </button>
       </div>
+      <p *ngIf="selectedPost.priority" class="priority-post-text">
+        Proiritized post!
+      </p>
     </div>
 
     <div
@@ -65,17 +90,30 @@
         *ngIf="selectedPost.comments.length > 1"
         (change)="changeOrder($event)"
       >
-        <option value="0" [selected]="order === 0">Newest</option>
-        <option value="1" [selected]="order === 1">Oldest</option>
-        <option value="2" [selected]="order === 2">Most likes</option>
+        <option value="1" [selected]="order === 1">Newest</option>
+        <option value="2" [selected]="order === 2">Oldest</option>
+        <option value="3" [selected]="order === 3">Most likes</option>
       </select>
     </div>
 
     <div
-      class="comments-container"
       *ngFor="let comment of selectedPost.comments"
+      [ngClass]="
+        comment.priority ? 'comments-container-premium' : 'comments-container'
+      "
     >
       <div class="comment-data-container">
+        <button
+          class="priority-button"
+          (click)="highLightComment(comment)"
+          *ngIf="
+            currentUser &&
+            comment.author.id === currentUser.id &&
+            currentUser.isPremium
+          "
+        >
+          <i class="fa-regular fa-star"></i>
+        </button>
         <button
           class="delete-button"
           (click)="deleteComment(comment.id)"
@@ -83,6 +121,7 @@
         >
           X
         </button>
+
         <img
           class="profile-picture"
           src="assets/profile-picture-default.png"

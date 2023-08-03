@@ -20,6 +20,7 @@ import { LoginFormComponent } from "./components/login-form/login-form.component
 import { LoginButtonComponent } from "./components/login-button/login-button.component";
 import { FooterComponent } from './components/footer/footer.component';
 import { PaidRegistrationModalComponent } from './components/paid-registration-modal/paid-registration-modal.component';
+import { PostingComponent } from "./components/forum/posting/posting.component";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { PaidRegistrationModalComponent } from './components/paid-registration-m
     LoginButtonComponent,
     FooterComponent,
     PaidRegistrationModalComponent,
+    PostingComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,16 +45,20 @@ import { PaidRegistrationModalComponent } from './components/paid-registration-m
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot([
-      { path: "", component: NewsContainerComponent },
-      { path: "blogs", component: NewsContainerComponent },
-      { path: "reports", component: NewsContainerComponent },
-      { path: "contact", component: ContactFormComponent },
-      { path: "forum", component: ForumComponent },
-      { path: "forum/post/:id", component: PostComponent },
-      { path: "search/:userInput", component: SearchContainerComponent },
-      { path: "login", component: LoginFormComponent },
-    ], {scrollPositionRestoration: 'enabled'}),
+    RouterModule.forRoot(
+      [
+        { path: "", component: NewsContainerComponent },
+        { path: "blogs", component: NewsContainerComponent },
+        { path: "reports", component: NewsContainerComponent },
+        { path: "contact", component: ContactFormComponent },
+        { path: "forum", component: ForumComponent },
+        { path: "forum/posting", component: PostingComponent },
+        { path: "forum/post/:id", component: PostComponent },
+        { path: "search/:userInput", component: SearchContainerComponent },
+        { path: "login", component: LoginFormComponent },
+      ],
+      { scrollPositionRestoration: "enabled" }
+    ),
   ],
   providers: [],
   bootstrap: [AppComponent],

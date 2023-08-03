@@ -1,55 +1,62 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { DataHandlingService } from './data-handling.service';
-import { User } from '@shared/models';
-import { Router } from '@angular/router';
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable } from "rxjs";
+import { DataHandlingService } from "./data-handling.service";
+import { User } from "@shared/models";
+import { Router } from "@angular/router";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AuthService {
-
   private userSubject: BehaviorSubject<User | null>;
-  public user: Observable<User |null>;
-  
+  public user: Observable<User | null>;
+
   constructor(
     private dataHandlingService: DataHandlingService,
-    private router: Router,
+    private router: Router
   ) {
     this.userSubject = new BehaviorSubject<User | null>(
-      JSON.parse(localStorage.getItem('currentUser') || 'null')
+      JSON.parse(localStorage.getItem("currentUser") || "null")
     );
     this.user = this.userSubject.asObservable();
   }
 
-  public get userValue(): User | null{
+  public get userValue(): User | null {
     return this.userSubject.value;
   }
 
   login(email: string, password: string) {
-    let user = this.dataHandlingService.users.getValue()
-                .find(x => x.email === email && x.password === password);
+    let user = this.dataHandlingService.users
+      .getValue()
+      .find((x) => x.email === email && x.password === password);
 
     if (!user) {
       throw new Error("Username or password is incorrect");
     }
-    console.log('setting localStorage...')
-    localStorage.setItem('currentUser', JSON.stringify(user));
+    console.log("setting localStorage...");
+    localStorage.setItem("currentUser", JSON.stringify(user));
     this.userSubject.next(user);
     console.log('auth.service login()' + JSON.stringify(user));
   }
 
   logout() {
-    localStorage.removeItem('currentUser');
-    this.userSubject.next(JSON.parse('null'));
-    this.router.navigate(['/']);
+    localStorage.removeItem("currentUser");
+    this.userSubject.next(JSON.parse("null"));
+    this.router.navigate(["/"]);
   }
 
   register(name: string, email: string, password: string) {
-    let newId: string = (this.dataHandlingService.users.getValue().length +1).toString();
-    console.log('NEW ID' + newId);
-    console.log('LENGTH' + this.dataHandlingService.users.getValue().length);
-    let user: User = {id: newId, name: name, email: email, password: password, isPremium: false};
+    let newIdNumber: number =
+      this.dataHandlingService.users.getValue().length + 1;
+    let newId: string = newIdNumber.toString();
+    let user: User = {
+      id: newId,
+      name: name,
+      email: email,
+      password: password,
+      isPremium: false,
+    };
+    console.log(user);
     this.dataHandlingService.pushUser(user);
   }
 }

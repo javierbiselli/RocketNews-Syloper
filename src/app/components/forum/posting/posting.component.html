@@ -1,0 +1,25 @@
+<section>
+  <h3>Add to forum</h3>
+  <div class="separation-bar"></div>
+  <div class="posting-container" *ngIf="currentUser">
+    <div class="title-container">
+      <h4>Title</h4>
+      <input type="text" [(ngModel)]="title" />
+    </div>
+    <div class="subject-container">
+      <h4>Content</h4>
+      <textarea
+        [(ngModel)]="content"
+        class="form-group-field no-focus"
+      ></textarea>
+    </div>
+    <div class="buttons-container">
+      <button (click)="post()" class="main-button">Post to forum</button>
+      <button routerLink="/forum" class="secondary-button">Cancel</button>
+    </div>
+  </div>
+  <div *ngIf="!currentUser" class="no-user">
+    <p>UNAUTHORIZED ACCESS:</p>
+    <a routerLink="">GO TO HOME</a> or <a routerLink="/login">LOGIN</a>
+  </div>
+</section>
