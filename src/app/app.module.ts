@@ -21,7 +21,6 @@ import { LoginButtonComponent } from "./components/login-button/login-button.com
 import { FooterComponent } from './components/footer/footer.component';
 import { PaidRegistrationModalComponent } from './components/paid-registration-modal/paid-registration-modal.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
-import { FooterComponent } from "./components/footer/footer.component";
 import { PostingComponent } from "./components/forum/posting/posting.component";
 
 @NgModule({
