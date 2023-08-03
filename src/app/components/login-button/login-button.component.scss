@@ -4,10 +4,19 @@
 .loginregister-container {
   font-size: fontsizes(normal);
   display: flex;
-  justify-content: space-around;
-  width: 100%;
-  // height: ;
-  background-color: colors(dark);
+  flex-direction: column;
+  p {
+    color: white;
+    padding: 10px 0;
+    font-family: $fontText;
+    font-size: 14px;
+  }
+  .btn-logout {
+    color: white;
+    background-color: colors(dark);
+    padding: 10px 0;
+    margin: 5px 0;
+  }
   .loginregister-button {
     color: black;
 
@@ -17,11 +26,7 @@
     -webkit-transition: transform 200ms;
     transition: transform 200ms;
   }
-  .loginregister-button:hover,
-  .mobile {
-    padding: 0 20px;
-  }
-  .loginregister-button-mobile:hover {
+  .loginregister-button:hover {
     color: colors(warnDark);
 
     transform: scale(1);
@@ -31,16 +36,38 @@
     padding: 10px 0;
     color: white;
     transition: 0.3s;
+    background-color: colors(dark);
   }
 }
 
-// .font-initial {
-//   // font-family: Arial, sans-serif;
-// }
-
 @include from(dt) {
   .loginregister-container {
+    flex-direction: row;
     font-size: $fontsizeSmallOne;
     background-color: inherit;
+    justify-content: space-around;
+    width: 100%;
+    .btn-logout {
+      color: inherit;
+      background-color: inherit;
+      padding: inherit ;
+      margin: inherit;
+      
+      -webkit-transform: translateZ(0);
+      transform: scale(0.95);
+      font-size: 1.12em;
+      -webkit-transition: transform 200ms;
+      transition: transform 200ms;
+    }
+    .btn-logout:hover {
+      color: colors(warnDark);
+  
+      transform: scale(1);
+    }
+    p {
+      color: inherit;
+      padding: inherit;
+      font-size: inherit;
+    }
   }
 }

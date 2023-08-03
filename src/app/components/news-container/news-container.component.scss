@@ -12,15 +12,16 @@ h2 {
   width: 95%;
   margin: auto;
   button {
+    font-weight: 600;
+    font-size: x-large;
+    color: #bc791c;
     font-family: Arial;
     line-height: normal;
     position: absolute;
-    top: 0;
-    right: 0;
-    font-size: $fontsizeHeadingThree;
+    top: 5px;
+    right: 5px;
     line-height: normal;
-    color: white;
-    border: 1px solid red;
+    border: 1px solid colors(accentDark);
     border-radius: 50%;
     padding: 2px 7px;
     margin: 5px 3%;
@@ -78,6 +79,8 @@ h2 {
       font-size: fontsizes(normal);
       font-weight: bold;
       color: colors(black);
+      font-family: Arial;
+      letter-spacing: 0.5px;
     }
     .title:hover {
       text-decoration: underline;
