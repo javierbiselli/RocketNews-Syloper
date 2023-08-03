@@ -60,6 +60,7 @@ export class HeaderComponent implements OnInit {
       }
     );
     this.initializeTyped();
+    this.startAutoChange();
 
     // clock logic
     const options: Intl.DateTimeFormatOptions = {
