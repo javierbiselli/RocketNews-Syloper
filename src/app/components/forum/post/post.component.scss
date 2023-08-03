@@ -22,15 +22,27 @@
       padding: 15px;
       margin-top: 15px;
       border-bottom: 1px solid colors(gray);
+      position: relative;
       .top-container {
         display: flex;
         flex-direction: column;
         padding-bottom: 15px;
         margin-bottom: 15px;
         border-bottom: 1px solid gray;
+        position: relative;
         h3 {
           font-size: $fontsizeHeadingOne;
           font-weight: bold;
+          width: 90%;
+        }
+        .priority-button-post {
+          position: absolute;
+          top: 0;
+          right: 0;
+          i {
+            font-size: $fontsizeHeadingThree;
+            color: colors(accent);
+          }
         }
         .post-data-container {
           display: flex;
@@ -43,6 +55,19 @@
             display: flex;
             flex-wrap: wrap;
             gap: 9px;
+            .post-name-date {
+              i {
+                margin-left: 5px;
+                color: colors(accent);
+              }
+            }
+          }
+
+          .delete-post-button {
+            width: 100px;
+            border: 1px solid colors(warnDark);
+            color: colors(warnDark);
+            padding: 0;
           }
         }
       }
@@ -59,6 +84,21 @@
         max-width: 200px;
         gap: 15px;
         margin-top: 15px;
+        button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 4px;
+        }
+      }
+
+      .priority-post-text {
+        position: absolute;
+        right: 0;
+        bottom: 10px;
+        color: colors(accent);
+        font-weight: bold;
+        width: 90px;
       }
     }
 
@@ -98,7 +138,8 @@
       }
     }
 
-    .comments-container {
+    .comments-container,
+    .comments-container-premium {
       background-color: colors(primaryDark);
       padding: 25px 15px;
       border-bottom: 5px solid colors(secondaryDark);
@@ -109,13 +150,19 @@
         gap: 10px;
         color: colors(gray);
         position: relative;
-        .delete-button {
+        .delete-button,
+        .priority-button {
           position: absolute;
-          color: red;
+          color: colors(warnDark);
           right: 0;
           top: 0;
-          border: 1px solid red;
+          border: 1px solid colors(warnDark);
           padding: 0 6px;
+        }
+        .priority-button {
+          color: colors(accent);
+          border: 1px solid colors(accent);
+          right: 30px;
         }
         p:first-child {
           color: colors(white);
@@ -136,10 +183,24 @@
         }
       }
     }
+    .comments-container-premium {
+      border: 1px solid gold;
+      border-radius: 4px;
+      margin: 10px 0;
+      font-weight: bold;
+    }
     .login-form-post {
       color: white;
     }
   }
+}
+
+button {
+  transition: 0.3s;
+}
+
+button:hover {
+  scale: 1.05;
 }
 
 @include from(tb) {
@@ -147,6 +208,12 @@
     section {
       margin: 0 auto;
       max-width: 800px;
+      .post-container {
+        .priority-post-text {
+          width: 130px;
+          right: 10px;
+        }
+      }
     }
   }
 }
@@ -158,6 +225,9 @@
     gap: 30px;
     section {
       margin: 0;
+      .post-container {
+        min-width: 750px;
+      }
     }
   }
 }

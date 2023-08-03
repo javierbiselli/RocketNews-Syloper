@@ -1,0 +1,59 @@
+@import "../../../styles/utils/setting";
+@import "../../../styles/utils/tools";
+
+section {
+  background-color: colors(secondaryDark);
+  color: colors(white);
+  h3 {
+    text-align: center;
+    padding: 20px 0;
+  }
+  .separation-bar {
+    background-color: colors(warnDark);
+  }
+  .posting-container {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 60vh;
+    margin: auto;
+    max-width: 900px;
+
+    .buttons-container {
+      display: flex;
+      width: 50%;
+      min-width: 230px;
+      gap: 10px;
+      margin: 20px 0;
+      button {
+        white-space: nowrap;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+        transition: 0.3s;
+      }
+      button:hover {
+        scale: 1.05;
+      }
+    }
+  }
+
+  .title-container,
+  .subject-container {
+    display: flex;
+    flex-direction: column;
+    textarea {
+      height: 200px;
+    }
+  }
+
+  .no-user {
+    min-height: 50vh;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+  }
+}

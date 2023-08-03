@@ -31,13 +31,29 @@ export class PostComponent implements OnInit {
     private dataHandlingService: DataHandlingService
   ) {}
 
+  posts: Post[] = [];
   selectedPost: Post | undefined = undefined;
+  comments: Comment[] = [];
 
   currentUser!: User;
 
   showPublicity: boolean = true;
-
+  id: number = 0;
   ngOnInit(): void {
+    this.dataHandlingService.posts.subscribe({
+      next: (posts) => {
+        this.posts = posts;
+      },
+      error: (err) => console.error(err),
+    });
+
+    this.dataHandlingService.comments.subscribe({
+      next: (comments) => {
+        this.comments = comments;
+        this.id = this.comments.length + 1;
+      },
+      error: (err) => console.error(err),
+    });
     this.loadCurrentUserFromLocalStorage();
     this.shareDataService.selectedPost$.subscribe((post) => {
       this.selectedPost = post;
@@ -126,30 +142,42 @@ export class PostComponent implements OnInit {
   sortComments(order: number): void {
     this.order = order;
     if (this.order === 0) {
+      this.selectedPost?.comments.sort((a, b) => {
+        if (a.priority && !b.priority) {
+          return -1;
+        } else if (!a.priority && b.priority) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    } else if (this.order === 1) {
       this.selectedPost?.comments.sort(
         (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
       );
-    } else if (this.order === 1) {
+    } else if (this.order === 2) {
       this.selectedPost?.comments.sort(
         (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
       );
-    } else if (this.order === 2) {
+    } else if (this.order === 3) {
       this.selectedPost?.comments.sort((a, b) => b.rating - a.rating);
     }
   }
 
-  id: number = 15;
-
   pushComment(): void {
+    console.log(this.comments);
     if (this.commentContent.length > 0) {
       this.id = this.id + 1;
+
       const comment: Comment = {
         id: this.id.toString(),
         content: this.commentContent,
         date: this.getFormattedDate(),
         author: this.currentUser,
         rating: 0,
+        priority: false,
       };
+      this.highLightComment(comment);
       this.dataHandlingService.pushComment(comment);
       this.dataHandlingService.pushCommentToPost(
         this.selectedPost?.id,
@@ -157,6 +185,79 @@ export class PostComponent implements OnInit {
       );
       this.toggleComment();
       this.commentContent = "";
+    }
+  }
+
+  highLightPost(post: Post): void {
+    if (
+      this.currentUser.isPremium &&
+      post.priority === false &&
+      post.author.id === this.currentUser.id
+    ) {
+      const shouldHighlight = confirm(
+        "You can prioritize your post since you are a premium user. Do you want to do it?"
+      );
+
+      if (shouldHighlight) {
+        post.priority = true;
+      } else {
+        post.priority = false;
+      }
+    } else if (
+      this.currentUser.isPremium &&
+      post.priority === true &&
+      post.author.id === this.currentUser.id
+    ) {
+      const deleteHighlight = confirm(
+        "Do you want to stop prioritizing your post?"
+      );
+      if (deleteHighlight) {
+        post.priority = false;
+      } else {
+        post.priority = true;
+      }
+    } else {
+      post.priority = false;
+    }
+  }
+
+  deletePost(postId: string) {
+    const index = this.posts.findIndex((post) => postId === post.id);
+
+    if (index !== undefined && index !== -1) {
+      const shouldDelete = window.confirm(
+        "Are you sure you want to delete this post?"
+      );
+
+      if (shouldDelete) {
+        this.posts.splice(index, 1);
+        this.router.navigate(["/forum"]);
+      }
+    }
+  }
+
+  highLightComment(comment: Comment): void {
+    if (this.currentUser.isPremium && comment.priority === false) {
+      const shouldHighlight = confirm(
+        "You can highlight your comment since you are a premium user. Do you want to do it?"
+      );
+
+      if (shouldHighlight) {
+        comment.priority = true;
+      } else {
+        comment.priority = false;
+      }
+    } else if (this.currentUser.isPremium && comment.priority === true) {
+      const deleteHighlight = confirm(
+        "Do you want to stop highlighting your comment?"
+      );
+      if (deleteHighlight) {
+        comment.priority = false;
+      } else {
+        comment.priority = true;
+      }
+    } else {
+      comment.priority = false;
     }
   }
 

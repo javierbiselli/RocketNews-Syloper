@@ -26,14 +26,14 @@ export class DataHandlingService {
       name: "Corabel Polland",
       email: "cpolland2@etsy.com",
       password: "pass123",
-      isPremium: false,
+      isPremium: true,
     },
     {
       id: "4",
       name: "Kyle Pember",
       email: "kpember3@mlb.com",
       password: "pass123",
-      isPremium: true,
+      isPremium: false,
     },
     {
       id: "5",
@@ -60,6 +60,7 @@ export class DataHandlingService {
       date: "4/6/2023",
       author: this.users.getValue()[2],
       rating: 0,
+      priority: false,
     },
     {
       id: "2",
@@ -68,6 +69,7 @@ export class DataHandlingService {
       date: "12/12/2022",
       author: this.users.getValue()[2],
       rating: 0,
+      priority: false,
     },
     {
       id: "3",
@@ -75,14 +77,16 @@ export class DataHandlingService {
       date: "6/29/2023",
       author: this.users.getValue()[2],
       rating: 0,
+      priority: false,
     },
     {
       id: "4",
       content:
         "Sed ante. Vivamus tortor. Duis mattis egestas metus.\n\nAenean fermentum. Donec ut mauris eget massa tempor convallis. Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.\n\nQuisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.",
       date: "1/16/2023",
-      author: this.users.getValue()[2],
+      author: this.users.getValue()[3],
       rating: 0,
+      priority: true,
     },
     {
       id: "5",
@@ -91,14 +95,16 @@ export class DataHandlingService {
       date: "3/23/2023",
       author: this.users.getValue()[2],
       rating: 0,
+      priority: false,
     },
     {
       id: "6",
       content:
         "Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.\n\nDuis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus.\n\nIn sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.",
       date: "2/3/2023",
-      author: this.users.getValue()[2],
+      author: this.users.getValue()[3],
       rating: 0,
+      priority: true,
     },
     {
       id: "7",
@@ -107,6 +113,7 @@ export class DataHandlingService {
       date: "7/1/2023",
       author: this.users.getValue()[2],
       rating: 0,
+      priority: false,
     },
     {
       id: "8",
@@ -115,6 +122,7 @@ export class DataHandlingService {
       date: "7/12/2022",
       author: this.users.getValue()[2],
       rating: 0,
+      priority: false,
     },
     {
       id: "9",
@@ -123,14 +131,16 @@ export class DataHandlingService {
       date: "7/27/2022",
       author: this.users.getValue()[2],
       rating: 0,
+      priority: false,
     },
     {
       id: "10",
       content:
         "Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.",
       date: "9/10/2022",
-      author: this.users.getValue()[2],
+      author: this.users.getValue()[4],
       rating: 0,
+      priority: false,
     },
     {
       id: "11",
@@ -139,22 +149,25 @@ export class DataHandlingService {
       date: "2/23/2023",
       author: this.users.getValue()[2],
       rating: 0,
+      priority: false,
     },
     {
       id: "12",
       content:
         "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.\n\nVestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.",
       date: "12/10/2022",
-      author: this.users.getValue()[2],
+      author: this.users.getValue()[0],
       rating: 0,
+      priority: false,
     },
     {
       id: "13",
       content:
         "Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
       date: "7/15/2022",
-      author: this.users.getValue()[2],
+      author: this.users.getValue()[1],
       rating: 0,
+      priority: true,
     },
     {
       id: "14",
@@ -163,6 +176,7 @@ export class DataHandlingService {
       date: "6/1/2023",
       author: this.users.getValue()[2],
       rating: 0,
+      priority: false,
     },
     {
       id: "15",
@@ -171,6 +185,7 @@ export class DataHandlingService {
       date: "4/10/2023",
       author: this.users.getValue()[2],
       rating: 0,
+      priority: false,
     },
   ]);
 

@@ -18,7 +18,8 @@ import { PostComponent } from "./components/forum/post/post.component";
 import { SearchContainerComponent } from "./components/search-container/search-container.component";
 import { LoginFormComponent } from "./components/login-form/login-form.component";
 import { LoginButtonComponent } from "./components/login-button/login-button.component";
-import { FooterComponent } from './components/footer/footer.component';
+import { FooterComponent } from "./components/footer/footer.component";
+import { PostingComponent } from "./components/forum/posting/posting.component";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { FooterComponent } from './components/footer/footer.component';
     LoginFormComponent,
     LoginButtonComponent,
     FooterComponent,
+    PostingComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,16 +43,20 @@ import { FooterComponent } from './components/footer/footer.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot([
-      { path: "", component: NewsContainerComponent },
-      { path: "blogs", component: NewsContainerComponent },
-      { path: "reports", component: NewsContainerComponent },
-      { path: "contact", component: ContactFormComponent },
-      { path: "forum", component: ForumComponent },
-      { path: "forum/post/:id", component: PostComponent },
-      { path: "search/:userInput", component: SearchContainerComponent },
-      { path: "login", component: LoginFormComponent },
-    ], {scrollPositionRestoration: 'enabled'}),
+    RouterModule.forRoot(
+      [
+        { path: "", component: NewsContainerComponent },
+        { path: "blogs", component: NewsContainerComponent },
+        { path: "reports", component: NewsContainerComponent },
+        { path: "contact", component: ContactFormComponent },
+        { path: "forum", component: ForumComponent },
+        { path: "forum/posting", component: PostingComponent },
+        { path: "forum/post/:id", component: PostComponent },
+        { path: "search/:userInput", component: SearchContainerComponent },
+        { path: "login", component: LoginFormComponent },
+      ],
+      { scrollPositionRestoration: "enabled" }
+    ),
   ],
   providers: [],
   bootstrap: [AppComponent],
