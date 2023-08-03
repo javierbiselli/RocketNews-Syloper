@@ -18,6 +18,7 @@ import { PostComponent } from "./components/forum/post/post.component";
 import { SearchContainerComponent } from "./components/search-container/search-container.component";
 import { LoginFormComponent } from "./components/login-form/login-form.component";
 import { LoginButtonComponent } from "./components/login-button/login-button.component";
+import { AboutUsComponent } from './components/about-us/about-us.component';
 import { FooterComponent } from "./components/footer/footer.component";
 import { PostingComponent } from "./components/forum/posting/posting.component";
 
@@ -33,6 +34,7 @@ import { PostingComponent } from "./components/forum/posting/posting.component";
     SearchContainerComponent,
     LoginFormComponent,
     LoginButtonComponent,
+    AboutUsComponent,
     FooterComponent,
     PostingComponent,
   ],
@@ -48,6 +50,7 @@ import { PostingComponent } from "./components/forum/posting/posting.component";
         { path: "", component: NewsContainerComponent },
         { path: "blogs", component: NewsContainerComponent },
         { path: "reports", component: NewsContainerComponent },
+        { path: "about", component: AboutUsComponent },
         { path: "contact", component: ContactFormComponent },
         { path: "forum", component: ForumComponent },
         { path: "forum/posting", component: PostingComponent },
