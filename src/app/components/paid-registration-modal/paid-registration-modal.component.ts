@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataHandlingService } from 'src/app/services/data-handling.service';
@@ -24,6 +25,7 @@ export class PaidRegistrationModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authenticationService: AuthService,
     private dataHandlingService: DataHandlingService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -55,21 +57,25 @@ export class PaidRegistrationModalComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    let subscription;
 
     if (this.form.invalid) {
       return;
     }
     
     if (this.authenticated != null) {
-      this.authenticated.subscribe((data) => {
+      subscription = this.authenticated.subscribe((data) => {
         this.dataHandlingService.makeUserPremium(data!.id);
         localStorage.setItem('currentUser', JSON.stringify(data));
+        console.log('paid.registratio.modal submit()' + JSON.stringify(data));
       });
+      subscription.unsubscribe();
       this.close();
 
       window.alert('Now you are Premium user!');
-    } else {
+      this.router.navigate([""]);
     }
+    return;
   }
 
 }

@@ -52,6 +52,7 @@ export class DataHandlingService {
   }
 
   makeUserPremium(userId: string) {
+    console.log('data.handling MAKING PREMIUM')
     const currentUsers = this.users.getValue();
     let index: any;
     let userIndex: string;
