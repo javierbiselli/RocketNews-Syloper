@@ -2,8 +2,9 @@
 @import "../../styles/utils/tools";
 
 .header {
-  font-family: Roboto;
-  font-size: $fontsizeSmallOne;
+  font-family: $fontNavbar;
+  letter-spacing: 2px;
+  font-size: fontsizes(smallOne);
 
   .header-wrapper {
     display: flex;
@@ -11,6 +12,7 @@
   }
 
   .header-top-section {
+    font-family: $fontText;
     border-left: 1px solid colors(grayLight);
     border-right: 1px solid colors(grayLight);
     flex-grow: 1;
@@ -30,9 +32,11 @@
     order: 2;
     display: flex;
     .trending-container {
+      // min-width: 480px;
       text-align: start;
       flex-grow: 1.5;
       .trending-red {
+        font-family: $fontTitles;
         background-color: colors(warnDark);
         color: colors(white);
         font-size: $fontsizeSmallTwo;
@@ -100,10 +104,10 @@
     background-color: colors(primaryDark);
     border-bottom: 2px solid colors(warnDark);
     position: fixed;
-    width: 50%;
+    width: fit-content;
     height: 100%;
     min-height: 100vh;
-    padding: 0 5%;
+    padding: 0 min(25px, 5%);
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -122,11 +126,13 @@
         margin-bottom: 10px;
         margin-top: 70px;
         p {
+          font-family: $fontTitles;
           color: colors(gray);
           border-top: 2px solid black;
           padding-top: 10px;
         }
         ul {
+          letter-spacing: 2px;
           display: flex;
           flex-direction: column;
           gap: 5px;
@@ -136,7 +142,7 @@
             font-size: $fontsizeNormal;
             font-weight: bold;
             transition: 0.3s;
-            border-radius: 2px;
+            // border-radius: 2px;
           }
           a:hover {
             background-color: colors(warnDark);
@@ -146,7 +152,7 @@
           }
         }
         button {
-          padding: 20px;
+          padding: 22px;
           background-color: transparent;
           color: white;
           font-size: $fontsizeNormal;
@@ -155,10 +161,13 @@
           justify-content: center;
           align-items: center;
           border: 2px solid colors(warnDark);
-          border-radius: 2px;
+          // border-radius: 2px;
           i {
             position: absolute;
           }
+        }
+        .active {
+          background-color: colors(warnDark);
         }
         button:hover {
           background-color: colors(warnDark);
@@ -182,7 +191,8 @@
       position: fixed;
       top: 0;
       z-index: 50;
-      width: 100%;
+      // width: 100%;
+      width: -webkit-fill-available;
       max-width: 1700px;
       margin: auto;
       display: flex;
@@ -191,7 +201,8 @@
     .search-input {
       display: flex;
       justify-content: center;
-      padding: 20px 30px;
+      // padding: 20px 30px;
+      padding: 15px min(25px, 5%);
       background-color: colors(primaryDark);
       opacity: 0;
       transition: opacity 0.3s ease;
@@ -212,12 +223,20 @@
     .visible {
       opacity: 1;
     }
-    button:not(.close-button-mobile) {
-      font-size: $fontsizeNormal;
+    button {
+      line-height: normal;
+    }
+    .search-button-icon {
       background-color: colors(warnDark);
       padding: 5px 10px;
       color: white;
     }
+    // button:not(.close-button-mobile) {
+    //   // font-size: $fontsizeNormal;
+    //   background-color: colors(warnDark);
+    //   padding: 5px 10px;
+    //   color: white;
+    // }
     input {
       border: none;
       background-color: colors(secondaryDark);
@@ -235,7 +254,7 @@
       top: 0;
       left: 0;
       padding: 8px 8px;
-      margin: 8px;
+      margin: 10px min(25px, 5%);
       font-size: $fontsizeHeadingThree;
       z-index: 100;
       i {
@@ -270,9 +289,9 @@
       min-width: 1000px;
       max-width: 1700px;
       margin: auto;
-    }
-    .trending-container {
-      min-width: 400px;
+      .trending-container {
+        min-width: 480px;
+      }
     }
     .header-top-section {
       display: flex;

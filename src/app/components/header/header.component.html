@@ -49,7 +49,7 @@
       <div class="header-bottom-section" id="mobileNav">
         <nav id="nav">
           <p *ngIf="isMobile()">Search:</p>
-          <button (click)="changeSearchVisibility()">
+          <button (click)="changeSearchVisibility()" [ngClass]="searchButtonActive">
             <i class="fa-solid" [ngClass]="searchButtonClass"></i>
           </button>
           <p *ngIf="isMobile()">Explore:</p>
@@ -121,7 +121,7 @@
             [(ngModel)]="userInput"
             (keyup.enter)="performSearch()"
           />
-          <button (click)="performSearch()">
+          <button (click)="performSearch()" class="search-button-icon">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </div>
@@ -138,13 +138,13 @@
         ></i>
       </button>
       <div class="main-header-background-container">
-        <img
+        <img routerLink=""
           class="main-header-background"
           src="assets/backgroundBanner.jpeg"
           alt="RocketNews background banner"
         />
       </div>
-      <img class="logo" src="assets/logo.png" alt="RocketNews" />
+      <img routerLink="" class="logo" src="assets/logo.png" alt="RocketNews" />
     </div>
   </div>
 </header>

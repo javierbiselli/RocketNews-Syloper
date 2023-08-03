@@ -42,6 +42,10 @@
     .forum-link:hover {
       text-decoration: underline;
     }
+    .main-button {
+      font-family: Arial;
+      letter-spacing: 0.5px;
+    }
     .main-button:hover {
       border: 1px solid colors(white);
       color: colors(white);
@@ -55,6 +59,7 @@
       flex-direction: row;
       justify-content: space-between;
       gap: 20px;
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
     }
   }
 }
@@ -87,5 +92,11 @@
         font-size: $fontsizeHeadingThree;
       }
     }
+  }
+}
+
+@include from(xd) {
+  .publicity-section {
+    margin-left: 10px;
   }
 }
